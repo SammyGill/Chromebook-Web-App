@@ -26,6 +26,20 @@
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
 
+  <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "chromebookapplication";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
+
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -81,14 +95,14 @@
 
         <div class = "search-wrapper">
           <div class = "search-options">
-            <select id = "options" onchange="check()" onload="check()">
+            <select id = "options" onchange="checkSelectionStatus()" onload="checkSelectionStatus()">
               <option value = "asset" onclick> Asset Tag </option>
               <option value = "pid"> Student PID </option>
             </select>
           </div>
 
           <form method = "post" action = >
-            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebook">
+            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebook" maxlength="4">
               <input type = "submit" class = "custom-search-button">
           </form>
         </div>
@@ -97,8 +111,11 @@
 
           // validation after the form has been submitted
           if ($_POST) {
+            $input = $_POST['chromebook'];
+            $result = $conn->query("SELECT room FROM chromebooks WHERE asset = $input");
+            $row = $result->fetch_assoc();
             echo "Here is your chromebook!\n";
-            echo $_POST["chromebook"];
+            echo "It is in room " . $row["room"];
           }
         ?>
 
