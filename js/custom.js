@@ -1,5 +1,10 @@
 var selectedValue = document.getElementById("options");
 
-if(options[options.selectedIndex].value == "asset") {
-  document.getElementById("testpara").innerHTML = "works!";
+function check() {
+  if(options[options.selectedIndex].value == "asset") {
+    document.getElementById("testpara").innerHTML = "Asset";
+  }
+  else {
+    document.getElementById("testpara").innerHTML = "PID";
+  }
 }

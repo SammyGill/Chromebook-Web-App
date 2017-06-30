@@ -71,34 +71,34 @@
         </ul>
         <ul class="nav nav-sidebar">
           <li><a href="manage.html">Manage</a></li>
-          <li><a href="search.html">Search</a></li>
+          <li><a href="search.php">Search</a></li>
         </ul>
       </div>
 
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
+          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;"> Chromebook Lookup </h1>
 
 
         <div class = "search-wrapper">
           <div class = "search-options">
-            <select id = "options">
-              <option value = "pid"> Asset Tag </option>
-              <option value = "asset"> Student PID </option>
+            <select id = "options" onchange="check()" onload="check()">
+              <option value = "asset" onclick> Asset Tag </option>
+              <option value = "pid"> Student PID </option>
             </select>
           </div>
+
           <form method = "post" action = >
             <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebook">
-            <div class = "submit-button">
               <input type = "submit" class = "custom-search-button">
-            </div>
           </form>
         </div>
-        <p id = "testpara"> Test </p>
+        <p id = "testpara"> Asset </p>
         <?php
 
           // validation after the form has been submitted
           if ($_POST) {
-            echo "Here is your chromebook!";
+            echo "Here is your chromebook!\n";
+            echo $_POST["chromebook"];
           }
         ?>
 
