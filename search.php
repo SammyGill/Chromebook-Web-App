@@ -109,20 +109,24 @@ contains all of the fields that are required to look up a Chromebook -->
           </div>
 
           <form method = "post" action = >
-            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebook" maxlength="4">
+            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebookQuery" maxlength="4">
               <input type = "submit" class = "custom-search-button">
           </form>
         </div>
-        <p id = "testpara"> Asset </p>
         <?php
 
           // validation after the form has been submitted
           if ($_POST) {
-            $input = $_POST['chromebook'];
+            $input = $_POST['chromebookQuery'];
             $result = $conn->query("SELECT room FROM chromebooks WHERE asset = $input");
             $row = $result->fetch_assoc();
-            echo "Here is your chromebook!\n";
-            echo "It is in room " . $row["room"];
+            if ($row == 0) {
+              echo "Chromebook not found!";
+            }
+            else {
+              echo "Here is your chromebook!\n";
+              echo "It is in room " . $row["room"];
+            }
           }
         ?>
 
