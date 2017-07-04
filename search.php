@@ -100,16 +100,11 @@ contains all of the fields that are required to look up a Chromebook -->
 
           <div class = "search-options">
 
-            Search Type
-            <select id = "type" onchange="checkSearchType()" onload="checkSearchType()">
-              <option value = "single" onclick> Single Search </option>
-              <option value = "mass"> Mass Search </option>
-            </select>
-
-            Asset/Student ID
+            Search by
             <select id = "options" onchange="checkSearchParam()" onload="checkSearchParam()">
               <option value = "asset" onclick> Asset Tag </option>
               <option value = "pid"> Student PID </option>
+              <option value = "room"> Room Number </option>
             </select>
           </div>
 
@@ -119,7 +114,6 @@ contains all of the fields that are required to look up a Chromebook -->
           </form>
         </div>
         <p id = "testpara"> Asset </p>
-        <p id = "otherpara"> Single </p>
         <?php
 
           // validation after the form has been submitted
