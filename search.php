@@ -26,21 +26,6 @@
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
 
-  <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "chromebookapplication";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?>
-
-
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -100,32 +85,28 @@ contains all of the fields that are required to look up a Chromebook -->
 
           <div class = "search-options">
 
+          <form method = "post" action = >
             Search by
-            <select id = "options" onchange="checkSearchParam()" onload="checkSearchParam()">
-              <option value = "asset" onclick> Asset Tag </option>
+            <select id = "options" name = "options" onchange="checkSearchParam()" onload="checkSearchParam()">
+              <option value = "asset"> Asset Tag </option>
               <option value = "pid"> Student PID </option>
               <option value = "room"> Room Number </option>
             </select>
           </div>
 
-          <form method = "post" action = >
             <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebookQuery" maxlength="4">
               <input type = "submit" class = "custom-search-button">
           </form>
         </div>
         <?php
-
+          include 'functions.php';
           // validation after the form has been submitted
           if ($_POST) {
-            $input = $_POST['chromebookQuery'];
-            $result = $conn->query("SELECT room FROM chromebooks WHERE asset = $input");
-            $row = $result->fetch_assoc();
-            if ($row == 0) {
-              echo "Chromebook not found!";
+            if($_POST['options'] == "room") {
+              queryDatabaseRoom($_POST);
             }
             else {
-              echo "Here is your chromebook!\n";
-              echo "It is in room " . $row["room"];
+              queryDatabase($_POST);
             }
           }
         ?>
