@@ -90,12 +90,24 @@ if ($conn->connect_error) {
       </div>
 
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;"> Chromebook Lookup </h1>
+          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
+            Chromebook Lookup </h1>
 
 
+<!-- Wrapper that contains all the parts of the Chromebook search. This div
+contains all of the fields that are required to look up a Chromebook -->
         <div class = "search-wrapper">
+
           <div class = "search-options">
-            <select id = "options" onchange="checkSelectionStatus()" onload="checkSelectionStatus()">
+
+            Search Type
+            <select id = "type" onchange="checkSearchType()" onload="checkSearchType()">
+              <option value = "single" onclick> Single Search </option>
+              <option value = "mass"> Mass Search </option>
+            </select>
+
+            Asset/Student ID
+            <select id = "options" onchange="checkSearchParam()" onload="checkSearchParam()">
               <option value = "asset" onclick> Asset Tag </option>
               <option value = "pid"> Student PID </option>
             </select>
@@ -107,6 +119,7 @@ if ($conn->connect_error) {
           </form>
         </div>
         <p id = "testpara"> Asset </p>
+        <p id = "otherpara"> Single </p>
         <?php
 
           // validation after the form has been submitted
