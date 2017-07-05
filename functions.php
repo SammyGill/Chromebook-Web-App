@@ -39,10 +39,9 @@
     $input = $arg['chromebookQuery'];
     $result[] = array();
     $result = $conn->query("SELECT asset FROM chromebooks WHERE room = $input");
-    echo count($result);
-    for($x = 0; $x < count($result); $x++) {
-      $row = $result->fetch_assoc();
-      echo "ASSET " . $row["asset"];
-    }
+      while ($row = $result->fetch_assoc()) {
+        echo "ASSET " . $row["asset"];
+        echo "<br>";
+      }
   }
  ?>
