@@ -95,7 +95,7 @@ contains all of the fields that are required to look up a Chromebook -->
             </select>
           </div>
 
-            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebookQuery" maxlength="4">
+            <input type = "text" class = "custom-search" placeholder = "Search..." name = "assetInputField" maxlength="4">
               <input type = "submit" class = "custom-search-button">
           </form>
         </div>

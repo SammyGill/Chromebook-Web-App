@@ -77,8 +77,23 @@
     </div>
 
     <div class="row">
-      <div class="col-md-3 col-md-offset-4" style="background-color:yellow;">.col-md-4 .offset-md-4</div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
+            Chromebook Quick Add </h1>
+      </div>
     </div>
+
+  <form>
+    <div class="row">
+
+      <div class="col-md-12 col-md-offset-1" style="text-align:center;">
+        <input type = "text" name = "assetInputField" placeholder="Asset Tag" style="margin-right:25px;">
+        <input type = "text" name = "serialInputField" placeholder="Serial Number">
+        <input type = "submit">
+      </div>
+    </div>
+  </form>
+
   </div>
 </body>
 </html>
