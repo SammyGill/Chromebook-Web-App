@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
 
-  <title>Search</title>
+  <title>Quick Add</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +59,7 @@
     </div>
   </nav>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
 
@@ -74,51 +74,11 @@
           <li><a href ="quick-add.php"> Quick Add </a></li>
         </ul>
       </div>
-
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
-            Chromebook Lookup </h1>
-
-
-<!-- Wrapper that contains all the parts of the Chromebook search. This div
-contains all of the fields that are required to look up a Chromebook -->
-        <div class = "search-wrapper">
-
-          <div class = "search-options">
-
-          <form method = "post" action = >
-            Search by
-            <select id = "options" name = "options" onchange="checkSearchParam()" onload="checkSearchParam()">
-              <option value = "asset"> Asset Tag </option>
-              <option value = "pid"> Student PID </option>
-              <option value = "room"> Room Number </option>
-            </select>
-          </div>
-
-            <input type = "text" class = "custom-search" placeholder = "Search..." name = "chromebookQuery" maxlength="4">
-              <input type = "submit" class = "custom-search-button">
-          </form>
-        </div>
-        <?php
-          include 'functions.php';
-          // validation after the form has been submitted
-          if ($_POST) {
-            if($_POST['options'] == "room") {
-              queryDatabaseRoom($_POST);
-            }
-            else {
-              queryDatabase($_POST);
-            }
-          }
-        ?>
-
-      </div>
-
     </div>
 
+    <div class="row">
+      <div class="col-md-3 col-md-offset-4" style="background-color:yellow;">.col-md-4 .offset-md-4</div>
+    </div>
   </div>
-
-<script src = "js/custom.js"></script>
 </body>
-
 </html>
