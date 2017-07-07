@@ -29,3 +29,8 @@
   padding-top: 15px;
   margin: auto;
 }
+
+table, th, td {
+    border: 1px solid black;
+    text-align:center; 
+}

@@ -38,11 +38,8 @@
 
     $input = $arg['assetInputField'];
     $result[] = array();
-    $result = $conn->query("SELECT asset FROM chromebooks WHERE room = $input");
-      while ($row = $result->fetch_assoc()) {
-        echo "ASSET " . $row["asset"];
-        echo "<br>";
-      }
+    $result = $conn->query("SELECT * FROM chromebooks WHERE room = $input");
+    formatTable($result);
   }
 
   function quickAdd($chromebook) {
@@ -94,5 +91,18 @@
       return false;
     }
     return true;
+  }
+
+  function formatTable($query) {
+    echo "<table style=width:100%>";
+    echo "<tr> <th> Room </th> <th> Asset Tag </th> </tr>";
+
+    while($row = $query->fetch_assoc()) {
+      $room = $row["room"];
+      $asset = $row["asset"];
+
+      echo "<tr> <th> $room </th> <th> $asset </th> </tr>";
+    }
+
   }
  ?>

@@ -75,7 +75,7 @@
         </ul>
       </div>
 
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
           <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
             Chromebook Lookup </h1>
 
