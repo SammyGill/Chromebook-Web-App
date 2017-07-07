@@ -94,14 +94,16 @@
   }
 
   function formatTable($query) {
-    echo "<table style=width:100%>";
+    echo "<table style=width:100% id=resultTable>";
     echo "<tr> <th> Room </th> <th> Asset Tag </th> </tr>";
+    $rowCounter = 0;
 
     while($row = $query->fetch_assoc()) {
       $room = $row["room"];
       $asset = $row["asset"];
 
-      echo "<tr> <th> $room </th> <th> $asset </th> </tr>";
+      echo "<tr onClick=saveData($rowCounter)> <td> $room </td> <td> $asset </td> </tr>";
+      $rowCounter++;
     }
 
   }

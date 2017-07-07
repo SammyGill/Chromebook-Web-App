@@ -17,3 +17,13 @@ function validateSearch(input) {
     document.getElementById("testpara").innerHTML = "INCORRECT ASSET";
   }
 }
+
+function saveData(row) {
+  sessionStorage.setItem("room", document.getElementById("resultTable").rows[row].cells[0].innerHTML);
+  sessionStorage.setItem("asset", document.getElementById("resultTable").rows[row].cells[1].innerHTML);
+  window.open("edit.php");
+}
+
+function loadData() {
+  
+}
