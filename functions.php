@@ -12,14 +12,14 @@
         die("Connection failed: " . $conn->connect_error);
     }
     $input = $arg['chromebookQuery'];
-    $result = $conn->query("SELECT room FROM chromebooks WHERE asset = $input");
-    $row = $result->fetch_assoc();
-    if ($row == 0) {
+    $result = $conn->query("SELECT * FROM chromebooks WHERE asset = $input");
+
+  //  $row = $result->fetch_assoc();
+    if ($conn->error || $result->num_rows == 0) {
       echo "Chromebook not found!";
     }
     else {
-      echo "Here is your chromebook!\n";
-      echo "It is in room " . $row["room"];
+      formatTable($result);
     }
   }
 
@@ -36,9 +36,14 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $input = $arg['assetInputField'];
+    $input = $arg['chromebookQuery'];
     $result[] = array();
     $result = $conn->query("SELECT * FROM chromebooks WHERE room = $input");
+
+    if($conn->error) {
+      echo "ERROR";
+      return -1;
+    }
     formatTable($result);
   }
 
