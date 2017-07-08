@@ -96,13 +96,13 @@
   function formatTable($query) {
     echo "<table style=width:100% id=resultTable>";
     echo "<tr> <th> Room </th> <th> Asset Tag </th> </tr>";
-    $rowCounter = 0;
+    $rowCounter = 1;
 
     while($row = $query->fetch_assoc()) {
       $room = $row["room"];
       $asset = $row["asset"];
 
-      echo "<tr onClick=saveData($rowCounter)> <td> $room </td> <td> $asset </td> </tr>";
+      echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td> $room </td> <td> $asset </td> </tr>";
       $rowCounter++;
     }
 

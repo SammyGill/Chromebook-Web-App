@@ -18,12 +18,7 @@ function validateSearch(input) {
   }
 }
 
-function saveData(row) {
-  sessionStorage.setItem("room", document.getElementById("resultTable").rows[row].cells[0].innerHTML);
-  sessionStorage.setItem("asset", document.getElementById("resultTable").rows[row].cells[1].innerHTML);
-  window.open("edit.php");
-}
-
-function loadData() {
-  
+function fillEditData(row) {
+  document.getElementById("editRoomField").value = document.getElementById("resultTable").rows[row].cells[0].innerHTML;
+  document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
 }

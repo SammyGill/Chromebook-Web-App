@@ -24,7 +24,11 @@
 
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
+  <script src="js/bootstrap.js"></script>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -98,7 +102,46 @@ contains all of the fields that are required to look up a Chromebook -->
             <input type = "text" class = "custom-search" placeholder = "Search..." name = "assetInputField" maxlength="4">
               <input type = "submit" class = "custom-search-button">
           </form>
-        </div>
+
+
+
+<!-- Modal -->
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog"
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+
+            <h4 class = "modal-title" id = "myModalLabel">
+               Edit Chromebook
+            </h4>
+         </div>
+
+         <form method="post" action= >
+         <div class = "modal-body">
+            <input type="text" placeholder="Room" id="editRoomField">
+            <input type="text" placeholder="Asset" id="editAssetField">
+         </div>
+
+         <div class = "modal-footer">
+            <button type = "button" class = "btn btn-default" data-dismiss = "modal">
+               Close
+            </button>
+
+            <button type = "button" class = "btn btn-primary">
+               Submit changes
+            </button>
+         </div>
+        </form>
+
+      </div>
+   </div>
+ </div>
         <?php
           include 'functions.php';
           // validation after the form has been submitted
@@ -115,7 +158,7 @@ contains all of the fields that are required to look up a Chromebook -->
 
     </div>
 
-  </div>
+
 
 <script src = "js/custom.js"></script>
 </body>
