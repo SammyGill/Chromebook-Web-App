@@ -21,4 +21,5 @@ function validateSearch(input) {
 function fillEditData(row) {
   document.getElementById("editRoomField").value = document.getElementById("resultTable").rows[row].cells[0].innerHTML;
   document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
+  document.getElementById("originalAsset").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
 }

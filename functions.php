@@ -105,6 +105,24 @@
       echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td> $room </td> <td> $asset </td> </tr>";
       $rowCounter++;
     }
+  }
 
+  function updateDatabase($query) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "chromebookapplication";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $room = $query['editRoomField'];
+    $asset = $query['editAssetField'];
+    $oldAsset = $query['originalAsset'];
+
+    $conn->query("UPDATE chromebooks SET room = $room, asset = $asset WHERE asset = $oldAsset");
   }
  ?>

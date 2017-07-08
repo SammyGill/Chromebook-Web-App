@@ -124,8 +124,9 @@ contains all of the fields that are required to look up a Chromebook -->
 
          <form method="post" action= >
          <div class = "modal-body">
-            <input type="text" placeholder="Room" id="editRoomField">
-            <input type="text" placeholder="Asset" id="editAssetField">
+            <input type="text" id="editRoomField" name="editRoomField">
+            <input type="text" id="editAssetField" name = "editAssetField">
+            <input type="text" id="originalAsset" name = "originalAsset" style="display:none;">
          </div>
 
          <div class = "modal-footer">
@@ -133,9 +134,7 @@ contains all of the fields that are required to look up a Chromebook -->
                Close
             </button>
 
-            <button type = "button" class = "btn btn-primary">
-               Submit changes
-            </button>
+            <input type="submit" class = "btn btn-primary">
          </div>
         </form>
 
@@ -145,13 +144,17 @@ contains all of the fields that are required to look up a Chromebook -->
         <?php
           include 'functions.php';
           // validation after the form has been submitted
-          if ($_POST) {
+          if (!empty($_POST['options'])) {
             if($_POST['options'] == "room") {
               queryDatabaseRoom($_POST);
             }
             else {
               queryDatabase($_POST);
             }
+          }
+
+          if(!empty($_POST['editRoomField'])) {
+            updateDatabase($_POST);
           }
         ?>
       </div>
