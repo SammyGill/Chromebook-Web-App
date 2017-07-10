@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-void compareData(char *room, char *asset) {
+void compareData(char *room, char *asset, char *unfoundChromebooks, int *index) {
   char searchString[BUFSIZ] = {0};
   FILE *fp = fopen("Chromebook Mass Export.txt", "r");
   if(fp == NULL) {
@@ -22,12 +22,17 @@ void compareData(char *room, char *asset) {
       return;
     }
   }
-  printf("COULD NOT FIND %s", asset);
+  strcpy(unfoundChromebooks, asset);
+  (*index)++;
+  //printf("COULD NOT FIND %s", asset);
   fclose(fp);
 }
 
 int main() {
+  int unfoundIndex = 0;
   char string[BUFSIZ] = {0};
+  char *unfoundChromebooks[BUFSIZ];
+
 
   FILE *fp = fopen("data.txt", "r");
   if(fp == NULL) {
@@ -40,7 +45,12 @@ int main() {
   while(fgets(string, BUFSIZ, fp)) {
     char *room = strtok(string, ",");
     char *asset = strtok(NULL, ",");
-    compareData(room, asset); 
+    unfoundChromebooks[unfoundIndex] = calloc(strlen(asset) + 1, sizeof(char));
+    compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex); 
+  }
+
+  for(int i = 0; i < unfoundIndex; i++) {
+    printf("COULD NOT FIND %s", unfoundChromebooks[i]);
   }
   return 0;
 
