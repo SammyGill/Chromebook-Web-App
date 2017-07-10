@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<dirent.h>
 
 void compareData(char *room, char *asset, char *unfoundChromebooks, int *index) {
   char searchString[BUFSIZ] = {0};
@@ -29,29 +30,43 @@ void compareData(char *room, char *asset, char *unfoundChromebooks, int *index) 
 }
 
 int main() {
-  int unfoundIndex = 0;
-  char string[BUFSIZ] = {0};
-  char *unfoundChromebooks[BUFSIZ];
+  DIR *path = opendir("data");
+  struct dirent *dp;
+
+  while((dp = readdir(path)) != NULL) {
+    if(strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0) {
+      continue;
+    }
+
+    int unfoundIndex = 0;
+    char string[BUFSIZ] = {0};
+    char *unfoundChromebooks[BUFSIZ];
 
 
-  FILE *fp = fopen("data.txt", "r");
-  if(fp == NULL) {
-    printf("COULD NOT OPEN FILE\n");
-  }
-  else {
-    printf("SUCCESSFULLY OPENED FILE\n");
+    char dirName[50] = "Data/";
+    char fullPath[50];
+    strcpy(fullPath, dirName);
+    strcat(fullPath, dp->d_name);
+    FILE *fp = fopen(fullPath, "r");
+    if(fp == NULL) {
+      printf("COULD NOT OPEN FILE %s\n", dp->d_name);
+    }
+    else {
+      printf("SUCCESSFULLY OPENED FILE %s\n", dp->d_name);
+    }
+
+    while(fgets(string, BUFSIZ, fp)) {
+      char *room = strtok(string, ",");
+      char *asset = strtok(NULL, ",");
+      unfoundChromebooks[unfoundIndex] = calloc(strlen(asset) + 1, sizeof(char));
+      compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex);
+    }
+
+    for(int i = 0; i < unfoundIndex; i++) {
+      printf("COULD NOT FIND %s", unfoundChromebooks[i]);
+    }
   }
 
-  while(fgets(string, BUFSIZ, fp)) {
-    char *room = strtok(string, ",");
-    char *asset = strtok(NULL, ",");
-    unfoundChromebooks[unfoundIndex] = calloc(strlen(asset) + 1, sizeof(char));
-    compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex); 
-  }
-
-  for(int i = 0; i < unfoundIndex; i++) {
-    printf("COULD NOT FIND %s", unfoundChromebooks[i]);
-  }
   return 0;
 
 }
