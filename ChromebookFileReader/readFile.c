@@ -3,7 +3,7 @@
 #include<string.h>
 #include<dirent.h>
 
-void compareData(char *room, char *asset, char *unfoundChromebooks, int *index) {
+void compareData(char *room, char *asset, char *unfoundChromebooks, int *index, FILE *stream) {
   char searchString[BUFSIZ] = {0};
   FILE *fp = fopen("Chromebook Mass Export.txt", "r");
   if(fp == NULL) {
@@ -18,20 +18,25 @@ void compareData(char *room, char *asset, char *unfoundChromebooks, int *index) 
     char *model = strtok(NULL, ",");
 
     if(strncmp(asset, assetNote, 4) == 0) {
-      printf("%s | %s | %s", assetNote, serialNumber, model);
+      fprintf(stream, "%s | %s | %s", assetNote, serialNumber, model);
       fclose(fp);
       return;
     }
   }
   strcpy(unfoundChromebooks, asset);
   (*index)++;
-  //printf("COULD NOT FIND %s", asset);
   fclose(fp);
 }
 
 int main() {
   DIR *path = opendir("data");
   struct dirent *dp;
+  FILE *writeFile = fopen("output.txt", "w");
+
+  if(writeFile == NULL) {
+    printf("COULD NOT OPEN OUTPUT FILE\n");
+    return EXIT_FAILURE;
+  }
 
   while((dp = readdir(path)) != NULL) {
     if(strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0) {
@@ -59,14 +64,14 @@ int main() {
       char *room = strtok(string, ",");
       char *asset = strtok(NULL, ",");
       unfoundChromebooks[unfoundIndex] = calloc(strlen(asset) + 1, sizeof(char));
-      compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex);
+      compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
     }
 
     for(int i = 0; i < unfoundIndex; i++) {
-      printf("COULD NOT FIND %s", unfoundChromebooks[i]);
+      fprintf(writeFile, "COULD NOT FIND %s", unfoundChromebooks[i]);
     }
   }
-
-  return 0;
+  fclose(writeFile);
+  return EXIT_SUCCESS;
 
 }
