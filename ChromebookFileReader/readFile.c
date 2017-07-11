@@ -29,7 +29,7 @@ void compareData(char *room, char *asset, char *unfoundChromebooks, int *index, 
 }
 
 int main() {
-  DIR *path = opendir("data");
+  DIR *path = opendir("Data");
   struct dirent *dp;
   FILE *writeFile = fopen("output.txt", "w");
 
@@ -45,11 +45,11 @@ int main() {
 
     int unfoundIndex = 0;
     char string[BUFSIZ] = {0};
-    char *unfoundChromebooks[BUFSIZ];
+    char *unfoundChromebooks[BUFSIZ] = {0};
 
 
     char dirName[50] = "Data/";
-    char fullPath[50];
+    char fullPath[50] = {0};
     strcpy(fullPath, dirName);
     strcat(fullPath, dp->d_name);
     FILE *fp = fopen(fullPath, "r");
