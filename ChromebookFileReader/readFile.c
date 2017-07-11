@@ -3,7 +3,7 @@
 #include<string.h>
 #include<dirent.h>
 
-void compareData(char *room, char *asset, char *unfoundChromebooks, int *index, FILE *stream) {
+void compareData(char *room, char *asset, char **unfoundChromebooks, int *index, FILE *stream) {
   char searchString[BUFSIZ] = {0};
   FILE *fp = fopen("Chromebook Mass Export.txt", "r");
   if(fp == NULL) {
@@ -23,7 +23,8 @@ void compareData(char *room, char *asset, char *unfoundChromebooks, int *index, 
       return;
     }
   }
-  strcpy(unfoundChromebooks, asset);
+  *unfoundChromebooks = calloc(strlen(asset) + 1, sizeof(char));
+  strcpy(*unfoundChromebooks, asset);
   (*index)++;
   fclose(fp);
 }
@@ -65,17 +66,21 @@ int main() {
     while(fgets(string, BUFSIZ, fp)) {
       char *room = strtok(string, ",");
       char *asset = strtok(NULL, ",");
-      unfoundChromebooks[unfoundIndex] = calloc(strlen(asset) + 1, sizeof(char));
-      compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
+      compareData(room, asset, &unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
     }
-
+    fclose(fp);
 
   }
 
   for(int i = 0; i < unfoundIndex; i++) {
     fprintf(writeFile, "COULD NOT FIND %s", unfoundChromebooks[i]);
   }
+
+  for(int i = 0; i < unfoundIndex; i++) {
+    free(unfoundChromebooks[i]);
+  }
   fclose(writeFile);
+  closedir(path);
   return EXIT_SUCCESS;
 
 }
