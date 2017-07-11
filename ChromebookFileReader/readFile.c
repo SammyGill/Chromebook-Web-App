@@ -5,7 +5,7 @@
 
 #define MAX_STR 100
 #define ASSET_LEN 4
-/*
+
 void compareData(char *school, char *room, char *asset, char *status, char *assignment, char **unfoundChromebooks, int *index, FILE *stream) {
   char searchString[MAX_STR] = {0};
   FILE *fp = fopen("Chromebook Mass Export.txt", "r");
@@ -14,21 +14,15 @@ void compareData(char *school, char *room, char *asset, char *status, char *assi
     return;
   }
   while(fgets(searchString, MAX_STR, fp)) {
-    char *orgUnit = strtok(searchString, ",");
-    char *roomNote = strtok(NULL, ",");
-    char *assetNote = strtok(NULL, ",");
+    searchString[strlen(searchString)] = '\0';
+
+    char *massAsset = strtok(searchString, ",");
     char *serialNumber = strtok(NULL, ",");
     char *model = strtok(NULL, ",");
-    char modelArray[MAX_STR];
-    if(model != NULL) {
-      strcpy(modelArray, model);
-      char *newLinePtr = strchr(modelArray, '\n');
-      *newLinePtr = '\0';
-    }
+    model[strlen(model) - 2] = 0;
 
-
-    if(strncmp(asset, assetNote, ASSET_LEN) == 0) {
-      fprintf(stream, "%s | %s | %s | %s | %s| %s | %s", school, room, assetNote, serialNumber, modelArray, status, assignment);
+    if(strncmp(asset, massAsset, ASSET_LEN) == 0) {
+      fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s", school, room, asset, serialNumber, model, status, assignment);
       fclose(fp);
       return;
     }
@@ -38,7 +32,7 @@ void compareData(char *school, char *room, char *asset, char *status, char *assi
   (*index)++;
   fclose(fp);
 }
-*/
+
 int main() {
   int unfoundIndex = 0;
   char *unfoundChromebooks[MAX_STR] = {0};
@@ -74,22 +68,19 @@ int main() {
     }
 
     while(fgets(string, MAX_STR, fp)) {
-      printf("%s", string);
-      /*
       char *school = strtok(string, ",");
       char *room = strtok(NULL, ",");
       char *asset = strtok(NULL, ",");
       char *status = strtok(NULL, ",");
       char *assignment = strtok(NULL, ",");
       compareData(school, room, asset, status, assignment, &unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
-      */
     }
     printf("FINISHED READING FILE %s\n", dp->d_name);
     fclose(fp);
   }
 
   for(int i = 0; i < unfoundIndex; i++) {
-    fprintf(writeFile, "COULD NOT FIND %s\r\n", unfoundChromebooks[i]);
+    fprintf(stdout, "COULD NOT FIND %s\n", unfoundChromebooks[i]);
   }
 
   for(int i = 0; i < unfoundIndex; i++) {
