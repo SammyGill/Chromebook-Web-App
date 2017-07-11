@@ -5,7 +5,7 @@
 
 #define MAX_STR 100
 #define ASSET_LEN 4
-
+/*
 void compareData(char *school, char *room, char *asset, char *status, char *assignment, char **unfoundChromebooks, int *index, FILE *stream) {
   char searchString[MAX_STR] = {0};
   FILE *fp = fopen("Chromebook Mass Export.txt", "r");
@@ -38,7 +38,7 @@ void compareData(char *school, char *room, char *asset, char *status, char *assi
   (*index)++;
   fclose(fp);
 }
-
+*/
 int main() {
   int unfoundIndex = 0;
   char *unfoundChromebooks[MAX_STR] = {0};
@@ -74,12 +74,15 @@ int main() {
     }
 
     while(fgets(string, MAX_STR, fp)) {
+      printf("%s", string);
+      /*
       char *school = strtok(string, ",");
       char *room = strtok(NULL, ",");
       char *asset = strtok(NULL, ",");
       char *status = strtok(NULL, ",");
       char *assignment = strtok(NULL, ",");
       compareData(school, room, asset, status, assignment, &unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
+      */
     }
     printf("FINISHED READING FILE %s\n", dp->d_name);
     fclose(fp);
