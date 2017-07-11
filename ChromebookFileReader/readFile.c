@@ -22,7 +22,7 @@ void compareData(char *school, char *room, char *asset, char *status, char *assi
     model[strlen(model) - 2] = 0;
 
     if(strncmp(asset, massAsset, ASSET_LEN) == 0) {
-      fprintf(stdout, "%s | %s | %s | %s | %s | %s | %s", school, room, asset, serialNumber, model, status, assignment);
+      fprintf(stream, "%s,%s,%s,%s,%s,%s,%s", school, room, asset, serialNumber, model, status, assignment);
       fclose(fp);
       return;
     }
@@ -38,13 +38,14 @@ int main() {
   char *unfoundChromebooks[MAX_STR] = {0};
   DIR *path = opendir("Data");
   struct dirent *dp;
-  FILE *writeFile = fopen("output.txt", "w");
+  FILE *writeFile = fopen("output.csv", "w");
 
   if(writeFile == NULL) {
     printf("COULD NOT OPEN OUTPUT FILE\n");
     return EXIT_FAILURE;
   }
 
+  fprintf(writeFile, "School, Room, Asset, Serial Number, Model, Physical Status, Assignment Status\n");
   while((dp = readdir(path)) != NULL) {
     if(strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0) {
       continue;
@@ -80,7 +81,7 @@ int main() {
   }
 
   for(int i = 0; i < unfoundIndex; i++) {
-    fprintf(stdout, "COULD NOT FIND %s\n", unfoundChromebooks[i]);
+    fprintf(writeFile, "COULD NOT FIND %s\n", unfoundChromebooks[i]);
   }
 
   for(int i = 0; i < unfoundIndex; i++) {
