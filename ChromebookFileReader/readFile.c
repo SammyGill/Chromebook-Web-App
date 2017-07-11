@@ -29,6 +29,8 @@ void compareData(char *room, char *asset, char *unfoundChromebooks, int *index, 
 }
 
 int main() {
+  int unfoundIndex = 0;
+  char *unfoundChromebooks[BUFSIZ] = {0};
   DIR *path = opendir("Data");
   struct dirent *dp;
   FILE *writeFile = fopen("output.txt", "w");
@@ -43,9 +45,9 @@ int main() {
       continue;
     }
 
-    int unfoundIndex = 0;
+
     char string[BUFSIZ] = {0};
-    char *unfoundChromebooks[BUFSIZ] = {0};
+
 
 
     char dirName[50] = "Data/";
@@ -67,9 +69,11 @@ int main() {
       compareData(room, asset, unfoundChromebooks[unfoundIndex], &unfoundIndex, writeFile);
     }
 
-    for(int i = 0; i < unfoundIndex; i++) {
-      fprintf(writeFile, "COULD NOT FIND %s", unfoundChromebooks[i]);
-    }
+
+  }
+
+  for(int i = 0; i < unfoundIndex; i++) {
+    fprintf(writeFile, "COULD NOT FIND %s", unfoundChromebooks[i]);
   }
   fclose(writeFile);
   return EXIT_SUCCESS;
