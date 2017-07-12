@@ -23,3 +23,16 @@ function fillEditData(row) {
   document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
   document.getElementById("originalAsset").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
 }
+
+function sortTable(columnName) {
+  var columns = document.getElementsByClassName(columnName);
+  for(i = 1; i < (columns.length - 1); i++) {
+    var indexElement = columns[i].innerHTML;
+    var j = i;
+    while( j > 0 && (columns[j-1].innerHTML > indexElement)) {
+      columns[j].innerHTML = columns[j - 1].innerHTML;
+      j--;
+    }
+    columns[j].innerHTML = indexElement;
+  }
+}

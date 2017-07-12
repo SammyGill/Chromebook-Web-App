@@ -99,8 +99,9 @@
   }
 
   function formatTable($query) {
+    $modelString = "model";
     echo "<table style=width:100% id=resultTable>";
-    echo "<tr> <th> School + Room </th> <th> Asset Tag </th> <th> Serial Number </th> <th> Model </th> <th> Physical Status </th> </tr>";
+    echo "<tr> <th> School + Room </th> <th> Asset Tag </th> <th> Serial Number </th> <th onclick='sortTable(\"$modelString\")'> Model </th> <th> Physical Status </th> </tr>";
     $rowCounter = 1;
 
     while($row = $query->fetch_assoc()) {
@@ -111,7 +112,8 @@
       $status = $row["Physical Status"];
       $model = $row["Model"];
 
-      echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td> $school $room </td> <td> $asset </td> <td> $serial </td> <td> $model </td> <td> $status </td> </tr>";
+
+      echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td class=location> $school $room </td> <td class=asset> $asset </td> <td class = serial> $serial </td> <td class='model'> $model </td> <td class=status> $status </td> </tr>";
       $rowCounter++;
     }
   }
@@ -134,4 +136,5 @@
 
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset WHERE asset = $oldAsset");
   }
+
  ?>
