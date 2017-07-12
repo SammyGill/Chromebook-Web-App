@@ -100,14 +100,18 @@
 
   function formatTable($query) {
     echo "<table style=width:100% id=resultTable>";
-    echo "<tr> <th> Room </th> <th> Asset Tag </th> </tr>";
+    echo "<tr> <th> School + Room </th> <th> Asset Tag </th> <th> Serial Number </th> <th> Model </th> <th> Physical Status </th> </tr>";
     $rowCounter = 1;
 
     while($row = $query->fetch_assoc()) {
-      $room = $row["room"];
-      $asset = $row["asset"];
+      $room = $row["Room"];
+      $asset = $row["Asset"];
+      $school = $row["School"];
+      $serial = $row["Serial Number"];
+      $status = $row["Physical Status"];
+      $model = $row["Model"];
 
-      echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td> $room </td> <td> $asset </td> </tr>";
+      echo "<tr data-toggle = 'modal' data-target = '#myModal' onclick= 'fillEditData($rowCounter)'> <td> $school $room </td> <td> $asset </td> <td> $serial </td> <td> $model </td> <td> $status </td> </tr>";
       $rowCounter++;
     }
   }
