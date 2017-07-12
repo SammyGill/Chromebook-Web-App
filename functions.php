@@ -100,8 +100,9 @@
 
   function formatTable($query) {
     $modelString = "model";
+    $assetString = "asset";
     echo "<table style=width:100% id=resultTable>";
-    echo "<tr> <th> School + Room </th> <th> Asset Tag </th> <th> Serial Number </th> <th onclick='sortTable(\"$modelString\")'> Model </th> <th> Physical Status </th> </tr>";
+    echo "<tr> <th onclick='sortTable(\"location\")'> School + Room </th> <th onclick='sortTable(\"asset\")'> Asset Tag </th> <th onclick='sortTable(\"serial\")'> Serial Number </th> <th onclick='sortTable(\"model\")'> Model </th> <th onclick='sortTable(\"status\")'> Physical Status </th> </tr>";
     $rowCounter = 1;
 
     while($row = $query->fetch_assoc()) {

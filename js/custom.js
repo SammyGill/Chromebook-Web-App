@@ -1,3 +1,6 @@
+var ascending = false;
+var lastFilter;
+
 function checkSearchParam() {
   switch(options[options.selectedIndex].value) {
     case "asset":
@@ -24,15 +27,52 @@ function fillEditData(row) {
   document.getElementById("originalAsset").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
 }
 
+function checkAscending(columnName) {
+  var rows = document.getElementsByClassName(columnName);
+  for(i = 0; i < (rows.length - 1); i++) {
+    if(rows[i + 1].innerHTML < rows[i].innerHTML) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function sortTable(columnName) {
-  var columns = document.getElementsByClassName(columnName);
-  for(i = 1; i < (columns.length - 1); i++) {
-    var indexElement = columns[i].innerHTML;
+  if(checkAscending(columnName)) {
+    sortAscending(columnName);
+  }
+  else {
+    sortDescending(columnName);
+  }
+}
+
+
+function sortAscending(columnName) {
+  var rows = document.getElementsByClassName(columnName);
+  for(i = 0; i < (rows.length); i++) {
+    var indexElement = rows[i].innerHTML;
     var j = i;
-    while( j > 0 && (columns[j-1].innerHTML > indexElement)) {
-      columns[j].innerHTML = columns[j - 1].innerHTML;
+    while( j > 0 && (rows[j-1].innerHTML > indexElement)) {
+      var parentRow = document.getElementById("resultTable").rows[j];
+      var childRow = document.getElementById("resultTable").rows[j + 1];
+      var table = parentRow.parentNode;
+      table.insertBefore(childRow, parentRow);
       j--;
     }
-    columns[j].innerHTML = indexElement;
+  }
+}
+
+function sortDescending(columnName) {
+  var rows = document.getElementsByClassName(columnName);
+  for(i = 0; i < (rows.length); i++) {
+    var indexElement = rows[i].innerHTML;
+    var j = i;
+    while( j > 0 && (rows[j-1].innerHTML < indexElement)) {
+      var parentRow = document.getElementById("resultTable").rows[j];
+      var childRow = document.getElementById("resultTable").rows[j + 1];
+      var table = parentRow.parentNode;
+      table.insertBefore(childRow, parentRow);
+      j--;
+    }
   }
 }
