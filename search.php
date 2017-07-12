@@ -125,9 +125,15 @@ contains all of the fields that are required to look up a Chromebook -->
 
          <form method="post" action= >
          <div class = "modal-body">
+           <div class ="edit-top-row">
             <input type="text" id="editRoomField" name="editRoomField">
-            <input type="text" id="editAssetField" name = "editAssetField">
-            <input type="text" id="originalAsset" name = "originalAsset" style="display:none;">
+            <input type="text" id="editAssetField" name="editAssetField">
+            <input type="text" id="editSerialField" name="editSerialField">
+          </div>
+            <input type="text" id="editModelField" name="editModelField">
+            <input type="text" id="editStatusField" name="editStatusField">
+            <input type="text" id="editAssignmentField" name="editAssignmentField">
+        <!--    <input type="text" id="originalAsset" name = "originalAsset" style="display:none;"> -->
          </div>
 
          <div class = "modal-footer">

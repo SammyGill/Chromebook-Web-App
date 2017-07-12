@@ -43,3 +43,17 @@ td:hover {
   cursor: hand;
   cursor: pointer;
 }
+
+.modal {
+  width: 1300px;
+  height: 1300px;
+}
+
+.modal-body {
+  height: 200px;
+}
+
+.edit-top-row {
+  padding-top: 20px;
+  padding-bottom: 75px;
+}
