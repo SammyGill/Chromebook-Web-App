@@ -117,6 +117,36 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="academy"> Fowler Academy </option>
             </select>
 
+            <?php
+              include 'functions.php';
+              printRooms();
+            ?>
+
+            <select class="sut-rooms">
+              <option value="c2"> C2 </option>
+              <option value="c3"> C3 </option>
+              <option value="c4"> C4 </option>
+              <option value="c5"> C5 </option>
+              <option value="c6"> C6 </option>
+              <option value="c7"> C7 </option>
+              <option value="c8"> C8 </option>
+              <option value="c9"> C9 </option>
+              <option value="c10"> C10 </option>
+              <option value="c11"> C11 </option>
+              <option value="d1"> D1 </option>
+              <option value="d2"> D2 </option>
+              <option value="d3"> D3 </option>
+              <option value="d4"> D4 </option>
+              <option value="d5"> D5 </option>
+              <option value="d6"> D6 </option>
+              <option value="d7"> D7 </option>
+              <option value="d8"> D8 </option>
+              <option value="e1"> E1 </option>
+              <option value="e2"> E2 </option>
+              <option value="e3"> E3 </option>
+              <option value="e4"> E4 </option>
+            </select>
+
             <select class="fhs-rooms">
               <option value="101"> 101 </option>
               <option value="102"> 102 </option>
@@ -146,7 +176,6 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="601"> 601 </option>
               <option value="703"> 703 </option>
             </select>
-
           </div>
 
             <input type="text" class ="custom-search" placeholder="Search..."
@@ -202,7 +231,6 @@ contains all of the fields that are required to look up a Chromebook -->
    </div>
  </div>
         <?php
-          include 'functions.php';
           // validation after the form has been submitted
           if (!empty($_POST['options'])) {
             if($_POST['options'] == "room") {

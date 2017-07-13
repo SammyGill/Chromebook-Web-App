@@ -141,4 +141,18 @@
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset, serial_number =\"$serial\", model=\"$model\", Physical_Status=\"$status\" WHERE asset = $oldAsset");
   }
 
+
+  function printRooms() {
+    $schools = array("mar", "fre", "mal");
+    $roomCount = 1;
+    for($schoolCount = 0; $schoolCount < count($schools); $schoolCount++) {
+
+      echo "<select class='mar-rooms'>";
+      for($roomCount = 1; $roomCount < 26; $roomCount++) {
+        echo "<option value='$schools[$schoolCount]-$roomCount'> $roomCount </option>";
+      }
+      echo "</select>";
+    }
+  }
+
  ?>
