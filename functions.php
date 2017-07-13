@@ -109,8 +109,8 @@
       $room = $row["Room"];
       $asset = $row["Asset"];
       $school = $row["School"];
-      $serial = $row["Serial Number"];
-      $status = $row["Physical Status"];
+      $serial = $row["Serial_Number"];
+      $status = $row["Physical_Status"];
       $model = $row["Model"];
 
 
@@ -133,9 +133,12 @@
     }
     $room = $query['editRoomField'];
     $asset = $query['editAssetField'];
+    $serial = $query['editSerialField'];
+    $model = $query['editModelField'];
+    $status = $query['editStatusField'];
     $oldAsset = $query['originalAsset'];
 
-    $conn->query("UPDATE chromebooks SET room = $room, asset = $asset WHERE asset = $oldAsset");
+    $conn->query("UPDATE chromebooks SET room = $room, asset = $asset, serial_number =\"$serial\", model=\"$model\", Physical_Status=\"$status\" WHERE asset = $oldAsset");
   }
 
  ?>
