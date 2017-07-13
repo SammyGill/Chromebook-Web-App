@@ -20,6 +20,12 @@
   padding-bottom: 15px;
 }
 
+.schoo
+
+.search-bar {
+  padding-top: 10px;
+}
+
 .search-wrapper {
   text-align: center;
   padding-bottom: 20px;
@@ -28,6 +34,14 @@
 .submit-button {
   padding-top: 15px;
   margin: auto;
+}
+
+.school-options {
+  display: none;
+}
+
+.fhs-rooms {
+  width: 60px;
 }
 
 table, th, td {

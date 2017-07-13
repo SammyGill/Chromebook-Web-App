@@ -10,7 +10,7 @@ function checkSearchParam() {
       document.getElementById("testpara").innerHTML = "PID";
       break;
     case "room":
-      document.getElementById("testpara").innerHTML = "Room Number";
+      document.getElementById("school-options").style.display = "inline";
       break;
   }
 }
