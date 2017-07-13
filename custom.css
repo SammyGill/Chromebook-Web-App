@@ -40,8 +40,13 @@
   display: none;
 }
 
-.fhs-rooms {
+#mar-rooms,
+#fre-rooms,
+#mal-rooms,
+#sut-rooms,
+#fhs-rooms  {
   width: 60px;
+  display: none;
 }
 
 table, th, td {

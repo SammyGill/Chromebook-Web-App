@@ -1,25 +1,34 @@
 var ascending = false;
 var lastFilter;
 
-function checkSearchParam() {
-  switch(options[options.selectedIndex].value) {
-    case "asset":
-      document.getElementById("testpara").innerHTML = "Asset";
-      break;
-    case "pid":
-      document.getElementById("testpara").innerHTML = "PID";
-      break;
-    case "room":
-      document.getElementById("school-options").style.display = "inline";
-      break;
+function checkSearchBySchool() {
+  if(options[options.selectedIndex].value == "school") {
+    document.getElementById("school-options").style.display = "inline";
+    checkSchool();
+  }
+  else {
+    document.getElementById("school-options").style.display = "none";
   }
 }
 
-function validateSearch(input) {
-  if(input != "sam") {
-    document.getElementById("testpara").innerHTML = "INCORRECT ASSET";
-  }
+function hideSchools() {
+  document.getElementById("mar-rooms").style.display = "none";
+  document.getElementById("fre-rooms").style.display = "none";
+  document.getElementById("sut-rooms").style.display = "none";
+  document.getElementById("mal-rooms").style.display = "none";
+  document.getElementById("fhs-rooms").style.display = "none";
 }
+
+function checkSchool() {
+  hideSchools();
+
+  var select = document.getElementById("school-options").options;
+  var index = document.getElementById("school-options").selectedIndex;
+  var school = select[index].value;
+  school = school.concat("-rooms");
+  document.getElementById(school).style.display = "inline";
+}
+
 
 function fillEditData(row) {
   document.getElementById("editRoomField").value = document.getElementById("resultTable").rows[row].cells[0].innerHTML;

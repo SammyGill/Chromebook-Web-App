@@ -101,14 +101,14 @@ contains all of the fields that are required to look up a Chromebook -->
 
           <form method="post" action= >
             Search by
-            <select id="options" name="options" onchange="checkSearchParam()"
-                    onload="checkSearchParam()">
+            <select id="options" name="options" onchange="checkSearchBySchool()"
+                    onload="checkSearchBySchool()">
               <option value="asset"> Asset Tag </option>
               <option value="pid"> Student PID </option>
-              <option value="room"> School </option>
+              <option value="school"> School </option>
             </select>
 
-            <select id="school-options" class="school-options">
+            <select id="school-options" name="school-options" class="school-options" onchange="checkSchool()">
               <option value="mar"> Marshall </option>
               <option value="fre"> Fremont </option>
               <option value="mal"> Malaga </option>
@@ -122,7 +122,7 @@ contains all of the fields that are required to look up a Chromebook -->
               printRooms();
             ?>
 
-            <select class="sut-rooms">
+            <select id="sut-rooms">
               <option value="c2"> C2 </option>
               <option value="c3"> C3 </option>
               <option value="c4"> C4 </option>
@@ -147,7 +147,7 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="e4"> E4 </option>
             </select>
 
-            <select class="fhs-rooms">
+            <select id="fhs-rooms">
               <option value="101"> 101 </option>
               <option value="102"> 102 </option>
               <option value="103"> 103 </option>
