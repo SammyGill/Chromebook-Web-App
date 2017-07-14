@@ -295,10 +295,10 @@ contains all of the fields that are required to look up a Chromebook -->
           // validation after the form has been submitted
           if (!empty($_POST['options'])) {
             if($_POST['options'] == "school") {
-              queryDatabaseRoom($_POST);
+              getChromebookRoom($_POST);
             }
             else {
-              queryDatabase($_POST);
+              getChromebook($_POST);
             }
           }
 

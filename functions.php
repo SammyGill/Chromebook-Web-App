@@ -1,5 +1,6 @@
 <?php
-  function queryDatabase($arg) {
+
+  function getConnection() {
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -11,7 +12,13 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $input = $arg['searchBarInput'];
+    return $conn;
+  }
+
+  function getChromebook($arg) {
+    $conn = getConnection();
+
+    $input = $arg["searchBarInput"];
     $result = $conn->query("SELECT * FROM chromebooks WHERE asset = $input");
 
   //  $row = $result->fetch_assoc();
@@ -23,21 +30,11 @@
     }
   }
 
-  function queryDatabaseRoom($arg) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "chromebookapplication";
+  function getChromebookRoom($arg) {
+    $conn = getConnection();
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $school = $arg['school-options'];
-    $room = $arg[$school . '-rooms'];
+    $school = $arg["school-options"];
+    $room = $arg[$school . "-rooms"];
     $result[] = array();
 
     if($room == "*") {
@@ -57,20 +54,10 @@
   }
 
   function quickAdd($chromebook) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "chromebookapplication";
+    $conn = getConnection();
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $asset = $chromebook['assetInputField'];
-    $serial = $chromebook['serialInputField'];
+    $asset = $chromebook["assetInputField"];
+    $serial = $chromebook["serialInputField"];
     $room = 0;
 
     if(chromebookExists($asset)) {
@@ -88,17 +75,7 @@
   }
 
   function chromebookExists($chromebookAsset) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "chromebookapplication";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    $conn = getConnection();
 
     $result = $conn->query("SELECT * FROM chromebooks WHERE
                             asset = $chromebookAsset");
@@ -110,8 +87,6 @@
   }
 
   function formatTable($query) {
-    $modelString = "model";
-    $assetString = "asset";
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
             <th onclick='sortTable(\"location\")'> School + Room </th>
@@ -131,9 +106,8 @@
       $status = $row["Physical_Status"];
       $model = $row["Model"];
 
-
       echo("<tr data-toggle = 'modal' data-target = '#myModal'
-                onclick= 'fillEditData($rowCounter)'>
+                onclick= 'fillEditData(\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\")'>
                 <td class=location>$school $room</td>
                 <td class=asset> $asset </td>
                 <td class=serial> $serial </td>
@@ -143,23 +117,14 @@
   }
 
   function updateChromebook($query) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "chromebookapplication";
+    $conn = getConnection();
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $room = $query['editRoomField'];
-    $asset = $query['editAssetField'];
-    $serial = $query['editSerialField'];
-    $model = $query['edit-model-select'];
-    $status = $query['edit-physical-status-select'];
-    $oldAsset = $query['originalAsset'];
+    $room = $query["editRoomField"];
+    $asset = $query["editAssetField"];
+    $serial = $query["editSerialField"];
+    $model = $query["edit-model-select"];
+    $status = $query["edit-physical-status-select"];
+    $oldAsset = $query["originalAsset"];
 
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset,
                   serial_number =\"$serial\", model=\"$model\",
@@ -167,18 +132,9 @@
   }
 
   function deleteChromebook($query) {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "chromebookapplication";
+    $conn = getConnection();
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $asset = $query['originalAsset'];
+    $asset = $query["originalAsset"];
     $conn->query("DELETE FROM chromebooks WHERE asset = $asset");
   }
 

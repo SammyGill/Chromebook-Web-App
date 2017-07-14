@@ -30,16 +30,16 @@ function checkSchool() {
 }
 
 
-function fillEditData(row) {
-  var school = document.getElementById("resultTable").rows[row].cells[0].innerHTML.split(" ")[0];
+function fillEditData(school, room, asset, serial, model, status) {
 
   document.getElementById("edit-school-select").value = school.toLowerCase();
   document.getElementById("edit-room-input").innerHTML = document.getElementById(school.toLowerCase().concat("-rooms")).innerHTML;
-  document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
-  document.getElementById("editSerialField").value = document.getElementById("resultTable").rows[row].cells[2].innerHTML;
-  document.getElementById("edit-model-select").value = document.getElementById("resultTable").rows[row].cells[3].innerHTML;
-  document.getElementById("edit-physical-status-select").value = document.getElementById("resultTable").rows[row].cells[4].innerHTML;
-  document.getElementById("originalAsset").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
+  document.getElementById("edit-room-input").value = room;
+  document.getElementById("editAssetField").value = asset;
+  document.getElementById("editSerialField").value = serial;
+  document.getElementById("edit-model-select").value = model;
+  document.getElementById("edit-physical-status-select").value = status;
+  document.getElementById("originalAsset").value = asset;
 }
 
 function checkAscending(columnName) {
