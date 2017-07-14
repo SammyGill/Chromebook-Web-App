@@ -1,14 +1,14 @@
 function checkSearchBySchool() {
   if(options[options.selectedIndex].value == "school") {
     document.getElementById("school-options").style.display = "inline";
-    checkSchool();
+    changeCurrentRooms();
   }
   else {
     document.getElementById("school-options").style.display = "none";
   }
 }
 
-function hideSchools() {
+function hideSchoolRooms() {
   document.getElementById("marshall-rooms").style.display = "none";
   document.getElementById("fremont-rooms").style.display = "none";
   document.getElementById("sutter-rooms").style.display = "none";
@@ -17,22 +17,25 @@ function hideSchools() {
 
 }
 
-function checkSchool() {
-  hideSchools();
+function changeCurrentRooms() {
+  hideSchoolRooms();
 
-  var select = document.getElementById("school-options").options;
-  var index = document.getElementById("school-options").selectedIndex;
-  var school = select[index].value;
+  var selectOptions = document.getElementById("school-options").options;
+  var selectedIndex = document.getElementById("school-options").selectedIndex;
+  var school = selectOptions[selectedIndex].value;
   school = school.concat("-rooms");
   document.getElementById(school).style.display = "inline";
 }
 
 
 function fillEditData(school, room, asset, serial, model, status) {
+  school = school.toLowerCase();
+  var roomOptionsString = school.concat("-rooms");
+  var roomOptions = document.getElementById(roomOptionsString).innerHTML;
 
-  document.getElementById("edit-school-select").value = school.toLowerCase();
-  document.getElementById("edit-room-input").innerHTML = document.getElementById(school.toLowerCase().concat("-rooms")).innerHTML;
-  document.getElementById("edit-room-input").value = room;
+  document.getElementById("edit-school-select").value = school;
+  document.getElementById("edit-room-field").innerHTML = roomOptions;
+  document.getElementById("edit-room-field").value = room;
   document.getElementById("edit-asset-field").value = asset;
   document.getElementById("edit-serial-field").value = serial;
   document.getElementById("edit-model-select").value = model;

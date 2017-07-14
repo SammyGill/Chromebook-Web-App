@@ -120,7 +120,7 @@
   function updateChromebook($query) {
     $conn = getConnection();
 
-    $room = $query["editRoomField"];
+    $room = $query["edit-room-field"];
     $asset = $query["edit-asset-field"];
     $serial = $query["edit-serial-field"];
     $model = $query["edit-model-select"];

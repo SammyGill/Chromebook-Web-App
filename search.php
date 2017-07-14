@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  <?php include 'functions.php' ?>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,7 +110,7 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="school"> School </option>
             </select>
 
-            <select id="school-options" name="school-options" class="school-options" onchange="checkSchool()">
+            <select id="school-options" name="school-options" class="school-options" onchange="changeCurrentRooms()">
               <option value="marshall"> Marshall </option>
               <option value="fremont"> Fremont </option>
               <option value="malaga"> Malaga </option>
@@ -117,10 +119,7 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="academy"> Fowler Academy </option>
             </select>
 
-            <?php
-              include 'functions.php';
-              printRooms();
-            ?>
+            <?php printRooms(); ?>
 
             <select id="sutter-rooms" name="sutter-rooms">
               <option value="*"> All </option>
@@ -226,7 +225,7 @@ contains all of the fields that are required to look up a Chromebook -->
              <div class="edit-data-input">
                <label> Room </label>
                <br>
-               <select name="edit-room-input" id="edit-room-input">
+               <select name="edit-room-field" id="edit-room-field">
 
                </select>
              </div>
