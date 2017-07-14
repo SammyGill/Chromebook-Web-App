@@ -1,6 +1,3 @@
-var ascending = false;
-var lastFilter;
-
 function checkSearchBySchool() {
   if(options[options.selectedIndex].value == "school") {
     document.getElementById("school-options").style.display = "inline";
@@ -17,6 +14,7 @@ function hideSchools() {
   document.getElementById("sutter-rooms").style.display = "none";
   document.getElementById("malaga-rooms").style.display = "none";
   document.getElementById("fhs-rooms").style.display = "none";
+
 }
 
 function checkSchool() {
@@ -35,11 +33,11 @@ function fillEditData(school, room, asset, serial, model, status) {
   document.getElementById("edit-school-select").value = school.toLowerCase();
   document.getElementById("edit-room-input").innerHTML = document.getElementById(school.toLowerCase().concat("-rooms")).innerHTML;
   document.getElementById("edit-room-input").value = room;
-  document.getElementById("editAssetField").value = asset;
-  document.getElementById("editSerialField").value = serial;
+  document.getElementById("edit-asset-field").value = asset;
+  document.getElementById("edit-serial-field").value = serial;
   document.getElementById("edit-model-select").value = model;
   document.getElementById("edit-physical-status-select").value = status;
-  document.getElementById("originalAsset").value = asset;
+  document.getElementById("original-asset").value = asset;
 }
 
 function checkAscending(columnName) {

@@ -21,7 +21,6 @@
     $input = $arg["searchBarInput"];
     $result = $conn->query("SELECT * FROM chromebooks WHERE asset = $input");
 
-  //  $row = $result->fetch_assoc();
     if ($conn->error || $result->num_rows == 0) {
       echo("Chromebook not found!");
     }
@@ -35,7 +34,6 @@
 
     $school = $arg["school-options"];
     $room = $arg[$school . "-rooms"];
-    $result[] = array();
 
     if($room == "*") {
       $result = $conn->query("SELECT * FROM chromebooks
@@ -50,6 +48,7 @@
       echo("ERROR");
       return -1;
     }
+
     formatTable($result);
   }
 
@@ -69,6 +68,7 @@
     $conn->query("INSERT INTO chromebooks (room, asset)
                   VALUES ($room, $asset)");
 
+
     // Currently going to be adding Chromebook without serial, will add into later version
     echo("<br>");
     echo("END OF FUNCTION");
@@ -78,12 +78,8 @@
     $conn = getConnection();
 
     $result = $conn->query("SELECT * FROM chromebooks WHERE
-                            asset = $chromebookAsset");
-
-    if($result->num_rows == 0) {
-      return false;
-    }
-    return true;
+                         asset = $chromebookAsset");
+    return $result->num_rows;
   }
 
   function formatTable($query) {
@@ -107,11 +103,16 @@
       $model = $row["Model"];
 
       echo("<tr data-toggle = 'modal' data-target = '#myModal'
-                onclick= 'fillEditData(\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\")'>
-                <td class=location>$school $room</td>
-                <td class=asset> $asset </td>
-                <td class=serial> $serial </td>
-                <td class='model'>$model</td> <td class=status>$status</td> </tr>");
+                onclick= 'fillEditData(\"$school\", $room, $asset, \"$serial\",
+                                       \"$model\", \"$status\")'>
+
+              <td class=location>$school $room</td>
+              <td class=asset> $asset </td>
+              <td class=serial> $serial </td>
+              <td class='model'>$model</td>
+              <td class=status>$status</td>
+
+            </tr>");
       $rowCounter++;
     }
   }
@@ -120,11 +121,11 @@
     $conn = getConnection();
 
     $room = $query["editRoomField"];
-    $asset = $query["editAssetField"];
-    $serial = $query["editSerialField"];
+    $asset = $query["edit-asset-field"];
+    $serial = $query["edit-serial-field"];
     $model = $query["edit-model-select"];
     $status = $query["edit-physical-status-select"];
-    $oldAsset = $query["originalAsset"];
+    $oldAsset = $query["original-asset"];
 
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset,
                   serial_number =\"$serial\", model=\"$model\",
@@ -143,7 +144,6 @@
     $schools = array("marshall", "fremont", "malaga");
     $roomCount = 1;
     for($schoolCount = 0; $schoolCount < count($schools); $schoolCount++) {
-
       echo("<select id='$schools[$schoolCount]-rooms'
                     name='$schools[$schoolCount]-rooms'>");
       echo("<option value='*'> All </option>");

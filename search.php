@@ -234,13 +234,13 @@ contains all of the fields that are required to look up a Chromebook -->
              <div class="edit-data-input">
                <label> Asset Tag </label>
                <br>
-               <input type="text" id="editAssetField" name="editAssetField">
+               <input type="text" id="edit-asset-field" name="editAssetField">
              </div>
 
              <div class="edit-data-input">
                <label> Serial Number </label>
                <br>
-               <input type="text" id="editSerialField" name="editSerialField">
+               <input type="text" id="edit-serial-field" name="editSerialField">
               </label>
             </div>
 
@@ -276,7 +276,7 @@ contains all of the fields that are required to look up a Chromebook -->
                 <option value="unassigned"> Unassigned </option>
               </select>
             </div>
-            <input type="text" id="originalAsset" name = "originalAsset" style="display:none;">
+            <input type="text" id="original-asset" name = "originalAsset" style="display:none;">
          </div>
 
          <div class="modal-footer">
