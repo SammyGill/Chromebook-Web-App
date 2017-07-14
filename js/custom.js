@@ -12,10 +12,10 @@ function checkSearchBySchool() {
 }
 
 function hideSchools() {
-  document.getElementById("mar-rooms").style.display = "none";
-  document.getElementById("fre-rooms").style.display = "none";
-  document.getElementById("sut-rooms").style.display = "none";
-  document.getElementById("mal-rooms").style.display = "none";
+  document.getElementById("marshall-rooms").style.display = "none";
+  document.getElementById("fremont-rooms").style.display = "none";
+  document.getElementById("sutter-rooms").style.display = "none";
+  document.getElementById("malaga-rooms").style.display = "none";
   document.getElementById("fhs-rooms").style.display = "none";
 }
 

@@ -109,10 +109,10 @@ contains all of the fields that are required to look up a Chromebook -->
             </select>
 
             <select id="school-options" name="school-options" class="school-options" onchange="checkSchool()">
-              <option value="mar"> Marshall </option>
-              <option value="fre"> Fremont </option>
-              <option value="mal"> Malaga </option>
-              <option value="sut"> Sutter </option>
+              <option value="marshall"> Marshall </option>
+              <option value="fremont"> Fremont </option>
+              <option value="malaga"> Malaga </option>
+              <option value="sutter"> Sutter </option>
               <option value="fhs"> Fowler High School </option>
               <option value="academy"> Fowler Academy </option>
             </select>
@@ -122,7 +122,8 @@ contains all of the fields that are required to look up a Chromebook -->
               printRooms();
             ?>
 
-            <select id="sut-rooms">
+            <select id="sutter-rooms" name="sutter-rooms">
+              <option value="*"> All </option>
               <option value="c2"> C2 </option>
               <option value="c3"> C3 </option>
               <option value="c4"> C4 </option>
@@ -147,7 +148,8 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="e4"> E4 </option>
             </select>
 
-            <select id="fhs-rooms">
+            <select id="fhs-rooms" name="fhs-rooms">
+              <option value="*"> All </option>
               <option value="101"> 101 </option>
               <option value="102"> 102 </option>
               <option value="103"> 103 </option>
@@ -179,7 +181,7 @@ contains all of the fields that are required to look up a Chromebook -->
           </div>
 
             <input type="text" class ="custom-search" placeholder="Search..."
-                   name="chromebookQuery" maxlength="4">
+                   name="searchBarInput">
             <input type="submit" class="custom-search-button">
 
           </form>
@@ -219,11 +221,13 @@ contains all of the fields that are required to look up a Chromebook -->
          </div>
 
          <div class="modal-footer">
+
+            <input type="submit" name="edit-submit" class="btn btn-primary">
+            <input type="submit" value="Delete" name="edit-delete" class="btn btn-primary">
             <button type="button" class="btn btn-default" data-dismiss="modal">
                Close
             </button>
 
-            <input type="submit" class="btn btn-primary">
          </div>
         </form>
 
@@ -233,7 +237,7 @@ contains all of the fields that are required to look up a Chromebook -->
         <?php
           // validation after the form has been submitted
           if (!empty($_POST['options'])) {
-            if($_POST['options'] == "room") {
+            if($_POST['options'] == "school") {
               queryDatabaseRoom($_POST);
             }
             else {
@@ -241,8 +245,12 @@ contains all of the fields that are required to look up a Chromebook -->
             }
           }
 
-          if(!empty($_POST['editRoomField'])) {
-            updateDatabase($_POST);
+          if(isset($_POST['edit-submit'])) {
+            updateChromebook($_POST);
+          }
+
+          if(isset($_POST['edit-delete'])) {
+            deleteChromebook($_POST);
           }
         ?>
       </div>
