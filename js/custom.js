@@ -31,7 +31,10 @@ function checkSchool() {
 
 
 function fillEditData(row) {
-  document.getElementById("editRoomField").value = document.getElementById("resultTable").rows[row].cells[0].innerHTML;
+  var school = document.getElementById("resultTable").rows[row].cells[0].innerHTML.split(" ")[0];
+
+  document.getElementById("edit-school-select").value = school.toLowerCase();
+  document.getElementById("edit-room-input").innerHTML = document.getElementById(school.toLowerCase().concat("-rooms")).innerHTML;
   document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
   document.getElementById("editSerialField").value = document.getElementById("resultTable").rows[row].cells[2].innerHTML;
   document.getElementById("edit-model-select").value = document.getElementById("resultTable").rows[row].cells[3].innerHTML;

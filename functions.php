@@ -133,10 +133,11 @@
 
 
       echo("<tr data-toggle = 'modal' data-target = '#myModal'
-                onclick= 'fillEditData($rowCounter)'> <td class=location>
-                $school $room </td> <td class=asset> $asset </td>
+                onclick= 'fillEditData($rowCounter)'>
+                <td class=location>$school $room</td>
+                <td class=asset> $asset </td>
                 <td class=serial> $serial </td>
-                <td class='model'>$model</td> <td class=status> $status </td> </tr>");
+                <td class='model'>$model</td> <td class=status>$status</td> </tr>");
       $rowCounter++;
     }
   }
