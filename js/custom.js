@@ -34,8 +34,8 @@ function fillEditData(row) {
   document.getElementById("editRoomField").value = document.getElementById("resultTable").rows[row].cells[0].innerHTML;
   document.getElementById("editAssetField").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
   document.getElementById("editSerialField").value = document.getElementById("resultTable").rows[row].cells[2].innerHTML;
-  document.getElementById("editModelField").value = document.getElementById("resultTable").rows[row].cells[3].innerHTML;
-  document.getElementById("editStatusField").value = document.getElementById("resultTable").rows[row].cells[4].innerHTML;
+  document.getElementById("edit-model-select").value = document.getElementById("resultTable").rows[row].cells[3].innerHTML;
+  document.getElementById("edit-physical-status-select").value = document.getElementById("resultTable").rows[row].cells[4].innerHTML;
   document.getElementById("originalAsset").value = document.getElementById("resultTable").rows[row].cells[1].innerHTML;
 }
 

@@ -210,24 +210,78 @@ contains all of the fields that are required to look up a Chromebook -->
          <form method="post" action= >
          <div class="modal-body">
            <div class="edit-top-row">
-            <input type="text" id="editRoomField" name="editRoomField">
-            <input type="text" id="editAssetField" name="editAssetField">
-            <input type="text" id="editSerialField" name="editSerialField">
+
+             <div class="edit-data-input">
+               <label> School </label>
+               <br>
+               <select id="edit-school-select">
+                 <option value="marshall"> Marshall </option>
+                 <option value="fremont"> Fremont </option>
+                 <option value="malaga"> Malaga </option>
+                 <option value="sutter"> Sutter </option>
+                 <option value="fhs"> FHS </option>
+               </select>
+             </div>
+
+             <div class="edit-data-input">
+               <label> Room </label>
+               <br>
+               <input type="text" id="editRoomField" name="editRoomField">
+             </div>
+
+             <div class="edit-data-input">
+               <label> Asset Tag </label>
+               <br>
+               <input type="text" id="editAssetField" name="editAssetField">
+             </div>
+
+             <div class="edit-data-input">
+               <label> Serial Number </label>
+               <br>
+               <input type="text" id="editSerialField" name="editSerialField">
+              </label>
+            </div>
+
           </div>
-            <input type="text" id="editModelField" name="editModelField">
-            <input type="text" id="editStatusField" name="editStatusField">
-            <input type="text" id="editAssignmentField" name="editAssignmentField">
+
+            <div class="edit-data-input">
+              <label> Model </label>
+              <br>
+              <select name="edit-model-select" id="edit-model-select">
+                <option value="asus"> Asus </option>
+                <option value="Dell Chromebook 11 (3120)"> Dell </option>
+                <option value="Samsung Chromebook"> Samsung </option>
+              </select>
+            </div>
+
+            <div class="edit-data-input">
+              <label> Physical Status </label>
+              <br>
+              <select name="edit-physical-status-select" id="edit-physical-status-select">
+                <option value="Good"> Good </option>
+                <option value="Damaged"> Damaged </option>
+                <option value="Scrapped"> Scrapped </option>
+              </select>
+            </div>
+
+            <div class="edit-data-input">
+              <label> Assignment Status </label>
+              <br>
+              <select id="edit-assignment-select">
+                <option value="none"> None </option>
+                <option value="assigned"> Assigned </option>
+                <option value="unassigned"> Unassigned </option>
+              </select>
+            </div>
             <input type="text" id="originalAsset" name = "originalAsset" style="display:none;">
          </div>
 
          <div class="modal-footer">
-
             <input type="submit" name="edit-submit" class="btn btn-primary">
             <input type="submit" value="Delete" name="edit-delete" class="btn btn-primary">
             <button type="button" class="btn btn-default" data-dismiss="modal">
                Close
             </button>
-
          </div>
         </form>
 

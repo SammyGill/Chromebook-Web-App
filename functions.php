@@ -135,8 +135,8 @@
       echo("<tr data-toggle = 'modal' data-target = '#myModal'
                 onclick= 'fillEditData($rowCounter)'> <td class=location>
                 $school $room </td> <td class=asset> $asset </td>
-                <td class = serial> $serial </td> <td class='model'>
-                $model </td> <td class=status> $status </td> </tr>");
+                <td class=serial> $serial </td>
+                <td class='model'>$model</td> <td class=status> $status </td> </tr>");
       $rowCounter++;
     }
   }
@@ -156,8 +156,8 @@
     $room = $query['editRoomField'];
     $asset = $query['editAssetField'];
     $serial = $query['editSerialField'];
-    $model = $query['editModelField'];
-    $status = $query['editStatusField'];
+    $model = $query['edit-model-select'];
+    $status = $query['edit-physical-status-select'];
     $oldAsset = $query['originalAsset'];
 
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset,
