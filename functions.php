@@ -135,7 +135,7 @@
   function deleteChromebook($query) {
     $conn = getConnection();
 
-    $asset = $query["originalAsset"];
+    $asset = $query["original-asset"];
     $conn->query("DELETE FROM chromebooks WHERE asset = $asset");
   }
 

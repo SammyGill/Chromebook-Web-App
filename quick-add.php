@@ -31,9 +31,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <?php include 'functions.php' ?>
 </head>
 
-<body>
+<body class="quick-add">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -64,14 +65,14 @@
       <div class="col-sm-3 col-md-2 sidebar">
 
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="overview.html">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="overview.html">Overview <span class="sr-only">(current)</span></a></li>
           <li><a href="analytics.html">Analytics</a></li>
           <li><a href="export.html">Export</a></li>
         </ul>
         <ul class="nav nav-sidebar">
           <li><a href="manage.html">Manage</a></li>
           <li><a href="search.php">Search</a></li>
-          <li><a href ="quick-add.php"> Quick Add </a></li>
+          <li class="active"><a href ="quick-add.php"> Quick Add </a></li>
         </ul>
       </div>
     </div>
@@ -87,22 +88,97 @@
     <div class="row">
 
       <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-        <input type = "text" name = "assetInputField" placeholder="Asset Tag" style="margin-right:25px;">
-        <input type = "text" name = "serialInputField" placeholder="Serial Number">
-        <input type = "submit">
-        <div class="search-wrapper">
-        <?php
-          include 'functions.php';
-          if($_POST) {
-            quickAdd($_POST);
-          }
-        ?>
-      </div>
+        <input type="text" placeholder="Asset Tag">
+        <input type="text" placeholder="Serial Number">
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1" style="text-align:center;">
+        <select name="edit-model-select" id="edit-model-select">
+          <option value="asus"> Asus </option>
+          <option value="Dell Chromebook 11 (3120)"> Dell </option>
+          <option value="Samsung Chromebook"> Samsung </option>
+        </select>
+
+        <select id="school-options" name="school-options" onchange="changeCurrentRooms()">
+          <option value="marshall"> Marshall </option>
+          <option value="fremont"> Fremont </option>
+          <option value="malaga"> Malaga </option>
+          <option value="sutter"> Sutter </option>
+          <option value="fhs"> FHS </option>
+        </select>
+
+        <?php printRooms(); ?>
+
+        <select id="sutter-rooms" name="sutter-rooms">
+          <option value="*"> All </option>
+          <option value="c2"> C2 </option>
+          <option value="c3"> C3 </option>
+          <option value="c4"> C4 </option>
+          <option value="c5"> C5 </option>
+          <option value="c6"> C6 </option>
+          <option value="c7"> C7 </option>
+          <option value="c8"> C8 </option>
+          <option value="c9"> C9 </option>
+          <option value="c10"> C10 </option>
+          <option value="c11"> C11 </option>
+          <option value="d1"> D1 </option>
+          <option value="d2"> D2 </option>
+          <option value="d3"> D3 </option>
+          <option value="d4"> D4 </option>
+          <option value="d5"> D5 </option>
+          <option value="d6"> D6 </option>
+          <option value="d7"> D7 </option>
+          <option value="d8"> D8 </option>
+          <option value="e1"> E1 </option>
+          <option value="e2"> E2 </option>
+          <option value="e3"> E3 </option>
+          <option value="e4"> E4 </option>
+        </select>
+
+        <select id="fhs-rooms" name="fhs-rooms">
+          <option value="*"> All </option>
+          <option value="101"> 101 </option>
+          <option value="102"> 102 </option>
+          <option value="103"> 103 </option>
+          <option value="104"> 104 </option>
+          <option value="105"> 105 </option>
+          <option value="106"> 106</option>
+          <option value="107"> 107 </option>
+          <option value="108"> 108 </option>
+          <option value="203"> 203 </option>
+          <option value="204"> 204 </option>
+          <option value="401"> 401 </option>
+          <option value="402"> 402 </option>
+          <option value="403"> 403 </option>
+          <option value="404"> 404 </option>
+          <option value="405"> 406 </option>
+          <option value="407"> 407 </option>
+          <option value="408"> 408 </option>
+          <option value="409"> 409 </option>
+          <option value="410"> 410 </option>
+          <option value="411"> 411 </option>
+          <option value="412"> 412 </option>
+          <option value="413"> 413 </option>
+          <option value="414"> 414 </option>
+          <option value="501"> 501 </option>
+          <option value="502"> 502 </option>
+          <option value="601"> 601 </option>
+          <option value="703"> 703 </option>
+        </select>
+
+        <select name="edit-physical-status-select" id="edit-physical-status-select">
+          <option value="Good"> Good </option>
+          <option value="Damaged"> Damaged </option>
+          <option value="Loaner"> Loaner </option>
+          <option value="Scrapped"> Scrapped </option>
+        </select>
+      </div>
+  </div>
   </form>
 
   </div>
-
+<script src="js/custom.js"></script>
 </body>
 </html>

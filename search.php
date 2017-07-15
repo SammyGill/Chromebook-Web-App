@@ -77,7 +77,7 @@
       <div class="col-sm-3 col-md-2 sidebar">
 
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="overview.html">Overview
+          <li><a href="overview.html">Overview
             <span class="sr-only">(current)</span></a></li>
 
           <li><a href="analytics.html">Analytics</a></li>
@@ -85,7 +85,7 @@
         </ul>
         <ul class="nav nav-sidebar">
           <li><a href="manage.html">Manage</a></li>
-          <li><a href="search.php">Search</a></li>
+          <li class="active"><a href="search.php">Search</a></li>
           <li><a href ="quick-add.php"> Quick Add </a></li>
         </ul>
       </div>
@@ -213,7 +213,7 @@ contains all of the fields that are required to look up a Chromebook -->
              <div class="edit-data-input">
                <label> School </label>
                <br>
-               <select id="edit-school-select">
+               <select id="edit-school-select" >
                  <option value="marshall">Marshall</option>
                  <option value="fremont">Fremont</option>
                  <option value="malaga"> Malaga </option>
@@ -233,13 +233,13 @@ contains all of the fields that are required to look up a Chromebook -->
              <div class="edit-data-input">
                <label> Asset Tag </label>
                <br>
-               <input type="text" id="edit-asset-field" name="editAssetField">
+               <input type="text" id="edit-asset-field" name="edit-asset-field">
              </div>
 
              <div class="edit-data-input">
                <label> Serial Number </label>
                <br>
-               <input type="text" id="edit-serial-field" name="editSerialField">
+               <input type="text" id="edit-serial-field" name="edit-serial-field">
               </label>
             </div>
 
@@ -275,7 +275,7 @@ contains all of the fields that are required to look up a Chromebook -->
                 <option value="unassigned"> Unassigned </option>
               </select>
             </div>
-            <input type="text" id="original-asset" name = "originalAsset" style="display:none;">
+            <input type="text" id="original-asset" name = "original-asset" style="display:none;">
          </div>
 
          <div class="modal-footer">

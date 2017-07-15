@@ -49,6 +49,10 @@
   display: none;
 }
 
+.quick-add #marshall-rooms {
+  display: inline;
+}
+
 table, th, td {
     border: 1px solid black;
     text-align:center;
