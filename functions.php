@@ -55,8 +55,8 @@
   function quickAdd($chromebook) {
     $conn = getConnection();
 
-    $asset = $chromebook["assetInputField"];
-    $serial = $chromebook["serialInputField"];
+    $asset = $chromebook["edit-asset-field"];
+    $serial = $chromebook["edit-serial-field"];
     $room = 0;
 
     if(chromebookExists($asset)) {
@@ -71,7 +71,7 @@
 
     // Currently going to be adding Chromebook without serial, will add into later version
     echo("<br>");
-    echo("END OF FUNCTION");
+    echo("CHROMEBOOK SUCCESSFULLY ADDED");
   }
 
   function chromebookExists($chromebookAsset) {
@@ -140,13 +140,16 @@
   }
 
 
-  function printRooms() {
+  function printRooms($toggleAllOption) {
     $schools = array("marshall", "fremont", "malaga");
     $roomCount = 1;
     for($schoolCount = 0; $schoolCount < count($schools); $schoolCount++) {
       echo("<select id='$schools[$schoolCount]-rooms'
-                    name='$schools[$schoolCount]-rooms'>");
-      echo("<option value='*'> All </option>");
+                    name='$schools[$schoolCount]-rooms') class='rooms'>");
+      if($toggleAllOption) {
+        echo("<option value='*'> All </option>");
+      }
+      echo("<option value='none'> None </option>");
 
       for($roomCount = 1; $roomCount < 26; $roomCount++) {
         echo("<option value='$roomCount'> $roomCount </option>");
