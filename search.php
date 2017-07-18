@@ -119,9 +119,9 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="academy"> Fowler Academy </option>
             </select>
 
-            <?php printRooms(); ?>
+            <?php printRooms(True); ?>
 
-            <select id="sutter-rooms" name="sutter-rooms">
+            <select id="sutter-rooms" name="sutter-rooms")>
               <option value="*"> All </option>
               <option value="c2"> C2 </option>
               <option value="c3"> C3 </option>

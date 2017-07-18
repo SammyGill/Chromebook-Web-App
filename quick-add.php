@@ -85,34 +85,47 @@
     </div>
 
   <form method = "post" action =>
-    <div class="row">
+    <div class="row top-row">
 
       <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-        <input type="text" placeholder="Asset Tag">
-        <input type="text" placeholder="Serial Number">
+        <input type="text" name="edit-asset-field" placeholder="Asset Tag">
+        <input type="text" name="edit-serial-field" placeholder="Serial Number">
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12 col-md-offset-1" style="text-align:center;">
+      <div class="col-md-12 col-md-offset-1" style="text-align:center; padding-bottom:10px;">
+
+      <div class=edit-data-input>
+        <label> Model </label>
+        <br>
         <select name="edit-model-select" id="edit-model-select">
           <option value="asus"> Asus </option>
           <option value="Dell Chromebook 11 (3120)"> Dell </option>
           <option value="Samsung Chromebook"> Samsung </option>
         </select>
+      </div>
 
+      <div class="edit-data-input">
+        <label> School </label>
+        <br>
         <select id="school-options" name="school-options" onchange="changeCurrentRooms()">
           <option value="marshall"> Marshall </option>
           <option value="fremont"> Fremont </option>
           <option value="malaga"> Malaga </option>
           <option value="sutter"> Sutter </option>
           <option value="fhs"> FHS </option>
+          <option value="academy"> Academy </option>
         </select>
+      </div>
 
-        <?php printRooms(); ?>
+      <div class ="edit-data-input" >
+        <label> Room </label>
+        <br>
+        <?php printRooms(False); ?>
 
         <select id="sutter-rooms" name="sutter-rooms">
-          <option value="*"> All </option>
+          <option value="student"> Student Assigned </option>
           <option value="c2"> C2 </option>
           <option value="c3"> C3 </option>
           <option value="c4"> C4 </option>
@@ -138,7 +151,7 @@
         </select>
 
         <select id="fhs-rooms" name="fhs-rooms">
-          <option value="*"> All </option>
+          <option value="student"> Student Assigned </option>
           <option value="101"> 101 </option>
           <option value="102"> 102 </option>
           <option value="103"> 103 </option>
@@ -167,16 +180,53 @@
           <option value="601"> 601 </option>
           <option value="703"> 703 </option>
         </select>
+      </div>
 
+
+      <div class="edit-data-input">
+        <label> Physical Status </label>
+        <br>
         <select name="edit-physical-status-select" id="edit-physical-status-select">
-          <option value="Good"> Good </option>
-          <option value="Damaged"> Damaged </option>
-          <option value="Loaner"> Loaner </option>
-          <option value="Scrapped"> Scrapped </option>
+          <option value="good"> Good </option>
+          <option value="damaged"> Damaged </option>
+          <option value="loaner"> Loaner </option>
         </select>
       </div>
+
+      <div class="edit-data-input">
+        <label> Assignment Status </label>
+        <br>
+      <select name="edit-assignment-status-select" id="edit-assignment-status-select"
+              onchange="checkAssignment()">
+        <option value="none"> None </option>
+        <option value="assigned"> Assigned </option>
+        <option value="unassigned"> Unassigned </option>
+        <option value="loanger"> Loaner </option>
+      </select>
+    </div>
+
+    <div class="edit-data-input">
+      <label class="student-id"> Student ID </label>
+      <br>
+      <input type="text" class="student-id" name="student-id" placeholder="Student ID">
+    </div>
+
+      </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12 col-md-offset-1" style="text-align:center;">
+      <input type="submit">
+      <br>
+      <?php
+        if($_POST) {
+          addChromebook($_POST);
+        }
+       ?>
   </form>
+</div>
+
+</div>
 
   </div>
 <script src="js/custom.js"></script>

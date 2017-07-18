@@ -92,3 +92,12 @@ function sortDescending(columnName) {
     }
   }
 }
+
+function checkAssignment() {
+  var assignment = document.getElementById("edit-assignment-status-select");
+  var studentInput = document.getElementsByClassName("student-id");
+  if(assignment.value == "assigned") {
+    studentInput[0].style.display = "inline";
+    studentInput[1].style.display = "inline";
+  }
+}

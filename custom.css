@@ -16,11 +16,13 @@
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.search-options {
+.top-row {
   padding-bottom: 15px;
 }
 
-.schoo
+.search-options {
+  padding-bottom: 15px;
+}
 
 .search-bar {
   padding-top: 10px;
@@ -45,8 +47,12 @@
 #malaga-rooms,
 #sutter-rooms,
 #fhs-rooms  {
-  width: 60px;
+  width: 140px;
   display: none;
+}
+
+.student-id {
+  display:none;
 }
 
 .quick-add #marshall-rooms {

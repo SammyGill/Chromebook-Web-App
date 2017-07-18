@@ -149,12 +149,43 @@
       if($toggleAllOption) {
         echo("<option value='*'> All </option>");
       }
-      echo("<option value='none'> None </option>");
-
       for($roomCount = 1; $roomCount < 26; $roomCount++) {
         echo("<option value='$roomCount'> $roomCount </option>");
       }
       echo("</select>");
+    }
+  }
+
+  function addChromebook($chromebookData) {
+    $conn = getConnection();
+
+    $asset = $chromebookData["edit-asset-field"];
+    $serial = $chromebookData["edit-serial-field"];
+    $model = $chromebookData["edit-model-select"];
+    $school = $chromebookData["school-options"];
+    $room = $chromebookData["$school-rooms"];
+    $status = $chromebookData["edit-physical-status-select"];
+    $assignment = $chromebookData["edit-assignment-status-select"];
+    $student = -1;
+
+    if($room == "student") {
+      $room = 0;
+    }
+
+    if("$assignment" == "assigned") {
+      $student = $chromebookData["student-id"];
+    }
+
+    echo($student);
+
+    if($conn->query("INSERT INTO chromebooks (School, Room, Asset, Serial_Number, Model, Physical_Status, Assignment_Status) VALUES (\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")")) {
+      echo("CHROME ADD SUCCESSFUL");
+    }
+    else {
+      echo("ERROR ADDING CHROMEBOOK");
+      echo($conn->error);
+      echo("<br>");
+      echo("\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\"");
     }
   }
 
