@@ -9,6 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
+  <link href="custom.css" rel="stylesheet">
 
   <title>Chromebook Repairs</title>
 
@@ -33,6 +34,7 @@
 </head>
 
 <body>
+  <?php include 'functions.php' ?>
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -73,6 +75,30 @@
           <li><a href ="quick-add.php"> Add Chromebook </a></li>
           <li class="active"> <a href="repairs.php"> Repairs </a></li>
         </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
+            <h1 style="text-align: center; margin: auto; padding-bottom: 20px;">
+              Submit A Repair Request </h1>
+        </div>
+      </div>
+        <div class="col-md-12 col-md-offset-6">
+          <form method="post" action= >
+            <input type="text" name="repair-search" placeholder="Serial Number/Asset Tag">
+            <input type="submit">
+          </form>
+
+
+        </div>
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
+          <?php
+            if($_POST) {
+              getChromebookRepair($_POST);
+            }
+           ?>
+        </div>
       </div>
 </body>
 

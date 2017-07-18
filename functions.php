@@ -52,6 +52,20 @@
     formatTable($result);
   }
 
+  function getChromebookRepair($input) {
+    $conn = getConnection();
+
+    $input = $input["repair-search"];
+
+    // first search by asset tag
+    $result = $conn->query("SELECT * FROM chromebooks WHERE asset = $input");
+
+    // now search by serial number
+  //  $result[] = $conn->query("SELECT * FROM chromebooks WHERE serial_number = $input");
+
+    formatTable($result);
+  }
+
   function quickAdd($chromebook) {
     $conn = getConnection();
 
