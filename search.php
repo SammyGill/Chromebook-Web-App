@@ -86,7 +86,8 @@
         <ul class="nav nav-sidebar">
           <li><a href="manage.html">Manage</a></li>
           <li class="active"><a href="search.php">Search</a></li>
-          <li><a href ="quick-add.php"> Quick Add </a></li>
+          <li><a href ="quick-add.php"> Add Chromebook </a></li>
+          <li> <a href="repairs.php"> Repairs </a></li>
         </ul>
       </div>
 

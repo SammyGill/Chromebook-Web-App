@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
 
-  <title>Manage</title>
+  <title>Chromebook Repairs</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="overview.html">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="overview.html">Overview <span class="sr-only">(current)</span></a></li>
           <li><a href="analytics.html">Analytics</a></li>
           <li><a href="export.html">Export</a></li>
         </ul>
@@ -71,7 +71,7 @@
           <li><a href="manage.html">Manage</a></li>
           <li><a href="search.php">Search</a></li>
           <li><a href ="quick-add.php"> Add Chromebook </a></li>
-          <li> <a href="repairs.php"> Repairs </a></li>
+          <li class="active"> <a href="repairs.php"> Repairs </a></li>
         </ul>
       </div>
 </body>

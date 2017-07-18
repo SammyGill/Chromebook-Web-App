@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
 
-  <title>Quick Add</title>
+  <title>Add Chromebook</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,8 @@
         <ul class="nav nav-sidebar">
           <li><a href="manage.html">Manage</a></li>
           <li><a href="search.php">Search</a></li>
-          <li class="active"><a href ="quick-add.php"> Quick Add </a></li>
+          <li class="active"><a href ="quick-add.php"> Add Chromebook </a></li>
+          <li> <a href="repairs.php"> Repairs </a></li>
         </ul>
       </div>
     </div>
@@ -80,7 +81,7 @@
     <div class="row">
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
-            Chromebook Quick Add </h1>
+            Add Chromebook </h1>
       </div>
     </div>
 
