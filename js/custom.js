@@ -101,3 +101,19 @@ function checkAssignment() {
     studentInput[1].style.display = "inline";
   }
 }
+
+function filterRepairSearch() {
+  var stringInput = document.getElementById("repair-search").value.toUpperCase();
+  var assetTagRows = document.getElementsByClassName("asset");
+  var serialNumberRows = document.getElementsByClassName("serial");
+  var tableRows = document.getElementsByTagName("tr");
+
+  for(var i = 0; i < assetTagRows.length; i++) {
+    if(assetTagRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1 || serialNumberRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1) {
+      tableRows[i + 1].style.display = "";
+    }
+    else {
+      tableRows[i + 1].style.display = "none";
+    }
+  }
+}

@@ -92,19 +92,13 @@
         </div>
       </div>
         <div class="col-md-12 col-md-offset-6">
-          <form method="post" action= >
-            <input type="text" name="repair-search" placeholder="Serial Number/Asset Tag">
+            <input type="text" id="repair-search" name="repair-search" placeholder="Serial Number/Asset Tag" onkeyup="filterRepairSearch()">
             <input type="submit">
-          </form>
-
-
         </div>
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
           <?php
-            if($_POST) {
-              getChromebookRepair($_POST);
-            }
+              getChromebookRepair();
            ?>
 
            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
