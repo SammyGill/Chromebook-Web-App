@@ -74,6 +74,7 @@
           <li><a href="search.php">Search</a></li>
           <li class="active"><a href ="quick-add.php"> Add Chromebook </a></li>
           <li> <a href="repairs.php"> Repairs </a></li>
+          <li> <a href="repair-form.php"> Repair Form </a></li>
         </ul>
       </div>
     </div>

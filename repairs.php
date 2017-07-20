@@ -82,6 +82,7 @@
           <li><a href="search.php">Search</a></li>
           <li><a href ="quick-add.php"> Add Chromebook </a></li>
           <li class="active"> <a href="repairs.php"> Repairs </a></li>
+          <li> <a href="repair-form.php"> Repair Form </a></li>
         </ul>
       </div>
 
@@ -93,7 +94,6 @@
       </div>
         <div class="col-md-12 col-md-offset-6">
             <input type="text" id="repair-search" name="repair-search" placeholder="Serial Number/Asset Tag" onkeyup="filterRepairSearch()">
-            <input type="submit">
         </div>
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">

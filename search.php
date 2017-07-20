@@ -30,6 +30,7 @@
       </script><![endif]-->
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
   <script src="js/bootstrap.js"></script>
@@ -88,6 +89,7 @@
           <li class="active"><a href="search.php">Search</a></li>
           <li><a href ="quick-add.php"> Add Chromebook </a></li>
           <li> <a href="repairs.php"> Repairs </a></li>
+          <li> <a href="repair-form.php"> Repair Form </a></li>
         </ul>
       </div>
 
@@ -207,6 +209,23 @@ contains all of the fields that are required to look up a Chromebook -->
             </h4>
          </div>
 
+         <div class="modal fade" id="testModal" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+               <div class="modal-content">
+
+                  <div class="modal-header">
+                     <h1> Header </h1>
+                  </div>
+
+                  <div class="modal-body">
+                    <p> Text </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
          <form method="post" action= >
          <div class="modal-body">
            <div class="edit-top-row">
@@ -282,6 +301,7 @@ contains all of the fields that are required to look up a Chromebook -->
          <div class="modal-footer">
             <input type="submit" name="edit-submit" class="btn btn-primary">
             <input type="submit" value="Delete" name="edit-delete" class="btn btn-primary">
+            <button type="button" value="Repair Form" name="repair-form-button" class="btn btn-primary"> Repair Form </button>
             <button type="button" class="btn btn-default" data-dismiss="modal">
                Close
             </button>
@@ -308,6 +328,10 @@ contains all of the fields that are required to look up a Chromebook -->
 
           if(isset($_POST['edit-delete'])) {
             deleteChromebook($_POST);
+          }
+
+          if(isset($_POST['repair-form-button'])) {
+
           }
         ?>
       </div>
