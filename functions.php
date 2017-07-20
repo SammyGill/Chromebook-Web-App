@@ -60,6 +60,12 @@
     formatTableRepair($result);
   }
 
+  function getChromebooksUnassigned() {
+    $conn = getConnection();
+    $result = $conn->query("SELECT * FROM chromebooks WHERE Assignment_Status = 'Unassigned'");
+    formatTableRepair($result);
+  }
+
   function quickAdd($chromebook) {
     $conn = getConnection();
 

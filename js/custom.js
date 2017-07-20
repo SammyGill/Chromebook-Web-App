@@ -136,6 +136,4 @@ function calculateRepairCost() {
   else {
     costField.value = "$50";
   }
-
-
 }
