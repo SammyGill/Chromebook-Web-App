@@ -63,7 +63,7 @@
     // now search by serial number
   //  $result[] = $conn->query("SELECT * FROM chromebooks WHERE serial_number = $input");
 
-    formatTable($result);
+    formatTableRepair($result);
   }
 
   function quickAdd($chromebook) {
@@ -130,6 +130,41 @@
       $rowCounter++;
     }
   }
+
+  function formatTableRepair($query) {
+    echo("<table style=width:100% id=resultTable>");
+    echo("<tr>
+            <th onclick='sortTable(\"location\")'> School + Room </th>
+            <th onclick='sortTable(\"asset\")'> Asset Tag </th>
+            <th onclick='sortTable(\"serial\")'> Serial Number </th>
+            <th onclick='sortTable(\"model\")'> Model </th>
+            <th onclick='sortTable(\"status\")'> Physical Status </th>
+          </tr>");
+
+    $rowCounter = 1;
+
+    while($row = $query->fetch_assoc()) {
+      $room = $row["Room"];
+      $asset = $row["Asset"];
+      $school = $row["School"];
+      $serial = $row["Serial_Number"];
+      $status = $row["Physical_Status"];
+      $model = $row["Model"];
+
+      echo("<tr data-toggle = 'modal' data-target = '#myModal'>
+
+              <td class=location>$school $room</td>
+              <td class=asset> $asset </td>
+              <td class=serial> $serial </td>
+              <td class='model'>$model</td>
+              <td class=status>$status</td>
+
+            </tr>");
+      $rowCounter++;
+    }
+  }
+
+
 
   function updateChromebook($query) {
     $conn = getConnection();

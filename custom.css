@@ -73,13 +73,17 @@ td:hover {
   cursor: pointer;
 }
 
+.modal-dialog {
+  width:700px;
+}
+
 .modal {
-  width: 1300px;
-  height: 1300px;
+  width: auto;
+  height: auto;
 }
 
 .modal-content {
-  width: 900px;
+  width: auto;
 }
 
 .modal-body {

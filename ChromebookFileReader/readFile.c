@@ -8,7 +8,7 @@
 
 void compareData(char *school, char *room, char *asset, char *status, char *assignment, char **unfoundChromebooks, int *index, FILE *stream) {
   char searchString[MAX_STR] = {0};
-  FILE *fp = fopen("Chromebook Mass Export.txt", "r");
+  FILE *fp = fopen("Chromebook Mass Export.csv", "r");
   if(fp == NULL) {
     printf("COULD NOT OPEN OTHER FILE\n");
     return;
