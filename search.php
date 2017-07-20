@@ -191,7 +191,36 @@ contains all of the fields that are required to look up a Chromebook -->
 
 
 
+
+
 <!-- Modal -->
+<div class="modal fade" id="repairModal" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel" aria-hidden="true" onfocus="calculateRepairCost()">
+
+   <div class="modal-dialog">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <h1> Chromebook Repair Form </h1>
+         </div>
+
+         <div class="modal-body" >
+           <input type="text" placeholder="Asset Tag" id="asset-repair-field">
+           <select id="repair-select" onchange="calculateRepairCost()">
+             <option value="screen"> Broken Screen </option>
+             <option value="keyboard"> Broken Keyboard/Touchpad </option>
+           </select>
+           <input type="text" id="cost-field" placeholder="Cost">
+           <input type="text" id="date-field" placeholder="Date">
+         </div>
+         <div class="modal-footer">
+           <input type="submit" class="btn btn-primary">
+         </div>
+       </div>
+     </div>
+   </div>
+
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
    aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -208,23 +237,6 @@ contains all of the fields that are required to look up a Chromebook -->
                Edit Chromebook
             </h4>
          </div>
-
-         <div class="modal fade" id="testModal" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog">
-               <div class="modal-content">
-
-                  <div class="modal-header">
-                     <h1> Header </h1>
-                  </div>
-
-                  <div class="modal-body">
-                    <p> Text </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
          <form method="post" action= >
          <div class="modal-body">
@@ -262,7 +274,6 @@ contains all of the fields that are required to look up a Chromebook -->
                <input type="text" id="edit-serial-field" name="edit-serial-field">
               </label>
             </div>
-
           </div>
 
             <div class="edit-data-input">
@@ -301,7 +312,7 @@ contains all of the fields that are required to look up a Chromebook -->
          <div class="modal-footer">
             <input type="submit" name="edit-submit" class="btn btn-primary">
             <input type="submit" value="Delete" name="edit-delete" class="btn btn-primary">
-            <button type="button" value="Repair Form" name="repair-form-button" class="btn btn-primary"> Repair Form </button>
+            <button type="button" value="Repair Form" name="repair-form-button" class="btn btn-primary" onclick="openRepairForm()"> Repair Form </button>
             <button type="button" class="btn btn-default" data-dismiss="modal">
                Close
             </button>

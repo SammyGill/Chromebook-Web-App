@@ -117,3 +117,25 @@ function filterRepairSearch() {
     }
   }
 }
+
+function openRepairForm() {
+  var date = new Date();
+  $("#myModal").modal("hide");
+  $("#repairModal").modal("show");
+  document.getElementById("asset-repair-field").value = document.getElementById("edit-asset-field").value;
+  document.getElementById("date-field").value = date.toDateString();
+}
+
+function calculateRepairCost() {
+  var repairSelected = document.getElementById("repair-select").value;
+  var costField = document.getElementById("cost-field");
+
+  if(repairSelected == "screen") {
+    costField.value = "$20";
+  }
+  else {
+    costField.value = "$50";
+  }
+
+
+}
