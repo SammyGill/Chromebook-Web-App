@@ -19,7 +19,7 @@
     $conn = getConnection();
 
     $input = $arg["searchBarInput"];
-    $result = $conn->query("SELECT * FROM chromebooks WHERE asset = $input");
+    $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset WHERE chromebooks.asset = $input");
 
     if ($conn->error || $result->num_rows == 0) {
       echo("Chromebook not found!");
@@ -36,12 +36,12 @@
     $room = $arg[$school . "-rooms"];
 
     if($room == "*") {
-      $result = $conn->query("SELECT * FROM chromebooks
-                              WHERE school = \"$school\"");
+      $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset
+                              WHERE locations.School = \"$school\"");
     }
     else {
-      $result = $conn->query("SELECT * FROM chromebooks
-                              WHERE school = \"$school\" AND room = $room");
+      $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset
+                              WHERE locations.School = \"$school\" AND locations.Room = $room");
     }
 
     if($conn->error) {
