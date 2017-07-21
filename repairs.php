@@ -93,7 +93,7 @@
         </div>
       </div>
         <div class="col-md-12 col-md-offset-6">
-            <input type="text" id="repair-search" name="repair-search" placeholder="Serial Number/Asset Tag" onkeyup="filterRepairSearch()">
+            <input type="text" id="repair-search" name="repair-search" placeholder="Serial Number/Asset Tag" onkeyup="filterSearch('repair-search')">
         </div>
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">

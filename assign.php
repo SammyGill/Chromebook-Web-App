@@ -95,8 +95,7 @@
 
       <div class="row">
         <div class="col-md-12 col-md-offset-6">
-          <input type="text" placeholder="Asset Tag/Serial Number">
-          <input type="submit">
+          <input type="text" id="unassigned-chromebooks" placeholder="Asset Tag/Serial Number" onkeyup="filterSearch('unassigned-chromebooks')">
         </div>
       </div>
 

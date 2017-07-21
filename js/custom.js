@@ -102,8 +102,8 @@ function checkAssignment() {
   }
 }
 
-function filterRepairSearch() {
-  var stringInput = document.getElementById("repair-search").value.toUpperCase();
+function filterSearch(searchBar) {
+  var stringInput = document.getElementById(searchBar).value.toUpperCase();
   var assetTagRows = document.getElementsByClassName("asset");
   var serialNumberRows = document.getElementsByClassName("serial");
   var tableRows = document.getElementsByTagName("tr");
