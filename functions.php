@@ -18,7 +18,7 @@
   function getChromebook($searchInput) {
     $conn = getConnection();
 
-    $input = $searchText["searchBarInput"];
+    $input = $searchInput["searchBarInput"];
     $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset WHERE chromebooks.asset = $input");
 
     if ($conn->error || $result->num_rows == 0) {
@@ -209,7 +209,12 @@
     $conn = getConnection();
 
     $asset = $chromebookAsset["original-asset"];
-    $conn->query("DELETE FROM chromebooks WHERE asset = $asset");
+    if($conn->query("DELETE FROM chromebooks WHERE asset = $asset")) {
+      echo("CHROMEBOOK DELETED");
+    }
+    else {
+      echo("CHROMEBOOK DELETE FAIL");
+    }
   }
 
 
@@ -260,6 +265,32 @@
       echo("<br>");
       echo("\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\"");
     }
+  }
+
+  function submitRepairRequest($formFields) {
+    $conn = getConnection();
+    $asset = $formFields["asset-repair-field"];
+    $damage = $formFields["repair-type-select"];
+    $cost = $formFields["repair-cost"];
+    $date = $formFields["repair-submit-date"];
+
+    $updateOne = $conn->query("UPDATE chromebooks SET
+                               Physical_Status = 'Damaged'
+                               WHERE Asset = $asset");
+
+    $updateTwo = $conn->query("INSERT INTO damages VALUES
+                               (\"$damage\", $cost, \"$date\", $asset, 'N')");
+
+    if($updateOne && $updateTwo) {
+      echo("REPAIR SUBMITTED");
+    }
+    else {
+      echo($conn->connect_error);
+    }
+  }
+
+  function completeRepair($repairUpdates) {
+    
   }
 
  ?>

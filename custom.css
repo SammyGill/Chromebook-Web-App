@@ -73,17 +73,11 @@ td:hover {
   cursor: pointer;
 }
 
-.modal {
-  height: auto;
-}
-
-.modal-content {
-  width: auto;
-}
-
 .modal-body {
-  height: auto;
-  width: auto;
+  position: relative;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 15px;
 }
 
 .edit-top-row {

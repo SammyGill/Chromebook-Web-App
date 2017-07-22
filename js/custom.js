@@ -139,9 +139,9 @@ function calculateRepairCost() {
   var costField = document.getElementById("cost-field");
 
   if(repairSelected == "screen") {
-    costField.value = "$20";
+    costField.value = "20";
   }
   else {
-    costField.value = "$50";
+    costField.value = "50";
   }
 }

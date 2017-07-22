@@ -201,21 +201,25 @@ contains all of the fields that are required to look up a Chromebook -->
       <div class="modal-content">
 
          <div class="modal-header">
-            <h1> Chromebook Repair Form </h1>
+            <h4 class="modal-title" id="myModalLabel"> Chromebook Repair Form </h1>
          </div>
 
-         <div class="modal-body" >
-           <input type="text" placeholder="Asset Tag" id="asset-repair-field">
-           <select id="repair-select" onchange="calculateRepairCost()">
+         <div class="modal-body">
+           <form method="post" action= >
+           <div style="padding-bottom:15px">
+           <input type="text" placeholder="Asset Tag" name="asset-repair-field" id="asset-repair-field">
+           <select id="repair-select" name="repair-type-select" onchange="calculateRepairCost()">
              <option value="screen"> Broken Screen </option>
              <option value="keyboard"> Broken Keyboard/Touchpad </option>
            </select>
-           <input type="text" id="cost-field" placeholder="Cost">
-           <input type="text" id="date-field" placeholder="Date">
+           <input type="text" id="cost-field" name="repair-cost" placeholder="Cost">
+         </div>
+           <input type="text" id="date-field" name="repair-submit-date" placeholder="Date">
          </div>
          <div class="modal-footer">
-           <input type="submit" class="btn btn-primary">
+           <input type="submit" class="btn btn-primary" name="repair-submit">
          </div>
+       </form>
        </div>
      </div>
    </div>
@@ -313,7 +317,7 @@ contains all of the fields that are required to look up a Chromebook -->
             <input type="submit" name="edit-submit" class="btn btn-primary">
             <input type="submit" value="Delete" name="edit-delete" class="btn btn-primary">
             <button type="button" value="Repair Form" name="repair-form-button" class="btn btn-primary" onclick="openRepairForm()"> Repair Form </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
                Close
             </button>
          </div>
@@ -341,8 +345,8 @@ contains all of the fields that are required to look up a Chromebook -->
             deleteChromebook($_POST);
           }
 
-          if(isset($_POST['repair-form-button'])) {
-
+          if(isset($_POST['repair-submit'])) {
+            submitRepairRequest($_POST);
           }
         ?>
       </div>
