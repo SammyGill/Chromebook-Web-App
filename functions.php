@@ -15,10 +15,10 @@
     return $conn;
   }
 
-  function getChromebook($arg) {
+  function getChromebook($searchInput) {
     $conn = getConnection();
 
-    $input = $arg["searchBarInput"];
+    $input = $searchText["searchBarInput"];
     $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset WHERE chromebooks.asset = $input");
 
     if ($conn->error || $result->num_rows == 0) {
@@ -29,11 +29,11 @@
     }
   }
 
-  function getChromebookRoom($arg) {
+  function getChromebookRoom($searchInput) {
     $conn = getConnection();
 
-    $school = $arg["school-options"];
-    $room = $arg[$school . "-rooms"];
+    $school = $searchInput["school-options"];
+    $room = $searchInput[$school . "-rooms"];
 
     if($room == "*") {
       $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset
@@ -55,7 +55,9 @@
   function getChromebookRepair() {
     $conn = getConnection();
 
-    $result = $conn->query("SELECT * FROM chromebooks WHERE Physical_Status = 'Damaged'");
+    $resultStudents = $conn->query("SELECT chromebooks.Asset, chromebooks.Model, damages.Type, students.Student_ID, students.Amount FROM chromebooks INNER JOIN students ON chromebooks.asset = students.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
+    $resultSchools = $conn->query("SELECT chromebooks.Asset, chromebooks.Model, damages.Type, locations.School, locations.Room FROM chromebooks INNER JOIN locations ON chromebooks.asset = locations.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
+    $result = array($resultStudents, $resultSchools);
 
     formatTableRepair($result);
   }
@@ -63,7 +65,7 @@
   function getChromebooksUnassigned() {
     $conn = getConnection();
     $result = $conn->query("SELECT * FROM chromebooks WHERE Assignment_Status = 'Unassigned'");
-    formatTableRepair($result);
+    formatTableUnassigned($result);
   }
 
   function quickAdd($chromebook) {
@@ -106,8 +108,6 @@
             <th onclick='sortTable(\"status\")'> Physical Status </th>
           </tr>");
 
-    $rowCounter = 1;
-
     while($row = $query->fetch_assoc()) {
       $room = $row["Room"];
       $asset = $row["Asset"];
@@ -127,44 +127,56 @@
               <td class=status>$status</td>
 
             </tr>");
-      $rowCounter++;
     }
   }
 
   function formatTableRepair($query) {
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
-            <th onclick='sortTable(\"location\")'> School + Room </th>
+            <th onclick='sortTable(\"asset\")'> Asset Tag </th>
+            <th onclick='sortTable(\"model\")'> Model </th>
+            <th onclick='sortTable(\"damage\")'> Damage </th>
+          </tr>");
+
+    for($x = 0; $x < count($query); $x++) {
+      while($row = $query[$x]->fetch_assoc()) {
+        $asset = $row["Asset"];
+        $model = $row["Model"];
+        $damage = $row["Type"];
+        echo("<tr data-toggle = 'modal' data-target = '#myModal'>
+                <td class=asset> $asset </td>
+                <td class=model> $model </td>
+                <td class=damage> $damage </td>
+            </tr>");
+      }
+    }
+  }
+
+  function formatTableUnassigned($query) {
+    echo("<table style=width:100% id=resultTable>");
+    echo("<tr>
             <th onclick='sortTable(\"asset\")'> Asset Tag </th>
             <th onclick='sortTable(\"serial\")'> Serial Number </th>
             <th onclick='sortTable(\"model\")'> Model </th>
             <th onclick='sortTable(\"status\")'> Physical Status </th>
           </tr>");
 
-    $rowCounter = 1;
-
     while($row = $query->fetch_assoc()) {
-      $room = $row["Room"];
       $asset = $row["Asset"];
-      $school = $row["School"];
       $serial = $row["Serial_Number"];
       $status = $row["Physical_Status"];
       $model = $row["Model"];
 
       echo("<tr data-toggle = 'modal' data-target = '#myModal'>
 
-              <td class=location>$school $room</td>
               <td class=asset> $asset </td>
               <td class=serial> $serial </td>
               <td class='model'>$model</td>
               <td class=status>$status</td>
 
             </tr>");
-      $rowCounter++;
     }
   }
-
-
 
   function updateChromebook($query) {
     $conn = getConnection();
@@ -181,10 +193,10 @@
                   Physical_Status=\"$status\" WHERE asset = $oldAsset");
   }
 
-  function deleteChromebook($query) {
+  function deleteChromebook($chromebookAsset) {
     $conn = getConnection();
 
-    $asset = $query["original-asset"];
+    $asset = $chromebookAsset["original-asset"];
     $conn->query("DELETE FROM chromebooks WHERE asset = $asset");
   }
 
