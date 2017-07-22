@@ -73,12 +73,7 @@ td:hover {
   cursor: pointer;
 }
 
-.modal-dialog {
-  width:700px;
-}
-
 .modal {
-  width: auto;
   height: auto;
 }
 
@@ -87,8 +82,8 @@ td:hover {
 }
 
 .modal-body {
-  height: 200px;
-  width: 1300px;
+  height: auto;
+  width: auto;
 }
 
 .edit-top-row {

@@ -43,6 +43,14 @@ function fillEditData(school, room, asset, serial, model, status) {
   document.getElementById("original-asset").value = asset;
 }
 
+function fillRepairModal(asset, serial, model, damage, location) {
+  document.getElementById("asset").value = asset;
+  document.getElementById("serial").value = serial;
+  document.getElementById("model").value = model;
+  document.getElementById("damage").value = damage;
+  document.getElementById("location").value = location;
+}
+
 function checkAscending(columnName) {
   var rows = document.getElementsByClassName(columnName);
   for(i = 0; i < (rows.length - 1); i++) {

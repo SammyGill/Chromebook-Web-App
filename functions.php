@@ -55,8 +55,8 @@
   function getChromebookRepair() {
     $conn = getConnection();
 
-    $resultStudents = $conn->query("SELECT chromebooks.Asset, chromebooks.Model, damages.Type, students.Student_ID, students.Amount FROM chromebooks INNER JOIN students ON chromebooks.asset = students.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
-    $resultSchools = $conn->query("SELECT chromebooks.Asset, chromebooks.Model, damages.Type, locations.School, locations.Room FROM chromebooks INNER JOIN locations ON chromebooks.asset = locations.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
+    $resultStudents = $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status, chromebooks.Serial_Number, chromebooks.Model, damages.Type, students.Student_ID, students.Amount FROM chromebooks INNER JOIN students ON chromebooks.asset = students.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
+    $resultSchools = $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status, chromebooks.Serial_Number, chromebooks.Model, damages.Type, locations.School, locations.Room FROM chromebooks INNER JOIN locations ON chromebooks.asset = locations.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
     $result = array($resultStudents, $resultSchools);
 
     formatTableRepair($result);
@@ -141,9 +141,21 @@
     for($x = 0; $x < count($query); $x++) {
       while($row = $query[$x]->fetch_assoc()) {
         $asset = $row["Asset"];
+        $serial = $row["Serial_Number"];
         $model = $row["Model"];
         $damage = $row["Type"];
-        echo("<tr data-toggle = 'modal' data-target = '#myModal'>
+        $assignment = $row["Assignment_Status"];
+        if("$assignment" == "School" || "$assignment" == "Loaner") {
+          $school = $row["School"];
+          $room = $row["Room"];
+          $location = "$school $room";
+        }
+        else {
+          $location = $row["Student_ID"];
+        }
+
+        echo("<tr data-toggle = 'modal' data-target = '#myModal'
+               onclick='fillRepairModal(\"$asset\", \"$serial\", \"$model\", \"$damage\", \"$location\")'>
                 <td class=asset> $asset </td>
                 <td class=model> $model </td>
                 <td class=damage> $damage </td>
@@ -171,8 +183,8 @@
 
               <td class=asset> $asset </td>
               <td class=serial> $serial </td>
-              <td class='model'>$model</td>
-              <td class=status>$status</td>
+              <td class='model'> $model </td>
+              <td class=status> $status </td>
 
             </tr>");
     }
