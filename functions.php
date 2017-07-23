@@ -144,23 +144,34 @@
         $serial = $row["Serial_Number"];
         $model = $row["Model"];
         $damage = $row["Type"];
+        $damage = determineDamageString($damage);
         $assignment = $row["Assignment_Status"];
         if("$assignment" == "School" || "$assignment" == "Loaner") {
           $school = $row["School"];
           $room = $row["Room"];
           $location = "$school $room";
+          $amount = 0;
         }
         else {
           $location = $row["Student_ID"];
+          $amount = $row["Amount"];
         }
-
         echo("<tr data-toggle = 'modal' data-target = '#myModal'
-               onclick='fillRepairModal(\"$asset\", \"$serial\", \"$model\", \"$damage\", \"$location\")'>
+               onclick='fillRepairModal(\"$asset\", \"$serial\", \"$model\", \"$damage\", \"$location\", $amount, \"$assignment\")'>
                 <td class=asset> $asset </td>
                 <td class=model> $model </td>
                 <td class=damage> $damage </td>
             </tr>");
       }
+    }
+  }
+
+  function determineDamageString($damageInput) {
+    if($damageInput == "screen") {
+      return "Broken Screen";
+    }
+    else {
+      return "Broken Keyboard";
     }
   }
 
@@ -289,8 +300,39 @@
     }
   }
 
+  function calculateCost($damageString) {
+    if(damageString == "Broken Screen") {
+      $cost = 20;
+    }
+    if(damageString == "Broken Keyboard") {
+      $cost = 50;
+    }
+    return $cost;
+  }
+
   function completeRepair($repairUpdates) {
-    
+    $conn = getConnection();
+    $asset = $repairUpdates["asset"];
+    $damage = $repairUpdates["damage"];
+    $previousDamage = $conn->query("SELECT Previous_Damage FROM chromebooks WHERE Asset = $asset");
+    $previousDamage = $previousDamage->fetch_assoc();
+
+    if($repairUpdates["assignment"] == "Student") {
+      $studentID = $repairUpdates["location"];
+      $cost = $repairUpdates["cost"];
+      $conn->query("UPDATE students SET Amount = Amount + $cost WHERE Student_ID = $studentID");
+    }
+    $conn->query("UPDATE chromebooks SET Physical_Status = 'Good' WHERE Asset = $asset");
+    echo $previousDamage["Previous_Damage"];
+    if($previousDamage["Previous_Damage"] == null) {
+      $conn->query("UPDATE chromebooks SET Previous_Damage = '$damage, ' WHERE Asset = $asset");
+    }
+    else {
+      $conn->query("UPDATE chromebooks SET Previous_Damage = concat(Previous_Damage, '$damage, ') WHERE Asset = $asset");
+    }
+    $conn->query("DELETE from damages WHERE Asset = $asset");
+    echo $conn->connect_error;
+    echo("REPAIR COMPELTE");
   }
 
  ?>

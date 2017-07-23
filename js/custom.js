@@ -43,13 +43,7 @@ function fillEditData(school, room, asset, serial, model, status) {
   document.getElementById("original-asset").value = asset;
 }
 
-function fillRepairModal(asset, serial, model, damage, location) {
-  document.getElementById("asset").value = asset;
-  document.getElementById("serial").value = serial;
-  document.getElementById("model").value = model;
-  document.getElementById("damage").value = damage;
-  document.getElementById("location").value = location;
-}
+
 
 function checkAscending(columnName) {
   var rows = document.getElementsByClassName(columnName);
@@ -134,14 +128,29 @@ function openRepairForm() {
   document.getElementById("date-field").value = date.toDateString();
 }
 
-function calculateRepairCost() {
-  var repairSelected = document.getElementById("repair-select").value;
-  var costField = document.getElementById("cost-field");
+function calculateRepairCost(repairSelected) {
 
-  if(repairSelected == "screen") {
+  if(repairSelected == undefined) {
+    repairSelected = document.getElementById("repair-select").value.innerHTML;
+  }
+    console.log(repairSelected);
+  var costField = document.getElementById("cost");
+
+  if(repairSelected == "Broken Screen") {
     costField.value = "20";
   }
   else {
     costField.value = "50";
   }
+}
+
+function fillRepairModal(asset, serial, model, damage, location, amount, assignment) {
+
+  calculateRepairCost(damage);
+  document.getElementById("asset").value = asset;
+  document.getElementById("serial").value = serial;
+  document.getElementById("model").value = model;
+  document.getElementById("damage").value = damage;
+  document.getElementById("location").value = location;
+  document.getElementById("assignment").value = assignment;
 }

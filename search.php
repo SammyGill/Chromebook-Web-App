@@ -212,9 +212,10 @@ contains all of the fields that are required to look up a Chromebook -->
              <option value="screen"> Broken Screen </option>
              <option value="keyboard"> Broken Keyboard/Touchpad </option>
            </select>
-           <input type="text" id="cost-field" name="repair-cost" placeholder="Cost">
+           <input type="text" id="cost" name="repair-cost" placeholder="Cost">
          </div>
            <input type="text" id="date-field" name="repair-submit-date" placeholder="Date">
+
          </div>
          <div class="modal-footer">
            <input type="submit" class="btn btn-primary" name="repair-submit">

@@ -91,6 +91,10 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
             <h1 style="text-align: center; margin: auto; padding-bottom: 20px;">
               Submit A Repair Request </h1>
+              <?php
+              if($_POST)
+                  completeRepair($_POST);
+               ?>
         </div>
       </div>
         <div class="col-md-12 col-md-offset-6">
@@ -115,13 +119,14 @@
                     <form method="post" action= >
                     <div class="modal-body">
                       <div style="padding-bottom:15px;">
-                        <input type="text" id="asset" placeholder="Asset" readonly>
+                        <input type="text" id="asset" name="asset" placeholder="Asset" readonly>
                         <input type="text" id="serial" placeholder="Serial" readonly>
-                        <input type="text" id="location" placeholder="Location" readonly>
+                        <input type="text" id="location" name="location" placeholder="Location" readonly>
                       </div>
                         <input type="text" id="model" placeholder="Model" readonly>
-                        <input type="text" id="damage" placeholder="Damage" readonly>
-                        <input type="text" placeholder="Total Cost" readonly>
+                        <input type="text" id="damage" name="damage" placeholder="Damage" readonly>
+                        <input type="text" id="cost" name="cost" placeholder="Total Cost" readonly>
+                        <input type="text" id="assignment" name="assignment" style="display:none;">
                     </div>
 
                     <div class="modal-footer">
@@ -131,12 +136,11 @@
                   </div>
                 </div>
               </div>
+
+
         </div>
+
       </div>
-
-
-
-
 <script src="js/custom.js"></script>
 </body>
 
