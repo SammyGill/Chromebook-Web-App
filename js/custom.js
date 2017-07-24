@@ -1,3 +1,10 @@
+
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function checkSearchBySchool() {
   if(options[options.selectedIndex].value == "school") {
     document.getElementById("school-options").style.display = "inline";
@@ -8,6 +15,12 @@ function checkSearchBySchool() {
   }
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function hideSchoolRooms() {
   document.getElementById("marshall-rooms").style.display = "none";
   document.getElementById("fremont-rooms").style.display = "none";
@@ -17,6 +30,12 @@ function hideSchoolRooms() {
 
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function changeCurrentRooms() {
   hideSchoolRooms();
 
@@ -25,9 +44,15 @@ function changeCurrentRooms() {
   var school = selectOptions[selectedIndex].value;
   school = school.concat("-rooms");
   document.getElementById(school).style.display = "inline";
+  document.getElementById(school).selectedIndex = 0;
 }
 
-
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function fillEditData(school, room, asset, serial, model, status) {
   school = school.toLowerCase();
   var roomOptionsString = school.concat("-rooms");
@@ -43,8 +68,12 @@ function fillEditData(school, room, asset, serial, model, status) {
   document.getElementById("original-asset").value = asset;
 }
 
-
-
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function checkAscending(columnName) {
   var rows = document.getElementsByClassName(columnName);
   for(i = 0; i < (rows.length - 1); i++) {
@@ -55,6 +84,12 @@ function checkAscending(columnName) {
   return false;
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function sortTable(columnName) {
   if(checkAscending(columnName)) {
     sortAscending(columnName);
@@ -64,7 +99,12 @@ function sortTable(columnName) {
   }
 }
 
-
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function sortAscending(columnName) {
   var rows = document.getElementsByClassName(columnName);
   for(i = 0; i < (rows.length); i++) {
@@ -80,6 +120,12 @@ function sortAscending(columnName) {
   }
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function sortDescending(columnName) {
   var rows = document.getElementsByClassName(columnName);
   for(i = 0; i < (rows.length); i++) {
@@ -95,15 +141,41 @@ function sortDescending(columnName) {
   }
 }
 
-function checkAssignment() {
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
+function checkAssignment(roomString) {
   var assignment = document.getElementById("edit-assignment-status-select");
   var studentInput = document.getElementsByClassName("student-id");
   if(assignment.value == "assigned") {
     studentInput[0].style.display = "inline";
     studentInput[1].style.display = "inline";
   }
+  else {
+    studentInput[0].style.display = "none";
+    studentInput[1].style.display = "none";
+  }
+  if(roomString) {
+    var room = document.getElementById(roomString);
+
+    if(room.selectedIndex == 0) {
+      console.log("student");
+    }
+    else {
+      console.log("not student");
+    }
+  }
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function filterSearch(searchBar) {
   var stringInput = document.getElementById(searchBar).value.toUpperCase();
   var assetTagRows = document.getElementsByClassName("asset");
@@ -111,7 +183,8 @@ function filterSearch(searchBar) {
   var tableRows = document.getElementsByTagName("tr");
 
   for(var i = 0; i < assetTagRows.length; i++) {
-    if(assetTagRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1 || serialNumberRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1) {
+    if(assetTagRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1 ||
+       serialNumberRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1) {
       tableRows[i + 1].style.display = "";
     }
     else {
@@ -120,6 +193,12 @@ function filterSearch(searchBar) {
   }
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function openRepairForm() {
   var date = new Date();
   $("#myModal").modal("hide");
@@ -128,10 +207,31 @@ function openRepairForm() {
   document.getElementById("date-field").value = date.toDateString();
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
+function determineDamageString(inputString) {
+  if(inputString == "screen") {
+    return "Broken Screen";
+  }
+  else {
+    return "Broken Keyboard";
+  }
+}
+
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function calculateRepairCost(repairSelected) {
 
   if(repairSelected == undefined) {
-    repairSelected = document.getElementById("repair-select").value.innerHTML;
+    repairSelected = determineDamageString(document.getElementById("repair-select").value);
   }
     console.log(repairSelected);
   var costField = document.getElementById("cost");
@@ -144,6 +244,12 @@ function calculateRepairCost(repairSelected) {
   }
 }
 
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function fillRepairModal(asset, serial, model, damage, location, amount, assignment) {
 
   calculateRepairCost(damage);

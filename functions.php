@@ -1,5 +1,11 @@
 <?php
 
+ /**
+  *
+  * Returns a connection to the MySQL Database
+  *
+  * @return MySQL connection
+  */
   function getConnection() {
     $servername = "localhost";
     $username = "root";
@@ -15,11 +21,25 @@
     return $conn;
   }
 
+ /**
+  *
+  * Comments
+  *
+  * @param
+  * @param
+  * @return
+  */
   function getChromebook($searchInput) {
     $conn = getConnection();
 
     $input = $searchInput["searchBarInput"];
-    $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset WHERE chromebooks.asset = $input");
+    $result =
+      $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset,
+                    chromebooks.Serial_Number, chromebooks.Model,
+                    chromebooks.Physical_Status, chromebooks.Assignment_Status
+                    FROM locations INNER JOIN chromebooks ON
+                    chromebooks.asset=locations.asset WHERE
+                    chromebooks.asset = $input");
 
     if ($conn->error || $result->num_rows == 0) {
       echo("Chromebook not found!");
@@ -29,6 +49,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function getChromebookRoom($searchInput) {
     $conn = getConnection();
 
@@ -36,12 +64,23 @@
     $room = $searchInput[$school . "-rooms"];
 
     if($room == "*") {
-      $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset
-                              WHERE locations.School = \"$school\"");
+      $result =
+        $conn->query("SELECT locations.School, locations.Room,
+                      chromebooks.Asset, chromebooks.Serial_Number,
+                      chromebooks.Model, chromebooks.Physical_Status,
+                      chromebooks.Assignment_Status FROM locations INNER JOIN
+                      chromebooks ON chromebooks.asset=locations.asset
+                      WHERE locations.School = \"$school\"");
     }
     else {
-      $result = $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset, chromebooks.Serial_Number, chromebooks.Model, chromebooks.Physical_Status, chromebooks.Assignment_Status FROM locations INNER JOIN chromebooks ON chromebooks.asset=locations.asset
-                              WHERE locations.School = \"$school\" AND locations.Room = $room");
+      $result =
+        $conn->query("SELECT locations.School, locations.Room,
+                      chromebooks.Asset, chromebooks.Serial_Number,
+                      chromebooks.Model, chromebooks.Physical_Status,
+                      chromebooks.Assignment_Status FROM locations INNER JOIN
+                      chromebooks ON chromebooks.asset=locations.asset
+                      WHERE locations.School = \"$school\"
+                      AND locations.Room = $room");
     }
 
     if($conn->error) {
@@ -52,22 +91,59 @@
     formatTable($result);
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function getChromebookRepair() {
     $conn = getConnection();
 
-    $resultStudents = $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status, chromebooks.Serial_Number, chromebooks.Model, damages.Type, students.Student_ID, students.Amount FROM chromebooks INNER JOIN students ON chromebooks.asset = students.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
-    $resultSchools = $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status, chromebooks.Serial_Number, chromebooks.Model, damages.Type, locations.School, locations.Room FROM chromebooks INNER JOIN locations ON chromebooks.asset = locations.asset INNER JOIN damages ON chromebooks.asset = damages.asset");
+    $resultStudents =
+      $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status,
+                    chromebooks.Serial_Number, chromebooks.Model, damages.Type,
+                    students.Student_ID, students.Amount FROM chromebooks
+                    INNER JOIN students ON chromebooks.asset = students.asset
+                    INNER JOIN damages ON chromebooks.asset = damages.asset");
+
+    $resultSchools =
+      $conn->query("SELECT chromebooks.Asset, chromebooks.Assignment_Status,
+                    chromebooks.Serial_Number, chromebooks.Model, damages.Type,
+                    locations.School, locations.Room FROM chromebooks INNER JOIN
+                    locations ON chromebooks.asset = locations.asset INNER JOIN
+                    damages ON chromebooks.asset = damages.asset");
+
     $result = array($resultStudents, $resultSchools);
 
     formatTableRepair($result);
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function getChromebooksUnassigned() {
     $conn = getConnection();
-    $result = $conn->query("SELECT * FROM chromebooks WHERE Assignment_Status = 'Unassigned'");
+    $result = $conn->query("SELECT * FROM chromebooks
+                            WHERE Assignment_Status = 'Unassigned'");
     formatTableUnassigned($result);
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function quickAdd($chromebook) {
     $conn = getConnection();
 
@@ -90,6 +166,14 @@
     echo("CHROMEBOOK SUCCESSFULLY ADDED");
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function chromebookExists($chromebookAsset) {
     $conn = getConnection();
 
@@ -98,6 +182,14 @@
     return $result->num_rows;
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function formatTable($query) {
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
@@ -130,6 +222,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function formatTableRepair($query) {
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
@@ -157,7 +257,9 @@
           $amount = $row["Amount"];
         }
         echo("<tr data-toggle = 'modal' data-target = '#myModal'
-               onclick='fillRepairModal(\"$asset\", \"$serial\", \"$model\", \"$damage\", \"$location\", $amount, \"$assignment\")'>
+               onclick='fillRepairModal(\"$asset\", \"$serial\", \"$model\",
+                                        \"$damage\", \"$location\", $amount,
+                                        \"$assignment\")'>
                 <td class=asset> $asset </td>
                 <td class=model> $model </td>
                 <td class=damage> $damage </td>
@@ -166,6 +268,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function determineDamageString($damageInput) {
     if($damageInput == "screen") {
       return "Broken Screen";
@@ -175,6 +285,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function formatTableUnassigned($query) {
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
@@ -201,6 +319,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function updateChromebook($query) {
     $conn = getConnection();
 
@@ -216,6 +342,14 @@
                   Physical_Status=\"$status\" WHERE asset = $oldAsset");
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function deleteChromebook($chromebookAsset) {
     $conn = getConnection();
 
@@ -228,7 +362,14 @@
     }
   }
 
-
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function printRooms($toggleAllOption) {
     $schools = array("marshall", "fremont", "malaga");
     $roomCount = 1;
@@ -245,6 +386,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function addChromebook($chromebookData) {
     $conn = getConnection();
 
@@ -265,19 +414,28 @@
       $student = $chromebookData["student-id"];
     }
 
-    echo($student);
 
-    if($conn->query("INSERT INTO chromebooks (School, Room, Asset, Serial_Number, Model, Physical_Status, Assignment_Status) VALUES (\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")")) {
-      echo("CHROME ADD SUCCESSFUL");
+    if($conn->query("INSERT INTO chromebooks (School, Room, Asset,
+                     Serial_Number, Model, Physical_Status, Assignment_Status)
+                     VALUES (\"$school\", $room, $asset, \"$serial\", \"$model\",
+                     \"$status\", \"$assignment\")")) {
+        echo("CHROME ADD SUCCESSFUL");
     }
+
     else {
       echo("ERROR ADDING CHROMEBOOK");
       echo($conn->error);
-      echo("<br>");
-      echo("\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\"");
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function submitRepairRequest($formFields) {
     $conn = getConnection();
     $asset = $formFields["asset-repair-field"];
@@ -300,6 +458,14 @@
     }
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function calculateCost($damageString) {
     if(damageString == "Broken Screen") {
       $cost = 20;
@@ -310,29 +476,42 @@
     return $cost;
   }
 
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
   function completeRepair($repairUpdates) {
     $conn = getConnection();
     $asset = $repairUpdates["asset"];
     $damage = $repairUpdates["damage"];
-    $previousDamage = $conn->query("SELECT Previous_Damage FROM chromebooks WHERE Asset = $asset");
+    $previousDamage = $conn->query("SELECT Previous_Damage FROM chromebooks
+                                    WHERE Asset = $asset");
     $previousDamage = $previousDamage->fetch_assoc();
 
     if($repairUpdates["assignment"] == "Student") {
       $studentID = $repairUpdates["location"];
       $cost = $repairUpdates["cost"];
-      $conn->query("UPDATE students SET Amount = Amount + $cost WHERE Student_ID = $studentID");
+      $conn->query("UPDATE students SET Amount = Amount + $cost
+                    WHERE Student_ID = $studentID");
     }
-    $conn->query("UPDATE chromebooks SET Physical_Status = 'Good' WHERE Asset = $asset");
-    echo $previousDamage["Previous_Damage"];
+    $conn->query("UPDATE chromebooks SET Physical_Status = 'Good'
+                  WHERE Asset = $asset");
+
     if($previousDamage["Previous_Damage"] == null) {
-      $conn->query("UPDATE chromebooks SET Previous_Damage = '$damage, ' WHERE Asset = $asset");
+      $conn->query("UPDATE chromebooks SET Previous_Damage = '$damage, '
+                    WHERE Asset = $asset");
     }
     else {
-      $conn->query("UPDATE chromebooks SET Previous_Damage = concat(Previous_Damage, '$damage, ') WHERE Asset = $asset");
+      $conn->query("UPDATE chromebooks SET Previous_Damage =
+                    concat(Previous_Damage, '$damage, ') WHERE Asset = $asset");
     }
     $conn->query("DELETE from damages WHERE Asset = $asset");
     echo $conn->connect_error;
-    echo("REPAIR COMPELTE");
+    echo("<p style='text-align:center;'> REPAIR COMPELTE </p>");
   }
 
  ?>

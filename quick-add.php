@@ -116,7 +116,7 @@
           <option value="fremont"> Fremont </option>
           <option value="malaga"> Malaga </option>
           <option value="sutter"> Sutter </option>
-          <option value="fhs"> FHS </option>
+          <option value="fhs" > FHS </option>
           <option value="academy"> Academy </option>
         </select>
       </div>
@@ -126,7 +126,7 @@
         <br>
         <?php printRooms(False); ?>
 
-        <select id="sutter-rooms" name="sutter-rooms">
+        <select id="sutter-rooms" name="sutter-rooms" onchange="checkAssignment('sutter-rooms')">
           <option value="student"> Student Assigned </option>
           <option value="c2"> C2 </option>
           <option value="c3"> C3 </option>
@@ -152,7 +152,7 @@
           <option value="e4"> E4 </option>
         </select>
 
-        <select id="fhs-rooms" name="fhs-rooms">
+        <select id="fhs-rooms" name="fhs-rooms" onchange="checkAssignment('fhs-rooms')">
           <option value="student"> Student Assigned </option>
           <option value="101"> 101 </option>
           <option value="102"> 102 </option>
@@ -200,10 +200,10 @@
         <br>
       <select name="edit-assignment-status-select" id="edit-assignment-status-select"
               onchange="checkAssignment()">
-        <option value="none"> None </option>
+        <option value="classroom"> Classroom </option>
         <option value="assigned"> Assigned </option>
         <option value="unassigned"> Unassigned </option>
-        <option value="loanger"> Loaner </option>
+        <option value="loaner"> Loaner </option>
       </select>
     </div>
 
