@@ -147,26 +147,22 @@ function sortDescending(columnName) {
  * @param
  * @return
  */
-function checkAssignment(roomString) {
+function checkAssignment() {
   var assignment = document.getElementById("edit-assignment-status-select");
   var studentInput = document.getElementsByClassName("student-id");
+  var insurance = document.getElementsByClassName("insurance");
   if(assignment.value == "assigned") {
     studentInput[0].style.display = "inline";
     studentInput[1].style.display = "inline";
+    insurance[0].style.display = "inline";
+    insurance[1].style.display = "inline";
+
   }
   else {
     studentInput[0].style.display = "none";
     studentInput[1].style.display = "none";
-  }
-  if(roomString) {
-    var room = document.getElementById(roomString);
-
-    if(room.selectedIndex == 0) {
-      console.log("student");
-    }
-    else {
-      console.log("not student");
-    }
+    insurance[0].style.display = "none";
+    insurance[1].style.display = "none";
   }
 }
 

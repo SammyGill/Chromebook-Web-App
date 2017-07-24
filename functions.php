@@ -399,35 +399,42 @@
   function addChromebook($chromebookData) {
     $conn = getConnection();
 
-    $asset = $chromebookData["edit-asset-field"];
-    $serial = $chromebookData["edit-serial-field"];
-    $model = $chromebookData["edit-model-select"];
+    $asset = $chromebookData["asset-field"];
+    $serial = $chromebookData["serial-field"];
+    $model = $chromebookData["model-select"];
     $school = $chromebookData["school-options"];
     $room = $chromebookData["$school-rooms"];
     $status = $chromebookData["edit-physical-status-select"];
     $assignment = $chromebookData["edit-assignment-status-select"];
-    $student = -1;
+    $student = $chromebookData["student-id"];
 
+    // Add chromebook to chromebooks table and change assignment to student
     if($room == "student") {
       $room = 0;
-    }
+      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
+      echo $conn->error;
 
-    if("$assignment" == "assigned") {
-      $student = $chromebookData["student-id"];
-    }
+      // If we are assiging to student also, update the students table
+      if("$assignment" == "assigned") {
+        if(isset($chromebookData["insurance"])) {
+          $insurance = "Y";
+          $amount = -250;
+        }
+        else {
+          $amount = 0;
+          $insurance = "N";
+        }
+        $studentQuery = $conn->query("SELECT * FROM students WHERE Student_ID = $student");
+        if($studentQuery->num_rows == 1) {
+          $conn->query("UPDATE students SET Asset = $asset WHERE Student_ID = $student");
+        }
+        else {
 
-
-    if($conn->query("INSERT INTO chromebooks (School, Room, Asset,
-                     Serial_Number, Model, Physical_Status, Assignment_Status)
-                     VALUES (\"$school\", $room, $asset, \"$serial\", \"$model\",
-                     \"$status\", \"$assignment\")")) {
-        echo("CHROME ADD SUCCESSFUL");
+          $conn->query("INSERT INTO students VALUES ($asset, $student, $amount, \"$insurance\")");
+        }
+      }
     }
-
-    else {
-      echo("ERROR ADDING CHROMEBOOK");
-      echo($conn->error);
-    }
+    // else add chromebook to chromebooks and locations table
   }
 
   /**

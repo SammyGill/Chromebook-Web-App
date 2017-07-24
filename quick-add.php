@@ -34,7 +34,7 @@
   <?php include 'functions.php' ?>
 </head>
 
-<body class="quick-add">
+<body class="quick-add" onload="checkAssignment()">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -90,23 +90,25 @@
     <div class="row top-row">
 
       <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-        <input type="text" name="edit-asset-field" placeholder="Asset Tag">
-        <input type="text" name="edit-serial-field" placeholder="Serial Number">
+        <input type="text" name="asset-field" placeholder="Asset Tag">
+        <input type="text" name="serial-field" placeholder="Serial Number">
+
+        <div class=edit-data-input>
+          <label> Model </label>
+          <br>
+          <select name="model-select" id="edit-model-select">
+            <option value="asus"> Asus </option>
+            <option value="Dell Chromebook 11 (3120)"> Dell </option>
+            <option value="Samsung Chromebook"> Samsung </option>
+          </select>
+        </div>
+
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12 col-md-offset-1" style="text-align:center; padding-bottom:10px;">
 
-      <div class=edit-data-input>
-        <label> Model </label>
-        <br>
-        <select name="edit-model-select" id="edit-model-select">
-          <option value="asus"> Asus </option>
-          <option value="Dell Chromebook 11 (3120)"> Dell </option>
-          <option value="Samsung Chromebook"> Samsung </option>
-        </select>
-      </div>
 
       <div class="edit-data-input">
         <label> School </label>
@@ -126,7 +128,7 @@
         <br>
         <?php printRooms(False); ?>
 
-        <select id="sutter-rooms" name="sutter-rooms" onchange="checkAssignment('sutter-rooms')">
+        <select id="sutter-rooms" name="sutter-rooms" onchange="checkAssignment()">
           <option value="student"> Student Assigned </option>
           <option value="c2"> C2 </option>
           <option value="c3"> C3 </option>
@@ -152,7 +154,7 @@
           <option value="e4"> E4 </option>
         </select>
 
-        <select id="fhs-rooms" name="fhs-rooms" onchange="checkAssignment('fhs-rooms')">
+        <select id="fhs-rooms" name="fhs-rooms" onchange="checkAssignment()">
           <option value="student"> Student Assigned </option>
           <option value="101"> 101 </option>
           <option value="102"> 102 </option>
@@ -190,7 +192,6 @@
         <br>
         <select name="edit-physical-status-select" id="edit-physical-status-select">
           <option value="good"> Good </option>
-          <option value="damaged"> Damaged </option>
           <option value="loaner"> Loaner </option>
         </select>
       </div>
@@ -213,20 +214,22 @@
       <input type="text" class="student-id" name="student-id" placeholder="Student ID">
     </div>
 
+    <input type="checkbox" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
+
       </div>
   </div>
 
   <div class="row">
     <div class="col-md-12 col-md-offset-1" style="text-align:center;">
       <input type="submit">
+    </form>
       <br>
       <?php
         if($_POST) {
           addChromebook($_POST);
         }
        ?>
-  </form>
-</div>
+  </div>
 
 </div>
 
