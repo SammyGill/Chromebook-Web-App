@@ -183,8 +183,8 @@ function filterSearch(searchBar) {
   var tableRows = document.getElementsByTagName("tr");
 
   for(var i = 0; i < assetTagRows.length; i++) {
-    if(assetTagRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1 ||
-       serialNumberRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1) {
+    if(assetTagRows.length && assetTagRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1 ||
+      serialNumberRows.length && serialNumberRows[i].innerHTML.toUpperCase().indexOf(stringInput) > -1) {
       tableRows[i + 1].style.display = "";
     }
     else {

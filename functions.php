@@ -276,8 +276,10 @@
    * @param
    * @return
    */
+
+   // THIS FUNCTION MAY NOT BE NEEDED, NEED TO DOUBLE CHECK
   function determineDamageString($damageInput) {
-    if($damageInput == "screen") {
+    if($damageInput == "Broken Screen") {
       return "Broken Screen";
     }
     else {
