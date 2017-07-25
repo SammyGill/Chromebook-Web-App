@@ -396,9 +396,9 @@
    * @param
    * @return
    */
-  function addChromebook($chromebookData) {
+  function addChromebook($chromebookData, $insuranceSelected) {
+    echo"IN FUNCTION";
     $conn = getConnection();
-
     $asset = $chromebookData["asset-field"];
     $serial = $chromebookData["serial-field"];
     $model = $chromebookData["model-select"];
@@ -407,16 +407,25 @@
     $status = $chromebookData["edit-physical-status-select"];
     $assignment = $chromebookData["edit-assignment-status-select"];
     $student = $chromebookData["student-id"];
+    
+    // Check to see if the chromebook is already in database
+    if(chromebookExists($asset)) {
+
+      return -1;
+    }
 
     // Add chromebook to chromebooks table and change assignment to student
+          echo "BEFORE ENTERING";
     if($room == "student") {
       $room = 0;
-      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
+      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
       echo $conn->error;
+      echo "$assignment";
+
 
       // If we are assiging to student also, update the students table
       if("$assignment" == "assigned") {
-        if(isset($chromebookData["insurance"])) {
+        if($insuranceSelected) {
           $insurance = "Y";
           $amount = -250;
         }
@@ -433,7 +442,20 @@
           $conn->query("INSERT INTO students VALUES ($asset, $student, $amount, \"$insurance\")");
         }
       }
+      if("$assignment" == "unassigned") {
+        echo"IN UUNASSIGN";
+        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
+        echo $conn->error;
+      }
     }
+    if("$assignment" == "classroom" || "$assignment" == "loaner") {
+      echo"IN CLASSROOM";
+      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
+      echo $conn->error;
+      $conn->query("INSERT INTO locations VALUES (\"$school\", $room, $asset)");
+      echo $conn->error;
+    }
+
     // else add chromebook to chromebooks and locations table
   }
 
