@@ -47,6 +47,7 @@
     else {
       formatTable($result);
     }
+    $conn->close();
   }
 
   /**
@@ -87,8 +88,13 @@
       echo("ERROR");
       return -1;
     }
-
-    formatTable($result);
+    if(!$result->num_rows) {
+      echo("NO CHROMEBOOKS WERE FOUND! TRY AGAIN");
+    }
+    else {
+      formatTable($result);
+    }
+    $conn->close();
   }
 
   /**
@@ -119,6 +125,7 @@
     $result = array($resultStudents, $resultSchools);
 
     formatTableRepair($result);
+    $conn->close();
   }
 
   /**
@@ -134,6 +141,7 @@
     $result = $conn->query("SELECT * FROM chromebooks
                             WHERE Assignment_Status = 'Unassigned'");
     formatTableUnassigned($result);
+    $conn->close();
   }
 
   /**
@@ -164,6 +172,7 @@
     // Currently going to be adding Chromebook without serial, will add into later version
     echo("<br>");
     echo("CHROMEBOOK SUCCESSFULLY ADDED");
+    $conn->close();
   }
 
   /**
@@ -179,6 +188,7 @@
 
     $result = $conn->query("SELECT * FROM chromebooks WHERE
                          asset = $chromebookAsset");
+    $conn->close();
     return $result->num_rows;
   }
 
@@ -342,6 +352,8 @@
     $conn->query("UPDATE chromebooks SET room = $room, asset = $asset,
                   serial_number =\"$serial\", model=\"$model\",
                   Physical_Status=\"$status\" WHERE asset = $oldAsset");
+
+    $conn->close();
   }
 
   /**
@@ -356,12 +368,23 @@
     $conn = getConnection();
 
     $asset = $chromebookAsset["original-asset"];
+    $studentQuery = $conn->query("SELECT * FROM students WHERE Asset = $asset");
+    $classroomQuery = $conn->query("SELECT * FROM locations WHERE Asset = $asset");
+
     if($conn->query("DELETE FROM chromebooks WHERE asset = $asset")) {
+      if($studentQuery->num_rows) {
+        $conn->query("DELETE FROM students WHERE Asset = $asset");
+      }
+      else {
+        $conn->query("DELETE FROM locations WHERE Asset = $asset");
+      }
       echo("CHROMEBOOK DELETED");
     }
     else {
       echo("CHROMEBOOK DELETE FAIL");
     }
+
+    $conn->close();
   }
 
   /**
@@ -397,7 +420,6 @@
    * @return
    */
   function addChromebook($chromebookData, $insuranceSelected) {
-    echo"IN FUNCTION";
     $conn = getConnection();
     $asset = $chromebookData["asset-field"];
     $serial = $chromebookData["serial-field"];
@@ -407,7 +429,7 @@
     $status = $chromebookData["edit-physical-status-select"];
     $assignment = $chromebookData["edit-assignment-status-select"];
     $student = $chromebookData["student-id"];
-    
+
     // Check to see if the chromebook is already in database
     if(chromebookExists($asset)) {
 
@@ -415,13 +437,10 @@
     }
 
     // Add chromebook to chromebooks table and change assignment to student
-          echo "BEFORE ENTERING";
     if($room == "student") {
       $room = 0;
       $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
       echo $conn->error;
-      echo "$assignment";
-
 
       // If we are assiging to student also, update the students table
       if("$assignment" == "assigned") {
@@ -438,25 +457,22 @@
           $conn->query("UPDATE students SET Asset = $asset WHERE Student_ID = $student");
         }
         else {
-
           $conn->query("INSERT INTO students VALUES ($asset, $student, $amount, \"$insurance\")");
         }
       }
       if("$assignment" == "unassigned") {
-        echo"IN UUNASSIGN";
         $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
         echo $conn->error;
       }
     }
     if("$assignment" == "classroom" || "$assignment" == "loaner") {
-      echo"IN CLASSROOM";
       $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
       echo $conn->error;
       $conn->query("INSERT INTO locations VALUES (\"$school\", $room, $asset)");
       echo $conn->error;
     }
 
-    // else add chromebook to chromebooks and locations table
+    $conn->close();
   }
 
   /**
@@ -487,6 +503,8 @@
     else {
       echo($conn->connect_error);
     }
+
+    $conn->close();
   }
 
   /**
@@ -543,6 +561,8 @@
     $conn->query("DELETE from damages WHERE Asset = $asset");
     echo $conn->connect_error;
     echo("<p style='text-align:center;'> REPAIR COMPELTE </p>");
+
+    $conn->close();
   }
 
  ?>

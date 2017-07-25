@@ -119,13 +119,43 @@
                     <form method="post" action= >
                     <div class="modal-body">
                       <div style="padding-bottom:15px;">
-                        <input type="text" id="asset" name="asset" placeholder="Asset" readonly>
-                        <input type="text" id="serial" placeholder="Serial" readonly>
-                        <input type="text" id="location" name="location" placeholder="Location" readonly>
+
+                        <div class="edit-data-input">
+                          <label> Asset Tag </label>
+                          <br>
+                          <input type="text" id="asset" name="asset" placeholder="Asset" readonly>
+                        </div>
+
+                        <div class="edit-data-input">
+                          <label> Serial Number </label>
+                          <br>
+                          <input type="text" id="serial" placeholder="Serial" readonly>
+                        </div>
+
+                        <div class="edit-data-input">
+                          <label> School + Room </label>
+                          <br>
+                          <input type="text" id="location" name="location" placeholder="Location" readonly>
+                        </div>
                       </div>
-                        <input type="text" id="model" placeholder="Model" readonly>
-                        <input type="text" id="damage" name="damage" placeholder="Damage" readonly>
-                        <input type="text" id="cost" name="cost" placeholder="Total Cost" readonly>
+
+                        <div class="edit-data-input">
+                          <label> Model </label>
+                          <br>
+                          <input type="text" id="model" placeholder="Model" readonly>
+                        </div>
+
+                        <div class="edit-data-input">
+                          <label> Damage </label>
+                          <br>
+                          <input type="text" id="damage" name="damage" placeholder="Damage" readonly>
+                        </div>
+
+                        <div class="edit-data-input">
+                          <label> Cost </label>
+                          <br>
+                          <input type="text" id="cost" name="cost" placeholder="Total Cost" readonly>
+                        </div>
                         <input type="text" id="assignment" name="assignment" style="display:none;">
                     </div>
 

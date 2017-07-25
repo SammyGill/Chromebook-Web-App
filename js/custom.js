@@ -12,6 +12,7 @@ function checkSearchBySchool() {
   }
   else {
     document.getElementById("school-options").style.display = "none";
+    hideSchoolRooms();
   }
 }
 
@@ -229,7 +230,6 @@ function calculateRepairCost(repairSelected) {
   if(repairSelected == undefined) {
     repairSelected = determineDamageString(document.getElementById("repair-select").value);
   }
-    console.log(repairSelected);
   var costField = document.getElementById("cost");
 
   if(repairSelected == "Broken Screen") {
