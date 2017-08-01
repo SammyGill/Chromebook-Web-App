@@ -153,11 +153,11 @@
 
   /**
    *
-   * Comments
+   * Parses the add form that is on the page and adds the chromebook to the
+   * database
    *
-   * @param
-   * @param
-   * @return
+   * @param $chromebook is the POST request containing the chromebook
+   *        information
    */
   function quickAdd($chromebook) {
     $conn = getConnection();
@@ -184,11 +184,14 @@
 
   /**
    *
-   * Comments
+   * Checks to see if the chromebook exists in the database using the 
+   * asset tag. This is done by searching the database for the specific
+   * asset tag and looking at the number of rows
    *
-   * @param
-   * @param
-   * @return
+   * @param $chromebookAsset is the asset tag of the chromebook being searched
+   *        for
+   * @return $result->num_rows is the number of rows in the chromebooks
+   *         table with that asset tag
    */
   function chromebookExists($chromebookAsset) {
     $conn = getConnection();
