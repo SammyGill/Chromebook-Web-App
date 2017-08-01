@@ -23,11 +23,14 @@
 
  /**
   *
-  * Comments
+  * Returns a Chromebook object based on asset tag or serial number. The function
+  * determines whether the search is by asset tag or serial number and then
+  * performs the correct search query. The resulting object is returned to
+  * be used in other functions.
   *
-  * @param
-  * @param
-  * @return
+  * @param searchInput is the asset tag or serial number input
+  * @return $result is the resulting mySQL object
+  *         -1 if there is no Chromebook that was found
   */
   function getChromebook($searchInput) {
     $conn = getConnection();
@@ -52,11 +55,14 @@
 
   /**
    *
-   * Comments
+   * This functions is similar to the getChromebook() function but performs
+   * a search for all of the chromebooks in a particular room. The resulting
+   * object from search is then parsed for each chromebook in the room.
    *
-   * @param
-   * @param
-   * @return
+   * @param $searchInput are the inputs/filters from the HTML form that are
+   *        used to search for the chromebooks.
+   * @return $result is the mySQL object that contains all of the chromebooks
+   *         -1 if there were no chromebooks found
    */
   function getChromebookRoom($searchInput) {
     $conn = getConnection();
@@ -99,11 +105,12 @@
 
   /**
    *
-   * Comments
+   * Searches for all of the chromebooks that have the damaged status. There
+   * are two different queries that are performed for schools and students
+   * since there are different types of information needed for them.
    *
-   * @param
-   * @param
-   * @return
+   * @return $result is the mySQL object that contains all of the chromebooks
+   *         -1 if there were no chromebooks found
    */
   function getChromebookRepair() {
     $conn = getConnection();
@@ -130,11 +137,11 @@
 
   /**
    *
-   * Comments
+   * Performs a search through the database for chromebooks that have the
+   * assignment status of unassigned
    *
-   * @param
-   * @param
-   * @return
+   * @return $result is the mySQL object that contains all of the chromebooks
+   *         -1 if there were no chromebooks found
    */
   function getChromebooksUnassigned() {
     $conn = getConnection();
@@ -320,7 +327,7 @@
       $status = $row["Physical_Status"];
       $model = $row["Model"];
 
-      echo("<tr data-toggle = 'modal' data-target = '#myModal'>
+      echo("<tr data-toggle = 'modal' data-target = '#assignModal'>
 
               <td class=asset> $asset </td>
               <td class=serial> $serial </td>
@@ -563,6 +570,18 @@
     echo("<p style='text-align:center;'> REPAIR COMPELTE </p>");
 
     $conn->close();
+  }
+
+  /**
+   *
+   * Comments
+   *
+   * @param
+   * @param
+   * @return
+   */
+  function assignChromebook($insuranceBoolean) {
+
   }
 
  ?>
