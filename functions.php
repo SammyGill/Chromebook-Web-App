@@ -184,7 +184,7 @@
 
   /**
    *
-   * Checks to see if the chromebook exists in the database using the 
+   * Checks to see if the chromebook exists in the database using the
    * asset tag. This is done by searching the database for the specific
    * asset tag and looking at the number of rows
    *
@@ -204,11 +204,11 @@
 
   /**
    *
-   * Comments
+   * Creates the table for the Chromebook Search page. After the search has
+   * been submitted, the table is created with the MySQL objects
    *
-   * @param
-   * @param
-   * @return
+   * @param $query is mySQL object that is created after searching for
+   *        chromebooks
    */
   function formatTable($query) {
     echo("<table style=width:100% id=resultTable>");
@@ -244,11 +244,12 @@
 
   /**
    *
-   * Comments
+   * This is very similar to the method that formats the table for the
+   * search page. This method instead creates a table with the chromebooks
+   * that need to be repaired
    *
-   * @param
-   * @param
-   * @return
+   * @param $query is the resulting MySQL object after searching for
+   *        damaged chromebooks in the database
    */
   function formatTableRepair($query) {
     echo("<table style=width:100% id=resultTable>");
@@ -309,11 +310,10 @@
 
   /**
    *
-   * Comments
+   * Similar implementation to the repair table, except with chromebooks
+   * that have the status of unassigned
    *
-   * @param
-   * @param
-   * @return
+   * @param $query is the MySQL object containing unassigned chromebooks
    */
   function formatTableUnassigned($query) {
     echo("<table style=width:100% id=resultTable>");
@@ -343,11 +343,12 @@
 
   /**
    *
-   * Comments
+   * After selecting a chromebook from the search page, the user has the
+   * option of editing its information. This method will update the information
+   * for that chromebook in the tables if the user chooses to edit it.
    *
-   * @param
-   * @param
-   * @return
+   * @param $query is the POST object that contains the updated chromebook
+   *        information
    */
   function updateChromebook($query) {
     $conn = getConnection();
@@ -368,11 +369,13 @@
 
   /**
    *
-   * Comments
+   * After searching for a chromebook, the user has the option of deleting
+   * it from the database. If the user chooses this option, this method will
+   * remove the chromebook from all of the tables in the database.
    *
-   * @param
-   * @param
-   * @return
+   * @param $chromebookAsset is the asset tag of the chromebook to be
+   *        deleted. The asset tag is the key used to link all of the
+   *        tables together.
    */
   function deleteChromebook($chromebookAsset) {
     $conn = getConnection();
@@ -399,11 +402,11 @@
 
   /**
    *
-   * Comments
+   * This method will populate the select HTML field that contains all of
+   * the rooms for the different schools, specifically the elementary schools.
    *
-   * @param
-   * @param
-   * @return
+   * @param $toggleAllOption is a boolean used to determine whether the
+   *        "All Rooms" will be used for a particular page
    */
   function printRooms($toggleAllOption) {
     $schools = array("marshall", "fremont", "malaga");
