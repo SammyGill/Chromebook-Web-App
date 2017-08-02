@@ -227,11 +227,9 @@
       <?php
         if($_POST) {
           if(isset($_POST["insurance"])) {
-            echo"TRUE";
             addChromebook($_POST, true);
           }
           else {
-            echo"FALSE";
             addChromebook($_POST, false);
           }
         }

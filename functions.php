@@ -44,13 +44,8 @@
                     chromebooks.asset=locations.asset WHERE
                     chromebooks.asset = $input");
 
-    if ($conn->error || $result->num_rows == 0) {
-      echo("Chromebook not found!");
-    }
-    else {
-      formatTable($result);
-    }
     $conn->close();
+    return $result;
   }
 
   /**
@@ -94,11 +89,8 @@
       echo("ERROR");
       return -1;
     }
-    if(!$result->num_rows) {
-      echo("NO CHROMEBOOKS WERE FOUND! TRY AGAIN");
-    }
     else {
-      formatTable($result);
+      return $result;
     }
     $conn->close();
   }
@@ -130,9 +122,9 @@
                     damages ON chromebooks.asset = damages.asset");
 
     $result = array($resultStudents, $resultSchools);
-
-    formatTableRepair($result);
     $conn->close();
+
+    return $result;
   }
 
   /**
@@ -147,8 +139,8 @@
     $conn = getConnection();
     $result = $conn->query("SELECT * FROM chromebooks
                             WHERE Assignment_Status = 'Unassigned'");
-    formatTableUnassigned($result);
     $conn->close();
+    return $result;
   }
 
   /**
@@ -180,6 +172,11 @@
    *        chromebooks
    */
   function formatTable($query) {
+    if($query->num_rows == 0) {
+      echo("CHROMEBOOK NOT FOUND");
+      return;
+    }
+
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
             <th onclick='sortTable(\"location\")'> School + Room </th>
@@ -221,6 +218,11 @@
    *        damaged chromebooks in the database
    */
   function formatTableRepair($query) {
+    if(count($query) == 0) {
+      echo("NO CHROMEBOOKS WERE FOUND DAMAGED");
+      return;
+    }
+
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
             <th onclick='sortTable(\"asset\")'> Asset Tag </th>
@@ -285,6 +287,11 @@
    * @param $query is the MySQL object containing unassigned chromebooks
    */
   function formatTableUnassigned($query) {
+    if($query->num_rows == 0) {
+      echo("NO CHROMEBOOKS ARE UNASSIGNED");
+      return;
+    }
+
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
             <th onclick='sortTable(\"asset\")'> Asset Tag </th>
@@ -416,7 +423,7 @@
 
     // Check to see if the chromebook is already in database
     if(chromebookExists($asset)) {
-
+      echo("CHROMEBOOK ALREADY IN DATABASE");
       return -1;
     }
 

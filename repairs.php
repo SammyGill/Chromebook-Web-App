@@ -103,7 +103,7 @@
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-align:center;">
           <?php
-              getChromebookRepair();
+              formatTableRepair(getChromebookRepair());
            ?>
 
            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"

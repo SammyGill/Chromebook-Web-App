@@ -331,10 +331,10 @@ contains all of the fields that are required to look up a Chromebook -->
           // validation after the form has been submitted
           if (!empty($_POST['options'])) {
             if($_POST['options'] == "school") {
-              getChromebookRoom($_POST);
+              formatTable(getChromebookRoom($_POST));
             }
             else {
-              getChromebook($_POST);
+              formatTable(getChromebook($_POST));
             }
           }
 
