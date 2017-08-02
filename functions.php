@@ -153,37 +153,6 @@
 
   /**
    *
-   * Parses the add form that is on the page and adds the chromebook to the
-   * database
-   *
-   * @param $chromebook is the POST request containing the chromebook
-   *        information
-   */
-  function quickAdd($chromebook) {
-    $conn = getConnection();
-
-    $asset = $chromebook["edit-asset-field"];
-    $serial = $chromebook["edit-serial-field"];
-    $room = 0;
-
-    if(chromebookExists($asset)) {
-      echo("<br>");
-      echo("CHROMEBOOK ALREADY EXISTS");
-      return -1;
-    }
-
-    $conn->query("INSERT INTO chromebooks (room, asset)
-                  VALUES ($room, $asset)");
-
-
-    // Currently going to be adding Chromebook without serial, will add into later version
-    echo("<br>");
-    echo("CHROMEBOOK SUCCESSFULLY ADDED");
-    $conn->close();
-  }
-
-  /**
-   *
    * Checks to see if the chromebook exists in the database using the
    * asset tag. This is done by searching the database for the specific
    * asset tag and looking at the number of rows
@@ -426,11 +395,13 @@
 
   /**
    *
-   * Comments
+   * Parses the add form that is on the page and adds the chromebook to the
+   * database
    *
-   * @param
-   * @param
-   * @return
+   * @param $chromebookData is the POST request containing the chromebook
+   *        information
+   * @param $insuranceSelected is a boolean value that determines whether a
+   *        student selected insurance for their chromebook
    */
   function addChromebook($chromebookData, $insuranceSelected) {
     $conn = getConnection();
@@ -490,11 +461,12 @@
 
   /**
    *
-   * Comments
+   * When a user searches for a chromebook, they are presented with the option
+   * to submit a repair request. This function will parse that repair request
+   * and update the appropriate tables with the repair information
    *
-   * @param
-   * @param
-   * @return
+   * @param $formFields is the POST request that contains the information for
+   *        the damaged chromebook
    */
   function submitRepairRequest($formFields) {
     $conn = getConnection();
@@ -522,11 +494,11 @@
 
   /**
    *
-   * Comments
+   * This helper method is used to determing the price of the repair depending
+   * on the damage that was submitted in the repair request
    *
-   * @param
-   * @param
-   * @return
+   * @param $damageString is the damage type that was selected
+   * @return $cost is the value of the damage/repair
    */
   function calculateCost($damageString) {
     if(damageString == "Broken Screen") {
@@ -540,11 +512,11 @@
 
   /**
    *
-   * Comments
+   * Once a repair has been compelted, this method will update the chromebooks
+   * status and update other tables as necessary
    *
-   * @param
-   * @param
-   * @return
+   * @param $repairUpdates is a POST request that contains the information
+   *        for the chromebook and damage so that it can be updated correctly
    */
   function completeRepair($repairUpdates) {
     $conn = getConnection();
