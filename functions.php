@@ -32,17 +32,24 @@
   * @return $result is the resulting mySQL object
   *         -1 if there is no Chromebook that was found
   */
-  function getChromebook($searchInput) {
+  function getChromebookByAsset($searchInput) {
     $conn = getConnection();
 
     $input = $searchInput["searchBarInput"];
-    $result =
+    $resultSchool =
       $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset,
                     chromebooks.Serial_Number, chromebooks.Model,
                     chromebooks.Physical_Status, chromebooks.Assignment_Status
                     FROM locations INNER JOIN chromebooks ON
                     chromebooks.asset=locations.asset WHERE
                     chromebooks.asset = $input");
+    $resultStudent = $conn->query("SELECT students.Student_ID, chromebooks.Asset,
+                  chromebooks.Serial_Number, chromebooks.Model,
+                  chromebooks.Physical_Status, chromebooks.Assignment_Status
+                  FROM students INNER JOIN chromebooks ON
+                  chromebooks.asset=students.asset WHERE
+                  chromebooks.asset = $input");
+    $result = array($resultSchool, $resultStudent);
 
     $conn->close();
     return $result;
@@ -59,7 +66,7 @@
    * @return $result is the mySQL object that contains all of the chromebooks
    *         -1 if there were no chromebooks found
    */
-  function getChromebookRoom($searchInput) {
+  function getChromebookByRoom($searchInput) {
     $conn = getConnection();
 
     $school = $searchInput["school-options"];
@@ -172,40 +179,48 @@
    *        chromebooks
    */
   function formatTable($query) {
-    if($query->num_rows == 0) {
+    if($query[0]->num_rows == 0 && $query[1]->num_rows == 0) {
       echo("CHROMEBOOK NOT FOUND");
       return;
     }
 
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
-            <th onclick='sortTable(\"location\")'> School + Room </th>
+            <th onclick='sortTable(\"location\")'> Location </th>
             <th onclick='sortTable(\"asset\")'> Asset Tag </th>
             <th onclick='sortTable(\"serial\")'> Serial Number </th>
             <th onclick='sortTable(\"model\")'> Model </th>
             <th onclick='sortTable(\"status\")'> Physical Status </th>
           </tr>");
 
-    while($row = $query->fetch_assoc()) {
-      $room = $row["Room"];
-      $asset = $row["Asset"];
-      $school = $row["School"];
-      $serial = $row["Serial_Number"];
-      $status = $row["Physical_Status"];
-      $model = $row["Model"];
+          for($x = 0; $x < count($query); $x++) {
+            while($row = $query[$x]->fetch_assoc()) {
+              $asset = $row["Asset"];
+              $serial = $row["Serial_Number"];
+              $status = $row["Physical_Status"];
+              $model = $row["Model"];
 
-      echo("<tr data-toggle = 'modal' data-target = '#myModal'
-                onclick= 'fillEditData(\"$school\", $room, $asset, \"$serial\",
-                                       \"$model\", \"$status\")'>
+              if($row["Assignment_Status"] == "assigned") {
+                $location = $row["Student_ID"];
+              }
+              else {
+                $school = $row["School"];
+                $room = $row["Room"];
+                $location = "$school $room";
+              }
 
-              <td class=location>$school $room</td>
-              <td class=asset> $asset </td>
-              <td class=serial> $serial </td>
-              <td class='model'>$model</td>
-              <td class=status>$status</td>
+              echo("<tr data-toggle = 'modal' data-target = '#myModal'>
 
-            </tr>");
-    }
+                      <td class=location>$location</td>
+                      <td class=asset> $asset </td>
+                      <td class=serial> $serial </td>
+                      <td class='model'>$model</td>
+                      <td class=status>$status</td>
+
+                    </tr>");
+            }
+          }
+
   }
 
   /**

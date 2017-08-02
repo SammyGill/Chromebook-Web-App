@@ -109,7 +109,7 @@ contains all of the fields that are required to look up a Chromebook -->
             <select id="options" name="options" onchange="checkSearchBySchool()"
                     onload="checkSearchBySchool()">
               <option value="asset"> Asset Tag </option>
-              <option value="pid"> Student PID </option>
+              <option value="studentId"> Student PID </option>
               <option value="school"> School </option>
             </select>
 
@@ -331,10 +331,13 @@ contains all of the fields that are required to look up a Chromebook -->
           // validation after the form has been submitted
           if (!empty($_POST['options'])) {
             if($_POST['options'] == "school") {
-              formatTable(getChromebookRoom($_POST));
+              formatTable(getChromebookByRoom($_POST));
+            }
+            else if($_POST["options"] == "studentId") {
+              formatTable(getChromebookByAsset($_POST));
             }
             else {
-              formatTable(getChromebook($_POST));
+              formatTable(getChromebookByAsset($_POST));
             }
           }
 
