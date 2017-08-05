@@ -54,7 +54,9 @@ function changeCurrentRooms() {
  * @param
  * @return
  */
-function fillEditData(school, room, asset, serial, model, status) {
+function fillEditDataClass(school, room, asset, serial, model, status) {
+  fillGeneralChromebookInfo(asset, serial, model, status);
+
   school = school.toLowerCase();
   var roomOptionsString = school.concat("-rooms");
   var roomOptions = document.getElementById(roomOptionsString).innerHTML;
@@ -62,11 +64,19 @@ function fillEditData(school, room, asset, serial, model, status) {
   document.getElementById("edit-school-select").value = school;
   document.getElementById("edit-room-field").innerHTML = roomOptions;
   document.getElementById("edit-room-field").value = room;
+  document.getElementById("original-asset").value = asset;
+}
+
+function fillEditDataStudent(student, asset, serial, model, status) {
+  fillGeneralChromebookInfo(asset, serial, model, status);
+}
+
+function fillGeneralChromebookInfo(asset, serial, model, status) {
+
   document.getElementById("edit-asset-field").value = asset;
   document.getElementById("edit-serial-field").value = serial;
   document.getElementById("edit-model-select").value = model;
   document.getElementById("edit-physical-status-select").value = status;
-  document.getElementById("original-asset").value = asset;
 }
 
 /**

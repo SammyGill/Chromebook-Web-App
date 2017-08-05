@@ -74,22 +74,22 @@
 
     if($room == "*") {
       $result =
-        $conn->query("SELECT locations.School, locations.Room,
+        array($conn->query("SELECT locations.School, locations.Room,
                       chromebooks.Asset, chromebooks.Serial_Number,
                       chromebooks.Model, chromebooks.Physical_Status,
                       chromebooks.Assignment_Status FROM locations INNER JOIN
                       chromebooks ON chromebooks.asset=locations.asset
-                      WHERE locations.School = \"$school\"");
+                      WHERE locations.School = \"$school\""));
     }
     else {
       $result =
-        $conn->query("SELECT locations.School, locations.Room,
+        array($conn->query("SELECT locations.School, locations.Room,
                       chromebooks.Asset, chromebooks.Serial_Number,
                       chromebooks.Model, chromebooks.Physical_Status,
                       chromebooks.Assignment_Status FROM locations INNER JOIN
                       chromebooks ON chromebooks.asset=locations.asset
                       WHERE locations.School = \"$school\"
-                      AND locations.Room = $room");
+                      AND locations.Room = $room"));
     }
 
     if($conn->error) {
@@ -179,10 +179,6 @@
    *        chromebooks
    */
   function formatTable($query) {
-    if($query[0]->num_rows == 0 && $query[1]->num_rows == 0) {
-      echo("CHROMEBOOK NOT FOUND");
-      return;
-    }
 
     echo("<table style=width:100% id=resultTable>");
     echo("<tr>
@@ -200,23 +196,24 @@
               $status = $row["Physical_Status"];
               $model = $row["Model"];
 
-              if($row["Assignment_Status"] == "assigned") {
+              if($row["Assignment_Status"] == "Student") {
                 $location = $row["Student_ID"];
+                echo("<tr data-toggle='modal' data-target='#myModal'
+                       onclick='fillEditDataStudent($location, $asset, $serial, $model, $status)'>");
               }
               else {
                 $school = $row["School"];
                 $room = $row["Room"];
                 $location = "$school $room";
+                echo("<tr data-toggle='modal' data-target='#myModal'
+                       onclick='fillEditDataClass(\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\")'>");
               }
 
-              echo("<tr data-toggle = 'modal' data-target = '#myModal'>
-
-                      <td class=location>$location</td>
+              echo("  <td class=location>$location</td>
                       <td class=asset> $asset </td>
                       <td class=serial> $serial </td>
                       <td class='model'>$model</td>
                       <td class=status>$status</td>
-
                     </tr>");
             }
           }
