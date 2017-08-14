@@ -73,13 +73,20 @@
     $room = $searchInput[$school . "-rooms"];
 
     if($room == "*") {
-      $result =
-        array($conn->query("SELECT locations.School, locations.Room,
-                      chromebooks.Asset, chromebooks.Serial_Number,
-                      chromebooks.Model, chromebooks.Physical_Status,
-                      chromebooks.Assignment_Status FROM locations INNER JOIN
-                      chromebooks ON chromebooks.asset=locations.asset
-                      WHERE locations.School = \"$school\""));
+      $resultSchool =
+        $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset,
+                      chromebooks.Serial_Number, chromebooks.Model,
+                      chromebooks.Physical_Status, chromebooks.Assignment_Status
+                      FROM locations INNER JOIN chromebooks ON
+                      chromebooks.asset=locations.asset WHERE
+                      locations.School = \"$school\"");
+      $resultStudent = $conn->query("SELECT students.Student_ID, chromebooks.Asset,
+                    chromebooks.Serial_Number, chromebooks.Model,
+                    chromebooks.Physical_Status, chromebooks.Assignment_Status
+                    FROM students INNER JOIN chromebooks ON
+                    chromebooks.asset=students.asset WHERE
+                    students.School = \"$school\"");
+      $result = array($resultSchool, $resultStudent);
     }
     else {
       $result =
@@ -93,7 +100,7 @@
     }
 
     if($conn->error) {
-      echo("ERROR");
+      echo("ERROR in getChromebookByRoom()");
       return -1;
     }
     else {
