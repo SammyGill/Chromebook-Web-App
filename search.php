@@ -152,6 +152,7 @@ contains all of the fields that are required to look up a Chromebook -->
 
             <select id="fhs-rooms" name="fhs-rooms">
               <option value="*"> All </option>
+              <option value="student"> Student Assigned </option>
               <option value="101"> 101 </option>
               <option value="102"> 102 </option>
               <option value="103"> 103 </option>

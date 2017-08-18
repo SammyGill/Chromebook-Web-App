@@ -73,6 +73,8 @@
     $room = $searchInput[$school . "-rooms"];
 
     if($room == "*") {
+
+      // Get all classroom assigned chromebooks
       $resultSchool =
         $conn->query("SELECT locations.School, locations.Room, chromebooks.Asset,
                       chromebooks.Serial_Number, chromebooks.Model,
@@ -80,6 +82,8 @@
                       FROM locations INNER JOIN chromebooks ON
                       chromebooks.asset=locations.asset WHERE
                       locations.School = \"$school\"");
+
+      // Get all student assigned chromebooks
       $resultStudent = $conn->query("SELECT students.Student_ID, chromebooks.Asset,
                     chromebooks.Serial_Number, chromebooks.Model,
                     chromebooks.Physical_Status, chromebooks.Assignment_Status
@@ -87,6 +91,15 @@
                     chromebooks.asset=students.asset WHERE
                     students.School = \"$school\"");
       $result = array($resultSchool, $resultStudent);
+    }
+    else if($room == "student") {
+      $result =
+        array($conn->query("SELECT students.Student_ID, chromebooks.Asset,
+                      chromebooks.Serial_Number, chromebooks.Model,
+                      chromebooks.Physical_Status, chromebooks.Assignment_Status
+                      FROM students INNER JOIN chromebooks ON
+                      chromebooks.asset=students.asset WHERE
+                      students.School = \"$school\""));
     }
     else {
       $result =
@@ -432,12 +445,12 @@
   function addChromebook($chromebookData, $insuranceSelected) {
     $conn = getConnection();
     $asset = $chromebookData["asset-field"];
-    $serial = $chromebookData["serial-field"];
-    $model = $chromebookData["model-select"];
+    $serial = strtoupper($chromebookData["serial-field"]);
+    $model = ucfirst($chromebookData["model-select"]);
     $school = $chromebookData["school-options"];
     $room = $chromebookData["$school-rooms"];
-    $status = $chromebookData["edit-physical-status-select"];
-    $assignment = $chromebookData["edit-assignment-status-select"];
+    $status = ucfirst($chromebookData["edit-physical-status-select"]);
+    $assignment = ucfirst($chromebookData["edit-assignment-status-select"]);
     $student = $chromebookData["student-id"];
 
     // Check to see if the chromebook is already in database
@@ -471,14 +484,14 @@
         }
       }
       if("$assignment" == "unassigned") {
-        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
+        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
         echo $conn->error;
       }
     }
-    if("$assignment" == "classroom" || "$assignment" == "loaner") {
-      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
+    if("$assignment" == "Classroom" || "$assignment" == "Loaner") {
+      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
       echo $conn->error;
-      $conn->query("INSERT INTO locations VALUES (\"$school\", $room, $asset)");
+      $conn->query("INSERT INTO locations VALUES ($asset, \"$school\", $room)");
       echo $conn->error;
     }
 

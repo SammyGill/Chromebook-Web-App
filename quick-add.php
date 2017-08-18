@@ -123,7 +123,7 @@
         </select>
       </div>
 
-      <div class ="edit-data-input" >
+      <div class ="edit-data-input">
         <label> Room </label>
         <br>
         <?php printRooms(False); ?>
@@ -202,7 +202,7 @@
       <select name="edit-assignment-status-select" id="edit-assignment-status-select"
               onchange="checkAssignment()">
         <option value="classroom"> Classroom </option>
-        <option value="assigned"> Assigned </option>
+        <option value="student"> Student </option>
         <option value="unassigned"> Unassigned </option>
         <option value="loaner"> Loaner </option>
       </select>
