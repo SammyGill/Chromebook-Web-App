@@ -215,18 +215,19 @@
               $serial = $row["Serial_Number"];
               $status = $row["Physical_Status"];
               $model = $row["Model"];
+              $assignment = $row["Assignment_Status"];
 
-              if($row["Assignment_Status"] == "Student") {
+              if($assignment == "Student") {
                 $location = $row["Student_ID"];
                 echo("<tr data-toggle='modal' data-target='#myModal'
-                       onclick='fillEditDataStudent($location, $asset, $serial, $model, $status)'>");
+                       onclick='fillEditDataStudent(\"$location\", $asset, \"$serial\", \"$model\", \"$status\")'>");
               }
               else {
                 $school = $row["School"];
                 $room = $row["Room"];
                 $location = "$school $room";
                 echo("<tr data-toggle='modal' data-target='#myModal'
-                       onclick='fillEditDataClass(\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\")'>");
+                       onclick='fillEditDataClass(\"$school\", $room, $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")'>");
               }
 
               echo("  <td class=location>$location</td>
@@ -361,14 +362,17 @@
   function updateChromebook($query) {
     $conn = getConnection();
 
+    $school = ucfirst($query["edit-school-select"]);
     $room = $query["edit-room-field"];
     $asset = $query["edit-asset-field"];
-    $serial = $query["edit-serial-field"];
-    $model = $query["edit-model-select"];
-    $status = $query["edit-physical-status-select"];
+    $serial = strtoupper($query["edit-serial-field"]);
+    $model = ucfirst($query["edit-model-select"]);
+    $status = ucfirst($query["edit-physical-status-select"]);
     $oldAsset = $query["original-asset"];
 
-    $conn->query("UPDATE chromebooks SET room = $room, asset = $asset,
+
+    // Update chromebooks table
+    $conn->query("UPDATE chromebooks SET asset = $asset,
                   serial_number =\"$serial\", model=\"$model\",
                   Physical_Status=\"$status\" WHERE asset = $oldAsset");
 
@@ -514,14 +518,14 @@
     $cost = $formFields["repair-cost"];
     $date = $formFields["repair-submit-date"];
 
-    $updateOne = $conn->query("UPDATE chromebooks SET
+    $updatePhysicalStatus = $conn->query("UPDATE chromebooks SET
                                Physical_Status = 'Damaged'
                                WHERE Asset = $asset");
 
-    $updateTwo = $conn->query("INSERT INTO damages VALUES
+    $updateDamage = $conn->query("INSERT INTO damages VALUES
                                (\"$damage\", $cost, \"$date\", $asset, 'N')");
 
-    if($updateOne && $updateTwo) {
+    if($updatePhysicalStatus && $updateDamage) {
       echo("REPAIR SUBMITTED");
     }
     else {
