@@ -307,9 +307,9 @@ contains all of the fields that are required to look up a Chromebook -->
               <label> Assignment Status </label>
               <br>
               <select id="edit-assignment-select">
-                <option value="none"> None </option>
-                <option value="student"> Student Assigned </option>
                 <option value="classroom"> Classroom </option>
+                <option value="student"> Student </option>
+                <option value="loaner"> Loaner </option>
                 <option value="unassigned"> Unassigned </option>
               </select>
             </div>

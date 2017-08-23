@@ -54,6 +54,23 @@ function changeCurrentRooms() {
  * @param
  * @return
  */
+function disableInsuranceButton() {
+  var schoolSelect = document.getElementById("school-options");
+  var insuranceButton = document.getElementById("insurance-button");
+  if(schoolSelect.value == "fhs" || schoolSelect.value == "sutter") {
+    insuranceButton.disabled = false;
+  }
+  else {
+    insuranceButton.disabled = true;
+  }
+}
+
+/**
+ * Comments
+ * @param
+ * @param
+ * @return
+ */
 function fillEditDataClass(school, room, asset, serial, model, status, assignment) {
   fillGeneralChromebookInfo(asset, serial, model, status, assignment);
 

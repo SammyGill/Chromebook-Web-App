@@ -34,7 +34,7 @@
   <?php include 'functions.php' ?>
 </head>
 
-<body class="quick-add" onload="checkAssignment()">
+<body class="quick-add" onload="disableInsuranceButton()">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -113,7 +113,8 @@
       <div class="edit-data-input">
         <label> School </label>
         <br>
-        <select id="school-options" name="school-options" onchange="changeCurrentRooms()">
+        <select id="school-options" name="school-options"
+                onchange="changeCurrentRooms(); disableInsuranceButton();">
           <option value="marshall"> Marshall </option>
           <option value="fremont"> Fremont </option>
           <option value="malaga"> Malaga </option>
@@ -128,7 +129,7 @@
         <br>
         <?php printRooms(False); ?>
 
-        <select id="sutter-rooms" name="sutter-rooms" onchange="checkAssignment()">
+        <select id="sutter-rooms" name="sutter-rooms">
           <option value="student"> Student Assigned </option>
           <option value="c2"> C2 </option>
           <option value="c3"> C3 </option>
@@ -154,7 +155,7 @@
           <option value="e4"> E4 </option>
         </select>
 
-        <select id="fhs-rooms" name="fhs-rooms" onchange="checkAssignment()">
+        <select id="fhs-rooms" name="fhs-rooms">
           <option value="student"> Student Assigned </option>
           <option value="101"> 101 </option>
           <option value="102"> 102 </option>
@@ -195,26 +196,13 @@
           <option value="loaner"> Loaner </option>
         </select>
       </div>
-
-      <div class="edit-data-input">
-        <label> Assignment Status </label>
-        <br>
-      <select name="edit-assignment-status-select" id="edit-assignment-status-select"
-              onchange="checkAssignment()">
-        <option value="classroom"> Classroom </option>
-        <option value="student"> Student </option>
-        <option value="unassigned"> Unassigned </option>
-        <option value="loaner"> Loaner </option>
-      </select>
-    </div>
-
     <div class="edit-data-input">
       <label class="student-id"> Student ID </label>
       <br>
       <input type="text" class="student-id" name="student-id" placeholder="Student ID">
     </div>
 
-    <input type="checkbox" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
+    <input type="checkbox" id="insurance-button" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
 
       </div>
   </div>
