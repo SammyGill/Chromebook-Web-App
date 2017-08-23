@@ -396,8 +396,6 @@
     $asset = $chromebookAsset["original-asset"];
     $studentQuery = $conn->query("SELECT * FROM students WHERE Asset = $asset");
     $classroomQuery = $conn->query("SELECT * FROM locations WHERE Asset = $asset");
-    echo "here";
-    echo "$asset";
     if($conn->query("DELETE FROM chromebooks WHERE asset = $asset")) {
       if($studentQuery->num_rows) {
         $conn->query("DELETE FROM students WHERE Asset = $asset");

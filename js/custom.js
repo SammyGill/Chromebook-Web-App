@@ -76,6 +76,7 @@ function fillEditDataStudent(school, student, asset, serial, model, status, assi
   document.getElementById("edit-school-select").value = school;
   document.getElementById("edit-room-field").innerHTML = roomOptions;
   document.getElementById("edit-room-field").value = "student";
+  document.getElementById("original-asset").value = asset;
 
 }
 
