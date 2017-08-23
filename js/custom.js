@@ -66,11 +66,21 @@ function fillEditDataClass(school, room, asset, serial, model, status, assignmen
   document.getElementById("original-asset").value = asset;
 }
 
-function fillEditDataStudent(student, asset, serial, model, status, assignment) {
+function fillEditDataStudent(school, student, asset, serial, model, status, assignment) {
+  console.log(school);
+  school = school.toLowerCase();
+  var roomOptionsString = school.concat("-rooms");
+  var roomOptions = document.getElementById(roomOptionsString).innerHTML;
+
   fillGeneralChromebookInfo(asset, serial, model, status, assignment);
+  document.getElementById("edit-school-select").value = school;
+  document.getElementById("edit-room-field").innerHTML = roomOptions;
+  document.getElementById("edit-room-field").value = "student";
+
 }
 
 function fillGeneralChromebookInfo(asset, serial, model, status, assignment) {
+  console.log(assignment);
 
   document.getElementById("edit-asset-field").value = asset;
   document.getElementById("edit-serial-field").value = serial;

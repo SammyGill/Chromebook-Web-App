@@ -85,7 +85,7 @@
 
       // Get all student assigned chromebooks
       $resultStudent = $conn->query("SELECT students.Student_ID, chromebooks.Asset,
-                    chromebooks.Serial_Number, chromebooks.Model,
+                    chromebooks.Serial_Number, chromebooks.Model, students.School,
                     chromebooks.Physical_Status, chromebooks.Assignment_Status
                     FROM students INNER JOIN chromebooks ON
                     chromebooks.asset=students.asset WHERE
@@ -216,11 +216,12 @@
               $status = $row["Physical_Status"];
               $model = $row["Model"];
               $assignment = $row["Assignment_Status"];
+              $school = $row["School"];
 
               if($assignment == "Student") {
                 $location = $row["Student_ID"];
                 echo("<tr data-toggle='modal' data-target='#myModal'
-                       onclick='fillEditDataStudent(\"$location\", $asset, \"$serial\", \"$model\", \"$status\")'>");
+                       onclick='fillEditDataStudent(\"$school\", \"$location\", $asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")'>");
               }
               else {
                 $school = $row["School"];
@@ -395,7 +396,8 @@
     $asset = $chromebookAsset["original-asset"];
     $studentQuery = $conn->query("SELECT * FROM students WHERE Asset = $asset");
     $classroomQuery = $conn->query("SELECT * FROM locations WHERE Asset = $asset");
-
+    echo "here";
+    echo "$asset";
     if($conn->query("DELETE FROM chromebooks WHERE asset = $asset")) {
       if($studentQuery->num_rows) {
         $conn->query("DELETE FROM students WHERE Asset = $asset");

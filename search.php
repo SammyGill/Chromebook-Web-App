@@ -251,7 +251,7 @@ contains all of the fields that are required to look up a Chromebook -->
              <div class="edit-data-input">
                <label> School </label>
                <br>
-               <select id="edit-school-select" >
+               <select name="edit-school-select" id="edit-school-select" >
                  <option value="marshall">Marshall</option>
                  <option value="fremont">Fremont</option>
                  <option value="malaga"> Malaga </option>
@@ -308,7 +308,8 @@ contains all of the fields that are required to look up a Chromebook -->
               <br>
               <select id="edit-assignment-select">
                 <option value="none"> None </option>
-                <option value="assigned"> Assigned </option>
+                <option value="student"> Student Assigned </option>
+                <option value="classroom"> Classroom </option>
                 <option value="unassigned"> Unassigned </option>
               </select>
             </div>
