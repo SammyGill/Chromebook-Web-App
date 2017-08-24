@@ -1,9 +1,8 @@
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Used in the search page to determine if the user is searching by a certain
+ * school. If a certain school is selected, then the appropriate rooms will
+ * be shown along side it
  */
 function checkSearchBySchool() {
   if(options[options.selectedIndex].value == "school") {
@@ -17,10 +16,8 @@ function checkSearchBySchool() {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Helper method used to hide all of the rooms. This method is called so that
+ * the appropriate school and its rooms can be shown afterwards
  */
 function hideSchoolRooms() {
   document.getElementById("marshall-rooms").style.display = "none";
@@ -32,12 +29,13 @@ function hideSchoolRooms() {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Helper method that is used to display the correct rooms according to the
+ * selected school during chromebook search. The function works by first hiding
+ * all the schools, determing which school is selected, and then changing the
+ * display for the corresponding rooms
  */
 function changeCurrentRooms() {
+  // Hide all the rooms before displaying the correct school and rooms
   hideSchoolRooms();
 
   var selectOptions = document.getElementById("school-options").options;
@@ -49,10 +47,10 @@ function changeCurrentRooms() {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Used to disable and enable the optional student button and student ID field
+ * when adding a chromebook to the database. These two fields should only be
+ * enabled when the school is either Sutter or FHS and when the room is
+ * selected as "Student Assigned"
  */
 function disableInsuranceButton() {
   var schoolSelect = document.getElementById("school-options");
@@ -76,14 +74,42 @@ function disableInsuranceButton() {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * General helper method that is used to fill in the information into the
+ * edit modal independent on where the chromebook is being assigned. This
+ * information is only the metadata for the chromebook itself and is called
+ * in other methods when the chromebook is being added/edited to the database
+ * @param asset is the asset tag for the chromebook
+ * @param serial is the serial number for the chromebook
+ * @param model is the model type for the chromebook
+ * @param status is the Physical Status of the chromebook at the time
+ * @param assignment is the assignment type of the chromebook at the time
+ */
+function fillGeneralChromebookInfo(asset, serial, model, status, assignment) {
+  document.getElementById("edit-asset-field").value = asset;
+  document.getElementById("edit-serial-field").value = serial;
+  document.getElementById("edit-model-select").value = model;
+  document.getElementById("edit-physical-status-select").value = status;
+  document.getElementById("edit-assignment-select").value = assignment.toLowerCase();
+}
+
+/**
+ * Used to fill in the data for the classrooms table in the database. This
+ * adds the appropriate information for the chromebook into edit modal. The
+ * function gets the appropriate information from the chromebooks table and the
+ * classrooms table and then inputs it into the modal for display
+ * @param school is the school location for the chromebook
+ * @param room is the room location for the chromebook
+ * @param asset is the asset tag for the chromebook
+ * @param serial is the serial number for the chromebook
+ * @param model is the model type for the chromebook
+ * @param status is the Physical Status of the chromebook at the time
+ * @param assignment is the assignment type of the chromebook at the time
  */
 function fillEditDataClass(school, room, asset, serial, model, status, assignment) {
+  // First fill in the appropriate information from the chromebooks table
   fillGeneralChromebookInfo(asset, serial, model, status, assignment);
 
+  // Then fill in the information we got from the classrooms table
   school = school.toLowerCase();
   var roomOptionsString = school.concat("-rooms");
   var roomOptions = document.getElementById(roomOptionsString).innerHTML;
@@ -93,8 +119,18 @@ function fillEditDataClass(school, room, asset, serial, model, status, assignmen
   document.getElementById("original-asset").value = asset;
 }
 
+/**
+ * Similar to the fill in classroom function except it pulls data from the
+ * students table because the chromebook is assigned to a student
+ * @param school is the school location for the chromebook
+ * @param student is the student ID for the student who holds the chromebooks
+ * @param asset is the asset tag for the chromebook
+ * @param serial is the serial number for the chromebook
+ * @param model is the model type for the chromebook
+ * @param status is the Physical Status of the chromebook at the time
+ * @param assignment is the assignment type of the chromebook at the time
+ */
 function fillEditDataStudent(school, student, asset, serial, model, status, assignment) {
-  console.log(school);
   school = school.toLowerCase();
   var roomOptionsString = school.concat("-rooms");
   var roomOptions = document.getElementById(roomOptionsString).innerHTML;
@@ -105,16 +141,6 @@ function fillEditDataStudent(school, student, asset, serial, model, status, assi
   document.getElementById("edit-room-field").value = "student";
   document.getElementById("original-asset").value = asset;
 
-}
-
-function fillGeneralChromebookInfo(asset, serial, model, status, assignment) {
-  console.log(assignment);
-
-  document.getElementById("edit-asset-field").value = asset;
-  document.getElementById("edit-serial-field").value = serial;
-  document.getElementById("edit-model-select").value = model;
-  document.getElementById("edit-physical-status-select").value = status;
-  document.getElementById("edit-assignment-select").value = assignment.toLowerCase();
 }
 
 /**
