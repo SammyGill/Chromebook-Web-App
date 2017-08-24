@@ -58,7 +58,13 @@ function disableInsuranceButton() {
   var schoolSelect = document.getElementById("school-options");
   var insuranceButton = document.getElementById("insurance-button");
   if(schoolSelect.value == "fhs" || schoolSelect.value == "sutter") {
-    insuranceButton.disabled = false;
+    var schoolRooms = schoolSelect.value.concat("-rooms");
+    if(document.getElementById(schoolRooms).value == "student") {
+        insuranceButton.disabled = false;
+    }
+    else {
+      insuranceButton.disabled = true;
+    }
   }
   else {
     insuranceButton.disabled = true;
