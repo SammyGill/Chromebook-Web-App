@@ -56,18 +56,22 @@ function changeCurrentRooms() {
  */
 function disableInsuranceButton() {
   var schoolSelect = document.getElementById("school-options");
+  var studentIDText = document.getElementById("student-id");
   var insuranceButton = document.getElementById("insurance-button");
   if(schoolSelect.value == "fhs" || schoolSelect.value == "sutter") {
     var schoolRooms = schoolSelect.value.concat("-rooms");
     if(document.getElementById(schoolRooms).value == "student") {
         insuranceButton.disabled = false;
+        studentIDText.disabled = false;
     }
     else {
       insuranceButton.disabled = true;
+      studentIDText.disabled = true;
     }
   }
   else {
     insuranceButton.disabled = true;
+    studentIDText.disabled = true;
   }
 }
 
