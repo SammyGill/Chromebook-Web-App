@@ -144,7 +144,7 @@ function fillEditDataStudent(school, student, asset, serial, model, status, assi
 }
 
 /**
- * Comments
+ * Helper method used to determine
  * @param
  * @param
  * @return
@@ -222,6 +222,8 @@ function sortDescending(columnName) {
  * @param
  * @return
  */
+
+// PROBABLY NOT NEEDED ANY MORE, WILL NEED TO DO SOME TESTING TO FIND OUT THOUGH
 function checkAssignment() {
   var assignment = document.getElementById("edit-assignment-status-select");
   var studentInput = document.getElementsByClassName("student-id");
@@ -242,10 +244,10 @@ function checkAssignment() {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Helps filter search textboxes while the user is typing. Every input into
+ * the textbox refines the results a little more by hiding all of the results
+ * that are not similar to the input
+ * @param searchBar is the HTML text field where the user searches
  */
 function filterSearch(searchBar) {
   var stringInput = document.getElementById(searchBar).value.toUpperCase();
@@ -265,10 +267,8 @@ function filterSearch(searchBar) {
 }
 
 /**
- * Comments
- * @param
- * @param
- * @return
+ * Used to hide the edit chromebook modal and open up the repair modal in
+ * order to subtmit a repair request
  */
 function openRepairForm() {
   var date = new Date();
