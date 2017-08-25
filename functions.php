@@ -451,17 +451,33 @@
     $asset = $chromebookData["asset-field"];
     $serial = strtoupper($chromebookData["serial-field"]);
     $model = ucfirst($chromebookData["model-select"]);
+    $status = ucfirst($chromebookData["edit-physical-status-select"]);
     $school = $chromebookData["school-options"];
     $room = $chromebookData["$school-rooms"];
-    $status = ucfirst($chromebookData["edit-physical-status-select"]);
-    $assignment = ucfirst($chromebookData["edit-assignment-status-select"]);
-    $student = $chromebookData["student-id"];
 
     // Check to see if the chromebook is already in database
     if(chromebookExists($asset)) {
       echo("CHROMEBOOK ALREADY IN DATABASE");
       return -1;
     }
+
+    if($school == "fhs" || $school == "sutter") {
+      if($room == "student") {
+        addChomrebookToStudentTable()
+      }
+      else {
+        addChromebookToClassroomTable()
+      }
+    }
+    else {
+      addChromebookToClassroomTable()
+    }
+
+
+    $assignment = ucfirst($chromebookData["edit-assignment-status-select"]);
+    $student = $chromebookData["student-id"];
+
+
 
     // Add chromebook to chromebooks table and change assignment to student
     if($room == "student") {
@@ -498,6 +514,18 @@
       $conn->query("INSERT INTO locations VALUES ($asset, \"$school\", $room)");
       echo $conn->error;
     }
+
+    $conn->close();
+  }
+
+  function addChromebookToStudentTable($asset, $studentID, $insurance, $school) {
+    $conn = getConnection();
+
+    $conn->close();
+  }
+
+  function addChromebookToClassroomTable($asset, $school, $room) {
+    $conn = getConnection();
 
     $conn->close();
   }
