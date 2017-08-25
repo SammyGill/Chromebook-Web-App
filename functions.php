@@ -461,16 +461,21 @@
       return -1;
     }
 
+    $assigment = "Classroom";
     if($school == "fhs" || $school == "sutter") {
       if($room == "student")
-        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"Student\")");
-        addChomrebookToStudentTable()
+        $assignment = "Student";
+        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
+        addChomrebookToStudentTable($asset, $studentID, $insurance, $school);
         return;
       }
-      $conn->query("INSERT INTO chromebooks VALUES($asset, \"$serial\", \"$model\", \"$status\", \"Classroom\")");
+      if($status = "Loaner") {
+        $assigment = "Loaner";
+      }
+      $conn->query("INSERT INTO chromebooks VALUES($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
       addChromebookToClassroomTable($asset, $school, $room);
 
-
+/*
     $assignment = ucfirst($chromebookData["edit-assignment-status-select"]);
     $student = $chromebookData["student-id"];
 
@@ -511,7 +516,7 @@
       $conn->query("INSERT INTO locations VALUES ($asset, \"$school\", $room)");
       echo $conn->error;
     }
-
+*/
     $conn->close();
   }
 
