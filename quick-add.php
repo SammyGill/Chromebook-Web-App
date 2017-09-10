@@ -213,7 +213,7 @@
       <br>
       <?php
         if($_POST) {
-          if(isset($_POST["insurance"])) {
+          if(isset($_POST["student-id"])) {
             addChromebook($_POST, true);
           }
           else {

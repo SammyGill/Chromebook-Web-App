@@ -446,7 +446,7 @@
    * @param $insuranceSelected is a boolean value that determines whether a
    *        student selected insurance for their chromebook
    */
-  function addChromebook($chromebookData, $insuranceSelected) {
+  function addChromebook($chromebookData, $studentAssigned) {
     $conn = getConnection();
     $asset = $chromebookData["asset-field"];
     $serial = strtoupper($chromebookData["serial-field"]);
@@ -462,61 +462,20 @@
     }
 
     $assigment = "Classroom";
-    if($school == "fhs" || $school == "sutter") {
-      if($room == "student")
-        $assignment = "Student";
-        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
-        addChomrebookToStudentTable($asset, $studentID, $insurance, $school);
-        return;
-      }
+    $studentID = $_POST["student-id"];
+    if($studentAssigned) {
+      $assignment = "Student";
+      $insurance = isset($_POST["insurance"]);
+
+      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
+      addChromebookToStudentTable($asset, $studentID, $insurance, $school);
+      return;
+    }
       if($status = "Loaner") {
         $assigment = "Loaner";
       }
       $conn->query("INSERT INTO chromebooks VALUES($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
-      addChromebookToClassroomTable($asset, $school, $room);
-
-/*
-    $assignment = ucfirst($chromebookData["edit-assignment-status-select"]);
-    $student = $chromebookData["student-id"];
-
-
-
-    // Add chromebook to chromebooks table and change assignment to student
-    if($room == "student") {
-      $room = 0;
-      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\", null)");
-      echo $conn->error;
-
-      // If we are assiging to student also, update the students table
-      if("$assignment" == "assigned") {
-        if($insuranceSelected) {
-          $insurance = "Y";
-          $amount = -250;
-        }
-        else {
-          $amount = 0;
-          $insurance = "N";
-        }
-        $studentQuery = $conn->query("SELECT * FROM students WHERE Student_ID = $student");
-        if($studentQuery->num_rows == 1) {
-          $conn->query("UPDATE students SET Asset = $asset WHERE Student_ID = $student");
-        }
-        else {
-          $conn->query("INSERT INTO students VALUES ($asset, $student, $amount, \"$insurance\")");
-        }
-      }
-      if("$assignment" == "unassigned") {
-        $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
-        echo $conn->error;
-      }
-    }
-    if("$assignment" == "Classroom" || "$assignment" == "Loaner") {
-      $conn->query("INSERT INTO chromebooks VALUES ($asset, \"$serial\", \"$model\", \"$status\", \"$assignment\")");
-      echo $conn->error;
-      $conn->query("INSERT INTO locations VALUES ($asset, \"$school\", $room)");
-      echo $conn->error;
-    }
-*/
+      addChromebookToClassroomTable($asset, $school, $room, $school);
     $conn->close();
   }
 
@@ -531,13 +490,14 @@
       $amount = 0;
     }
 
-    $conn->query("INSERT INTO students VALUES ($asset, $studentID, $amount, \"$insurance\")");
+    $conn->query("INSERT INTO students VALUES ($asset, $studentID, $amount, \"$insurance\", \"$school\")");
+    echo $conn->error;
     $conn->close();
   }
 
   function addChromebookToClassroomTable($asset, $school, $room) {
     $conn = getConnection();
-    $conn->query("INSERT INTO locations VALUES($asset, \"$school\", )")
+    $conn->query("INSERT INTO locations VALUES($asset, \"$school\", )");
     $conn->close();
   }
 
