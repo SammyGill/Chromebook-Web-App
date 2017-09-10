@@ -380,6 +380,24 @@
     $conn->close();
   }
 
+  function getSchoolString($stringInput) {
+    if($stringInput == "fhs") {
+      return "FHS";
+    }
+    if($stringInput == "sutter") {
+      return "Sutter";
+    }
+    if($stringInput == "malaga") {
+      return "Malaga";
+    }
+    if($stringInput == "fremont") {
+      return "Fremont";
+    }
+    if($stringInput == "marshall") {
+      return "Marshall";
+    }
+  }
+
   /**
    *
    * After searching for a chromebook, the user has the option of deleting
@@ -454,6 +472,8 @@
     $status = ucfirst($chromebookData["edit-physical-status-select"]);
     $school = $chromebookData["school-options"];
     $room = $chromebookData["$school-rooms"];
+
+    $school = getSchoolString($school);
 
     // Check to see if the chromebook is already in database
     if(chromebookExists($asset)) {
