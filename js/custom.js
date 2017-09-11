@@ -285,6 +285,8 @@ function openRepairForm() {
  * @return
  */
 function determineDamageString(inputString) {
+  console.log(inputString);
+  console.log("hello");
   if(inputString == "screen") {
     return "Broken Screen";
   }

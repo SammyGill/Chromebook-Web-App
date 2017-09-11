@@ -305,7 +305,7 @@
 
    // THIS FUNCTION MAY NOT BE NEEDED, NEED TO DOUBLE CHECK
   function determineDamageString($damageInput) {
-    if($damageInput == "Broken Screen") {
+    if($damageInput == "screen") {
       return "Broken Screen";
     }
     else {
@@ -376,6 +376,9 @@
     $conn->query("UPDATE chromebooks SET asset = $asset,
                   serial_number =\"$serial\", model=\"$model\",
                   Physical_Status=\"$status\" WHERE asset = $oldAsset");
+
+    echo $room;
+    echo($conn->error);
 
     $conn->close();
   }
@@ -542,7 +545,7 @@
                                WHERE Asset = $asset");
 
     $updateDamage = $conn->query("INSERT INTO damages VALUES
-                               (\"$damage\", $cost, \"$date\", $asset, 'N')");
+                               ($asset, \"$damage\", 'N')");
 
     if($updatePhysicalStatus && $updateDamage) {
       echo("REPAIR SUBMITTED");
@@ -588,11 +591,12 @@
                                     WHERE Asset = $asset");
     $previousDamage = $previousDamage->fetch_assoc();
 
-    if($repairUpdates["assignment"] == "Student") {
+    if($conn->query("SELECT * FROM students WHERE asset = $asset")->num_rows) {
       $studentID = $repairUpdates["location"];
       $cost = $repairUpdates["cost"];
       $conn->query("UPDATE students SET Amount = Amount + $cost
                     WHERE Student_ID = $studentID");
+      echo($conn->error);
     }
     $conn->query("UPDATE chromebooks SET Physical_Status = 'Good'
                   WHERE Asset = $asset");
