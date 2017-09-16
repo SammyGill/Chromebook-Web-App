@@ -184,6 +184,7 @@ function sortAscending(columnName) {
   var rows = document.getElementsByClassName(columnName);
   for(i = 0; i < (rows.length); i++) {
     var indexElement = rows[i].innerHTML;
+    console.log(typeof(indexElement));
     var j = i;
     while( j > 0 && (rows[j-1].innerHTML > indexElement)) {
       var parentRow = document.getElementById("resultTable").rows[j];

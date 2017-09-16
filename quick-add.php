@@ -86,21 +86,70 @@
       </div>
     </div>
 
+
+<div class="container-fluid">
+    <div class="row" style="text-align:center;">
+      <div class="col-md-2 col-md-offset-5">
+        <input type="text" name="asset-field" placeholder="Asset Tag" style="width:100px;">
+      </div>
+      <div class="col-md-2">
+        <input type="text" name="serial-field" placeholder="Serial Number">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+        <label for="edit-model-select"> Model </label>
+        <br>
+        <select name="model-select" id="edit-model-select" style="width:100px;">
+          <option value="asus"> Asus </option>
+          <option value="Dell Chromebook 11 (3120)"> Dell </option>
+          <option value="Samsung Chromebook"> Samsung </option>
+        </select>
+      </div>
+      <div class="col-md-2" style="text-align:center;">
+        <label for="edit-physical-status-select"> Physical Status </label>
+        <br>
+        <select name="edit-physical-status-select" id="edit-physical-status-select">
+          <option value="good"> Good </option>
+          <option value="loaner"> Loaner </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- FORM STARTS HERE -->
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="background-color:grey; border-radius:15px;">
   <form method = "post" action =>
     <div class="row top-row">
 
       <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-        <input type="text" name="asset-field" placeholder="Asset Tag">
+        <div>
+        <input type="text" name="asset-field" placeholder="Asset Tag" style="width:100px;">
         <input type="text" name="serial-field" placeholder="Serial Number">
+      </div>
 
         <div class=edit-data-input>
-          <label> Model </label>
+          <div style="float:left;">
+          <label for="edit-model-select"> Model </label>
           <br>
-          <select name="model-select" id="edit-model-select">
+          <select name="model-select" id="edit-model-select" style="width:100px;">
             <option value="asus"> Asus </option>
             <option value="Dell Chromebook 11 (3120)"> Dell </option>
             <option value="Samsung Chromebook"> Samsung </option>
           </select>
+        </div>
+        <div style="float:left;">
+          <label for="edit-physical-status-select"> Physical Status </label>
+          <br>
+          <select name="edit-physical-status-select" id="edit-physical-status-select">
+            <option value="good"> Good </option>
+            <option value="loaner"> Loaner </option>
+          </select>
+        </div>
+
         </div>
 
       </div>
@@ -210,6 +259,7 @@
     <div class="col-md-12 col-md-offset-1" style="text-align:center;">
       <input type="submit">
     </form>
+
       <br>
       <?php
         if($_POST) {

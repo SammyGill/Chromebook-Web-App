@@ -90,6 +90,7 @@
           <li><a href ="quick-add.php"> Add Chromebook </a></li>
           <li> <a href="repairs.php"> Repairs </a></li>
           <li> <a href="assign.php"> Assign Chromebooks </a></li>
+          <li> <a href="assign.php"> Check In </a></li>
         </ul>
       </div>
 
@@ -325,6 +326,8 @@ contains all of the fields that are required to look up a Chromebook -->
             </button>
          </div>
         </form>
+
+        
 
       </div>
    </div>
