@@ -85,195 +85,153 @@
             Add Chromebook </h1>
       </div>
     </div>
-
-
-<div class="container-fluid">
-    <div class="row" style="text-align:center;">
-      <div class="col-md-2 col-md-offset-5">
-        <input type="text" name="asset-field" placeholder="Asset Tag" style="width:100px;">
-      </div>
-      <div class="col-md-2">
-        <input type="text" name="serial-field" placeholder="Serial Number">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2 col-md-offset-5" style="text-align:center;">
-        <label for="edit-model-select"> Model </label>
-        <br>
-        <select name="model-select" id="edit-model-select" style="width:100px;">
-          <option value="asus"> Asus </option>
-          <option value="Dell Chromebook 11 (3120)"> Dell </option>
-          <option value="Samsung Chromebook"> Samsung </option>
-        </select>
-      </div>
-      <div class="col-md-2" style="text-align:center;">
-        <label for="edit-physical-status-select"> Physical Status </label>
-        <br>
-        <select name="edit-physical-status-select" id="edit-physical-status-select">
-          <option value="good"> Good </option>
-          <option value="loaner"> Loaner </option>
-        </select>
-      </div>
-    </div>
   </div>
 
-
-
-<!-- FORM STARTS HERE -->
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="background-color:grey; border-radius:15px;">
-  <form method = "post" action =>
-    <div class="row top-row">
-
-      <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-        <div>
-        <input type="text" name="asset-field" placeholder="Asset Tag" style="width:100px;">
-        <input type="text" name="serial-field" placeholder="Serial Number">
+  <div class="container-fluid" id="add-chromebook-form-container">
+    <form id="add-form">
+      <div class="row" style="text-align:center;">
+        <div class="col-md-2 col-md-offset-5">
+          <input type="text" class="form-control" name="asset-field" placeholder="Asset Tag" id="asset-field">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" name="serial-field" placeholder="Serial Number" id="serial-field">
+        </div>
       </div>
 
-        <div class=edit-data-input>
-          <div style="float:left;">
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
           <label for="edit-model-select"> Model </label>
           <br>
-          <select name="model-select" id="edit-model-select" style="width:100px;">
+          <select name="model-select" class="form-control" id="edit-model-select";>
             <option value="asus"> Asus </option>
             <option value="Dell Chromebook 11 (3120)"> Dell </option>
             <option value="Samsung Chromebook"> Samsung </option>
           </select>
         </div>
-        <div style="float:left;">
+        <div class="col-md-2" style="text-align:center;">
           <label for="edit-physical-status-select"> Physical Status </label>
           <br>
-          <select name="edit-physical-status-select" id="edit-physical-status-select">
+          <select name="edit-physical-status-select" class="form-control" id="edit-physical-status-select" >
             <option value="good"> Good </option>
             <option value="loaner"> Loaner </option>
           </select>
         </div>
-
-        </div>
-
       </div>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+          <label> School </label>
+          <br>
+          <select id="school-options" class="form-control" name="school-options"
+                  onchange="changeCurrentRooms(); disableInsuranceButton();">
+            <option value="marshall"> Marshall </option>
+            <option value="fremont"> Fremont </option>
+            <option value="malaga"> Malaga </option>
+            <option value="sutter"> Sutter </option>
+            <option value="fhs" > FHS </option>
+            <option value="academy"> Academy </option>
+          </select>
+         </div>
+
+        <div class="col-md-2" style="text-align:center;">
+          <label> Room </label>
+          <br>
+          <?php printRooms(False); ?>
+
+          <select id="sutter-rooms" class="form-control" name="sutter-rooms" onchange="disableInsuranceButton()">
+            <option value="student"> Student Assigned </option>
+            <option value="c2"> C2 </option>
+            <option value="c3"> C3 </option>
+            <option value="c4"> C4 </option>
+            <option value="c5"> C5 </option>
+            <option value="c6"> C6 </option>
+            <option value="c7"> C7 </option>
+            <option value="c8"> C8 </option>
+            <option value="c9"> C9 </option>
+            <option value="c10"> C10 </option>
+            <option value="c11"> C11 </option>
+            <option value="d1"> D1 </option>
+            <option value="d2"> D2 </option>
+            <option value="d3"> D3 </option>
+            <option value="d4"> D4 </option>
+            <option value="d5"> D5 </option>
+            <option value="d6"> D6 </option>
+            <option value="d7"> D7 </option>
+            <option value="d8"> D8 </option>
+            <option value="e1"> E1 </option>
+            <option value="e2"> E2 </option>
+            <option value="e3"> E3 </option>
+            <option value="e4"> E4 </option>
+          </select>
+
+          <select id="fhs-rooms" class="form-control" name="fhs-rooms" onchange="disableInsuranceButton()">
+            <option value="student"> Student Assigned </option>
+            <option value="101"> 101 </option>
+            <option value="102"> 102 </option>
+            <option value="103"> 103 </option>
+            <option value="104"> 104 </option>
+            <option value="105"> 105 </option>
+            <option value="106"> 106</option>
+            <option value="107"> 107 </option>
+            <option value="108"> 108 </option>
+            <option value="203"> 203 </option>
+            <option value="204"> 204 </option>
+            <option value="401"> 401 </option>
+            <option value="402"> 402 </option>
+            <option value="403"> 403 </option>
+            <option value="404"> 404 </option>
+            <option value="405"> 406 </option>
+            <option value="407"> 407 </option>
+            <option value="408"> 408 </option>
+            <option value="409"> 409 </option>
+            <option value="410"> 410 </option>
+            <option value="411"> 411 </option>
+            <option value="412"> 412 </option>
+            <option value="413"> 413 </option>
+            <option value="414"> 414 </option>
+            <option value="501"> 501 </option>
+            <option value="502"> 502 </option>
+            <option value="601"> 601 </option>
+            <option value="703"> 703 </option>
+          </select>
+         </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+          <label class="student-id"> Student ID </label>
+          <br>
+          <input type="text" class="form-control" id="student-id" name="student-id" placeholder="Student ID">
+         </div>
+
+          <div class="col-md-2" style="text-align:center;">
+            <br>
+            <input type="checkbox" id="insurance-button" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
+         </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+          <input type="submit">
+        </table>
+        </form>
+        <div>
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="col-md-12 col-md-offset-1" style="text-align:center; padding-bottom:10px;">
-
-
-      <div class="edit-data-input">
-        <label> School </label>
         <br>
-        <select id="school-options" name="school-options"
-                onchange="changeCurrentRooms(); disableInsuranceButton();">
-          <option value="marshall"> Marshall </option>
-          <option value="fremont"> Fremont </option>
-          <option value="malaga"> Malaga </option>
-          <option value="sutter"> Sutter </option>
-          <option value="fhs" > FHS </option>
-          <option value="academy"> Academy </option>
-        </select>
-      </div>
-
-      <div class ="edit-data-input">
-        <label> Room </label>
-        <br>
-        <?php printRooms(False); ?>
-
-        <select id="sutter-rooms" name="sutter-rooms" onchange="disableInsuranceButton()">
-          <option value="student"> Student Assigned </option>
-          <option value="c2"> C2 </option>
-          <option value="c3"> C3 </option>
-          <option value="c4"> C4 </option>
-          <option value="c5"> C5 </option>
-          <option value="c6"> C6 </option>
-          <option value="c7"> C7 </option>
-          <option value="c8"> C8 </option>
-          <option value="c9"> C9 </option>
-          <option value="c10"> C10 </option>
-          <option value="c11"> C11 </option>
-          <option value="d1"> D1 </option>
-          <option value="d2"> D2 </option>
-          <option value="d3"> D3 </option>
-          <option value="d4"> D4 </option>
-          <option value="d5"> D5 </option>
-          <option value="d6"> D6 </option>
-          <option value="d7"> D7 </option>
-          <option value="d8"> D8 </option>
-          <option value="e1"> E1 </option>
-          <option value="e2"> E2 </option>
-          <option value="e3"> E3 </option>
-          <option value="e4"> E4 </option>
-        </select>
-
-        <select id="fhs-rooms" name="fhs-rooms" onchange="disableInsuranceButton()">
-          <option value="student"> Student Assigned </option>
-          <option value="101"> 101 </option>
-          <option value="102"> 102 </option>
-          <option value="103"> 103 </option>
-          <option value="104"> 104 </option>
-          <option value="105"> 105 </option>
-          <option value="106"> 106</option>
-          <option value="107"> 107 </option>
-          <option value="108"> 108 </option>
-          <option value="203"> 203 </option>
-          <option value="204"> 204 </option>
-          <option value="401"> 401 </option>
-          <option value="402"> 402 </option>
-          <option value="403"> 403 </option>
-          <option value="404"> 404 </option>
-          <option value="405"> 406 </option>
-          <option value="407"> 407 </option>
-          <option value="408"> 408 </option>
-          <option value="409"> 409 </option>
-          <option value="410"> 410 </option>
-          <option value="411"> 411 </option>
-          <option value="412"> 412 </option>
-          <option value="413"> 413 </option>
-          <option value="414"> 414 </option>
-          <option value="501"> 501 </option>
-          <option value="502"> 502 </option>
-          <option value="601"> 601 </option>
-          <option value="703"> 703 </option>
-        </select>
-      </div>
-
-
-      <div class="edit-data-input">
-        <label> Physical Status </label>
-        <br>
-        <select name="edit-physical-status-select" id="edit-physical-status-select">
-          <option value="good"> Good </option>
-          <option value="loaner"> Loaner </option>
-        </select>
-      </div>
-      <div class="edit-data-input">
-        <label class="student-id"> Student ID </label>
-        <br>
-        <input type="text" id="student-id" name="student-id" placeholder="Student ID">
-      </div>
-    <input type="checkbox" id="insurance-button" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
-
-      </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 col-md-offset-1" style="text-align:center;">
-      <input type="submit">
-    </form>
-
-      <br>
-      <?php
-        if($_POST) {
-          if(isset($_POST["student-id"])) {
-            addChromebook($_POST, true);
+        <?php
+          if($_POST) {
+            if(isset($_POST["student-id"])) {
+              addChromebook($_POST, true);
+            }
+            else {
+              addChromebook($_POST, false);
+            }
           }
-          else {
-            addChromebook($_POST, false);
-          }
-        }
-       ?>
-  </div>
-
-</div>
+         ?>
+    </div>
 
   </div>
 <script src="js/custom.js"></script>

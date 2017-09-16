@@ -445,7 +445,7 @@
     $schools = array("marshall", "fremont", "malaga");
     $roomCount = 1;
     for($schoolCount = 0; $schoolCount < count($schools); $schoolCount++) {
-      echo("<select id='$schools[$schoolCount]-rooms'
+      echo("<select id='$schools[$schoolCount]-rooms' class='form-control'
                     name='$schools[$schoolCount]-rooms') class='rooms'>");
       if($toggleAllOption) {
         echo("<option value='*'> All </option>");
