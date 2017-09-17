@@ -88,6 +88,7 @@ td:hover {
 
 .insurance {
 padding-top:8px;
+padding-bottom:16px;
 }
 
 #asset-field,
@@ -101,12 +102,12 @@ padding-top:8px;
 #fremont-rooms,
 #student-id {
   width:150px;
+  margin-left:auto;
+  margin-right:auto;
   margin-bottom: 10px;
-  background-color: yellow;
 }
 
-#border-table {
-  border-style: solid;
-    border-width: 5px;
-    background-cl
+.form-background {
+  background-color:red;
+  width: 20.83333%;
 }

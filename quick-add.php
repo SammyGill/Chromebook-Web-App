@@ -87,19 +87,19 @@
     </div>
   </div>
 
-  <div class="container-fluid" id="add-chromebook-form-container">
+  <div class="container" id="add-chromebook-form-container" style="text-align:center;">
     <form id="add-form">
       <div class="row" style="text-align:center;">
-        <div class="col-md-2 col-md-offset-5">
+        <div class="col-md-2 col-md-offset-5 form-background" style="padding-top:15px;">
           <input type="text" class="form-control" name="asset-field" placeholder="Asset Tag" id="asset-field">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 form-background" style="padding-top:15px;">
           <input type="text" class="form-control" name="serial-field" placeholder="Serial Number" id="serial-field">
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+        <div class="col-md-2 col-md-offset-5 form-background" style="text-align:center;">
           <label for="edit-model-select"> Model </label>
           <br>
           <select name="model-select" class="form-control" id="edit-model-select";>
@@ -108,7 +108,7 @@
             <option value="Samsung Chromebook"> Samsung </option>
           </select>
         </div>
-        <div class="col-md-2" style="text-align:center;">
+        <div class="col-md-2 form-background" style="text-align:center;">
           <label for="edit-physical-status-select"> Physical Status </label>
           <br>
           <select name="edit-physical-status-select" class="form-control" id="edit-physical-status-select" >
@@ -119,7 +119,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+        <div class="col-md-2 col-md-offset-5 form-background" style="text-align:center;">
           <label> School </label>
           <br>
           <select id="school-options" class="form-control" name="school-options"
@@ -133,7 +133,7 @@
           </select>
          </div>
 
-        <div class="col-md-2" style="text-align:center;">
+        <div class="col-md-2 form-background" style="text-align:center;">
           <label> Room </label>
           <br>
           <?php printRooms(False); ?>
@@ -198,28 +198,25 @@
       </div>
 
       <div class="row">
-        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+        <div class="col-md-2 col-md-offset-5 form-background" style="text-align:center;">
           <label class="student-id"> Student ID </label>
           <br>
           <input type="text" class="form-control" id="student-id" name="student-id" placeholder="Student ID">
          </div>
 
-          <div class="col-md-2" style="text-align:center;">
+          <div class="col-md-2 form-background" style="text-align:center;">
             <br>
             <input type="checkbox" id="insurance-button" name="insurance" value="Y" class="insurance"> <label class="insurance"> Insurance </label>
          </div>
       </div>
 
       <div class="row">
-        <div class="col-md-2 col-md-offset-5" style="text-align:center;">
+        <div class="col-md-5 col-md-offset-5" style="background-color:red; padding-bottom:15px;">
           <input type="submit">
-        </table>
-        </form>
-        <div>
+        </div>
       </div>
-
-    </div>
-
+    </form>
+  </div>
         <br>
         <?php
           if($_POST) {
@@ -231,9 +228,7 @@
             }
           }
          ?>
-    </div>
 
-  </div>
 <script src="js/custom.js"></script>
 </body>
 </html>
