@@ -80,8 +80,8 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 style = "text-align: center; margin: auto; padding-bottom: 20px;">
+      <div class="col col-md-offset-2" style="text-align:center;">
+          <h1 style = "text-align:center;">
             Add Chromebook </h1>
       </div>
     </div>
@@ -211,7 +211,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-5 col-md-offset-5" style="background-color:red; padding-bottom:15px;">
+        <div class="col-md-5 col-md-offset-5" style="padding-bottom:15px;">
           <input type="submit">
         </div>
       </div>
