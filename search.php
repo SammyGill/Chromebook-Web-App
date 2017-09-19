@@ -107,14 +107,14 @@ contains all of the fields that are required to look up a Chromebook -->
 
           <form method="post" action= >
             Search by
-            <select id="options" name="options" onchange="checkSearchBySchool()"
+            <select style="display:inline;" class="form-control" id="options" name="options" onchange="checkSearchBySchool()"
                     onload="checkSearchBySchool()">
               <option value="asset"> Asset Tag </option>
               <option value="studentId"> Student PID </option>
               <option value="school"> School </option>
             </select>
 
-            <select id="school-options" name="school-options" class="school-options" onchange="changeCurrentRooms()">
+            <select style="display:none;" class="form-control" id="school-options" name="school-options" class="school-options" onchange="changeCurrentRooms()">
               <option value="marshall"> Marshall </option>
               <option value="fremont"> Fremont </option>
               <option value="malaga"> Malaga </option>
@@ -327,7 +327,7 @@ contains all of the fields that are required to look up a Chromebook -->
          </div>
         </form>
 
-        
+
 
       </div>
    </div>

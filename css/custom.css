@@ -100,7 +100,8 @@ padding-bottom:16px;
 #fhs-rooms,
 #marshall-rooms,
 #fremont-rooms,
-#student-id {
+#student-id,
+#options {
   width:150px;
   margin-left:auto;
   margin-right:auto;
