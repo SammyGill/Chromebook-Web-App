@@ -181,10 +181,9 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="601"> 601 </option>
               <option value="703"> 703 </option>
             </select>
-          </div>
-
             <input type="text" class ="custom-search" placeholder="Search..."
                    name="searchBarInput">
+          </div>
             <input type="submit" class="custom-search-button">
 
           </form>
