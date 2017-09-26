@@ -91,10 +91,12 @@
     <form id="add-form">
       <div class="row" style="text-align:center;">
         <div class="col-md-2 col-md-offset-5 form-background" style="padding-top:15px;">
-          <input type="text" maxlength="4" class="form-control" name="asset-field" placeholder="Asset Tag" id="asset-field">
+          <input type="text" maxlength="4" class="form-control" name="asset-field" 
+                 placeholder="Asset Tag" id="asset-field" pattern="[0-9]{4,}" required>
         </div>
         <div class="col-md-2 form-background" style="padding-top:15px;">
-          <input type="text" class="form-control" name="serial-field" placeholder="Serial Number" id="serial-field">
+          <input type="text" class="form-control" name="serial-field" 
+                 placeholder="Serial Number" id="serial-field" pattern="[A-Za-z0-9]{1,}" required>
         </div>
       </div>
 
@@ -201,7 +203,10 @@
         <div class="col-md-2 col-md-offset-5 form-background" style="text-align:center;">
           <label class="student-id"> Student ID </label>
           <br>
-          <input type="text" class="form-control" id="student-id" name="student-id" placeholder="Student ID">
+          <input type="text" maxlength="5" class="form-control" name="student-id" 
+          placeholder="Student ID" id="student-id" pattern="[0-9]{5,}" required disabled>
+
+                 
          </div>
 
           <div class="col-md-2 form-background" style="text-align:center;">
