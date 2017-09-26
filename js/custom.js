@@ -7,10 +7,12 @@
 function checkSearchBySchool() {
   if(options[options.selectedIndex].value == "school") {
     document.getElementById("school-options").style.display = "inline";
+    document.getElementById("search-bar").disabled = true;
     changeCurrentRooms();
   }
   else {
     document.getElementById("school-options").style.display = "none";
+    document.getElementById("search-bar").disabled = false;
     hideSchoolRooms();
   }
 }

@@ -91,7 +91,7 @@
     <form id="add-form">
       <div class="row" style="text-align:center;">
         <div class="col-md-2 col-md-offset-5 form-background" style="padding-top:15px;">
-          <input type="text" class="form-control" name="asset-field" placeholder="Asset Tag" id="asset-field">
+          <input type="text" maxlength="4" class="form-control" name="asset-field" placeholder="Asset Tag" id="asset-field">
         </div>
         <div class="col-md-2 form-background" style="padding-top:15px;">
           <input type="text" class="form-control" name="serial-field" placeholder="Serial Number" id="serial-field">

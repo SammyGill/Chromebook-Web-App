@@ -124,7 +124,7 @@ contains all of the fields that are required to look up a Chromebook -->
 
             <?php printRooms(True); ?>
 
-            <select id="sutter-rooms" name="sutter-rooms")>
+            <select class="form-control" id="sutter-rooms" name="sutter-rooms")>
               <option value="*"> All </option>
               <option value="c2"> C2 </option>
               <option value="c3"> C3 </option>
@@ -150,7 +150,7 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="e4"> E4 </option>
             </select>
 
-            <select id="fhs-rooms" name="fhs-rooms">
+            <select class="form-control" id="fhs-rooms" name="fhs-rooms">
               <option value="*"> All </option>
               <option value="student"> Student Assigned </option>
               <option value="101"> 101 </option>
@@ -181,7 +181,7 @@ contains all of the fields that are required to look up a Chromebook -->
               <option value="601"> 601 </option>
               <option value="703"> 703 </option>
             </select>
-            <input type="text" class ="custom-search" placeholder="Search..."
+            <input type="text" id="search-bar" class ="custom-search" placeholder="Search..."
                    name="searchBarInput">
           </div>
             <input type="submit" class="custom-search-button">
